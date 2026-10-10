@@ -1,0 +1,218 @@
+{
+  "pattern_id": "object_reveal_sequence",
+  "name": "关键道具揭示",
+  "version": "1.0",
+  "description": "用于揭示关键道具、证据或重要物品的镜头序列，营造戏剧张力",
+  "category": "reveal",
+  "usage_frequency": "",
+  "structure": {
+    "shot_sequence": [
+      {
+        "shot_id": "establish_context",
+        "name": "建立镜头",
+        "shot_type": "中近景",
+        "camera_setup": "_",
+        "eye_line": "__",
+        "duration": "2-3",
+        "visual_prompt_template": "{地点},,",
+        "lighting": "_",
+        "pacing": "_"
+      },
+      {
+        "shot_id": "hand_movement",
+        "name": "手部动作",
+        "shot_type": "",
+        "camera_setup": "",
+        "eye_line": "/",
+        "duration": "1-2",
+        "visual_prompt_template": "特写的{_},缓慢",
+        "lighting": "_",
+        "pacing": "_",
+        "focus": "_"
+      },
+      {
+        "shot_id": "object_entry",
+        "name": "道具入画",
+        "shot_type": "",
+        "camera_setup": "",
+        "eye_line": "/",
+        "duration": "1.5-2",
+        "visual_prompt_template": "镜头的{道具}画面,{_},光线",
+        "lighting": "_",
+        "pacing": "",
+        "focus": "_"
+      },
+      {
+        "shot_id": "reaction_shot",
+        "name": "角色反应",
+        "shot_type": "特写",
+        "camera_setup": "主观视角",
+        "eye_line": "___",
+        "duration": "2-3",
+        "visual_prompt_template": "镜头的{主体}{道具},{情绪},眼睛带{_}",
+        "lighting": "逆光",
+        "pacing": "_",
+        "emotion_params": [
+          "",
+          "_"
+        ]
+      },
+      {
+        "shot_id": "object_closeup",
+        "name": "道具特写",
+        "shot_type": "大特写",
+        "camera_setup": "",
+        "eye_line": "/",
+        "duration": "2-4",
+        "visual_prompt_template": "大特写的{道具},{_},光线和",
+        "lighting": "_+_",
+        "pacing": "_",
+        "focus": "_"
+      },
+      {
+        "shot_id": "context_reestablish",
+        "name": "场景重建",
+        "shot_type": "近景",
+        "camera_setup": "过肩",
+        "eye_line": "__",
+        "duration": "2-3",
+        "visual_prompt_template": "带,,{}",
+        "lighting": "_",
+        "pacing": "_",
+        "atmosphere_params": [
+          ""
+        ]
+      }
+    ],
+    "pattern_flow": "→→→→→",
+    "minimum_shots": 3,
+    "flexible_shots": [
+      "_",
+      "_"
+    ]
+  },
+  "rules": {
+    "must_use": [
+      "_",
+      "_"
+    ],
+    "recommended": [
+      "__"
+    ],
+    "forbidden": [
+      "_"
+    ],
+    "constraints": {
+      "object_focus": "2",
+      "reaction_timing": "",
+      "lighting_emphasis": "或"
+    }
+  },
+  "customizable_slots": {
+    "object_X": {
+      "type": "",
+      "description": "揭示的道具名称",
+      "default": ""
+    },
+    "reveal_method": {
+      "type": "",
+      "description": "道具揭示方式",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "key_detail": {
+      "type": "",
+      "description": "道具的关键细节",
+      "default": ""
+    },
+    "emotion": {
+      "type": "",
+      "description": "角色反应情绪",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "emotion_intensity": {
+      "type": "",
+      "description": "情绪强度",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "atmosphere": {
+      "type": "",
+      "description": "场景氛围",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "reveal_methods": {
+    "hand": {
+      "visual": "缓慢",
+      "pacing": "",
+      "emotion": ""
+    },
+    "table": {
+      "visual": ",画面",
+      "pacing": "",
+      "emotion": ""
+    },
+    "pocket": {
+      "visual": "",
+      "pacing": "",
+      "emotion": ""
+    },
+    "floor": {
+      "visual": "或",
+      "pacing": "",
+      "emotion": ""
+    },
+    "window": {
+      "visual": "或",
+      "pacing": "",
+      "emotion": ""
+    }
+  },
+  "example_bindings": {
+    "object_X": "订婚戒指",
+    "reveal_method": "",
+    "key_detail": "刻有名字的黄金戒指",
+    "emotion": "",
+    "emotion_intensity": "",
+    "atmosphere": "",
+    "location": "高档餐厅包间"
+  },
+  "use_cases": [
+    "证据揭示",
+    "身份暴露",
+    "情感信物",
+    "关键道具",
+    "秘密曝光"
+  ]
+}

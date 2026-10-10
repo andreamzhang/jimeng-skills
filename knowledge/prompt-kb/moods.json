@@ -1,0 +1,316 @@
+{
+  "category": "mood_to_visual",
+  "version": "1.0",
+  "description": "情绪→视觉关键词映射，为不同情绪提供绘图提示词",
+  "entries": [
+    {
+      "mood": "紧张",
+      "keywords": [
+        "光线",
+        "对比",
+        "阴影",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        "柔焦",
+        "",
+        "光线",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "",
+        "阴影"
+      ],
+      "example_prompt_suffix": ":,,,电影感光线"
+    },
+    {
+      "mood": "孤独",
+      "keywords": [
+        "",
+        "主体",
+        "阴天",
+        "",
+        "",
+        "",
+        "",
+        "阴影"
+      ],
+      "avoid": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "光线",
+        ""
+      ],
+      "example_prompt_suffix": ":,,电影感,"
+    },
+    {
+      "mood": "温馨",
+      "keywords": [
+        "黄金时刻",
+        "",
+        "背景虚化",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "阴影",
+        "",
+        "宽广",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "黄金时刻",
+        "",
+        ""
+      ],
+      "example_prompt_suffix": ":,,,"
+    },
+    {
+      "mood": "荒诞",
+      "keywords": [
+        "构图",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "阴影",
+        ""
+      ],
+      "avoid": [
+        "光线",
+        "",
+        "",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "霓虹",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "阴影",
+        ""
+      ],
+      "example_prompt_suffix": ":,,,"
+    },
+    {
+      "mood": "绝望",
+      "keywords": [
+        "构图",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "阴影",
+        ""
+      ],
+      "example_prompt_suffix": ":,,,"
+    },
+    {
+      "mood": "狂喜",
+      "keywords": [
+        "",
+        "",
+        "构图",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "逆光",
+        "",
+        ""
+      ],
+      "example_prompt_suffix": ":,,,"
+    },
+    {
+      "mood": "悲伤",
+      "keywords": [
+        "",
+        "",
+        "眼睛",
+        "或",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        "",
+        "光线",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "阴天",
+        ""
+      ],
+      "example_prompt_suffix": ":,-,,"
+    },
+    {
+      "mood": "平静",
+      "keywords": [
+        "构图",
+        "",
+        "",
+        "平稳",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "构图",
+        "光线",
+        "",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "",
+        ""
+      ],
+      "example_prompt_suffix": ":,,,"
+    },
+    {
+      "mood": "愤怒",
+      "keywords": [
+        "",
+        "",
+        "眼睛",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        "光线",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "对比",
+        "-"
+      ],
+      "example_prompt_suffix": ":,,,"
+    },
+    {
+      "mood": "好奇",
+      "keywords": [
+        "",
+        "宽广眼睛",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "avoid": [
+        "",
+        "",
+        ""
+      ],
+      "color_palette": [
+        "",
+        "",
+        ""
+      ],
+      "lighting_style": [
+        "",
+        "面部",
+        ""
+      ],
+      "example_prompt_suffix": ":,,,"
+    }
+  ]
+}

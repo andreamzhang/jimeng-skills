@@ -1,0 +1,199 @@
+{
+  "category": "shot_types",
+  "version": "1.0",
+  "description": "景别原子定义，定义各种电影镜头的景别参数",
+  "usage_notes": "与_组合使用，决定画面中主体的占比和空间关系",
+  "atoms": [
+    {
+      "atom_id": "ECU",
+      "director_term": "大特写",
+      "aliases": [
+        "大特写",
+        "大特写",
+        "超大特写"
+      ],
+      "ai_prompt": "大特写的{主体},皮肤纹理或,浅景深,微距-",
+      "screen_ratio": "1:1或3:4",
+      "subject_coverage": "5%的画面",
+      "focus_point": [
+        "眼睛",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "-"
+      ],
+      "notes": "避免使用'微距'关键词，易触发昆虫/微距模式",
+      "compatible_models": [
+        "深度扩散",
+        "光流",
+        "中途6"
+      ]
+    },
+    {
+      "atom_id": "CU",
+      "director_term": "特写",
+      "aliases": [
+        "特写",
+        "特写",
+        "面部特写"
+      ],
+      "ai_prompt": "特写人像的{主体},面部画面,清晰对焦眼睛,",
+      "screen_ratio": "3:4或1:1",
+      "subject_coverage": "15%的画面",
+      "focus_point": [
+        "面部",
+        "眼睛",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "镜头"
+      ],
+      "notes": "必须强调清晰，指定眼睛对焦",
+      "compatible_models": [
+        "深度扩散",
+        "达利3",
+        "中途"
+      ]
+    },
+    {
+      "atom_id": "MS",
+      "director_term": "近景",
+      "aliases": [
+        "近景",
+        "近景",
+        "胸像"
+      ],
+      "ai_prompt": "近景的{主体},,和",
+      "screen_ratio": "3:4或16:9",
+      "subject_coverage": "30%的画面",
+      "focus_point": [
+        "面部",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "角色",
+        ""
+      ],
+      "notes": "指定身体范围防止裁剪错误，包含手部动作",
+      "compatible_models": [
+        "深度扩散",
+        "稳定3"
+      ]
+    },
+    {
+      "atom_id": "MCU",
+      "director_term": "中近景",
+      "aliases": [
+        "特写",
+        "中近景"
+      ],
+      "ai_prompt": "特写的{主体},,,",
+      "screen_ratio": "16:9",
+      "subject_coverage": "40%的画面",
+      "focus_point": [
+        "角色",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "角色"
+      ],
+      "notes": "平衡人物与环境，适合互动场景",
+      "compatible_models": [
+        "深度扩散",
+        "中途6"
+      ]
+    },
+    {
+      "atom_id": "FS",
+      "director_term": "全景",
+      "aliases": [
+        "镜头",
+        "中景",
+        "全身"
+      ],
+      "ai_prompt": "全景的{主体},画面,",
+      "screen_ratio": "16:9或9:16",
+      "subject_coverage": "60%的画面",
+      "focus_point": [
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "角色",
+        "",
+        ""
+      ],
+      "notes": "勿与混淆，确保完整展现人物",
+      "compatible_models": [
+        "深度扩散",
+        "索拉",
+        "皮卡"
+      ]
+    },
+    {
+      "atom_id": "WS",
+      "director_term": "远景",
+      "aliases": [
+        "远景",
+        "远景",
+        "大远景"
+      ],
+      "ai_prompt": "远景的{主体},,电影感,构图,画面",
+      "screen_ratio": "16:9或21:9",
+      "subject_coverage": "20%的画面",
+      "focus_point": [
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "加强化电影感，人物虽小但要突出",
+      "compatible_models": [
+        "索拉",
+        "跑道第二代",
+        "深度扩散"
+      ]
+    },
+    {
+      "atom_id": "ELS",
+      "director_term": "极远景",
+      "aliases": [
+        "极远景",
+        "极远景"
+      ],
+      "ai_prompt": "极远景,{主体},镜头,",
+      "screen_ratio": "21:9或16:9",
+      "subject_coverage": "5%的画面",
+      "focus_point": [
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "主要用于建立场景氛围，人物可能只是点缀",
+      "compatible_models": [
+        "索拉",
+        "跑道"
+      ]
+    }
+  ]
+}

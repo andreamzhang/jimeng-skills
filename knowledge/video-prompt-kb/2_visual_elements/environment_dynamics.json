@@ -1,0 +1,437 @@
+{
+  "category": "environment_dynamics",
+  "version": "1.0",
+  "description": "环境动态库，包含风、雨、光影变化等环境动态元素",
+  "entries": [
+    {
+      "dynamic_type": "风",
+      "intensity_levels": [
+        {
+          "level": "微风",
+          "ai_prompt": ",的和,",
+          "visual_effect": "轻微的头发飘动，衣物轻轻摆动",
+          "mood_association": [
+            "舒适",
+            "平静",
+            "户外"
+          ],
+          "speed": "1-2"
+        },
+        {
+          "level": "中风",
+          "ai_prompt": ",,,",
+          "visual_effect": "明显的头发飞舞，衣物拍打，树枝摇摆",
+          "mood_association": [
+            "凉爽",
+            "动态",
+            "清新"
+          ],
+          "speed": "3-4"
+        },
+        {
+          "level": "强风",
+          "ai_prompt": ",,,,",
+          "visual_effect": "头发狂乱飞舞，衣物剧烈拍打，尘土飞扬",
+          "mood_association": [
+            "狂野",
+            "混乱",
+            "危险"
+          ],
+          "speed": "5-6"
+        },
+        {
+          "level": "狂风",
+          "ai_prompt": ",,,,",
+          "visual_effect": "极度的动态效果，树木弯曲，碎片飞舞",
+          "mood_association": [
+            "危险",
+            "戏剧性",
+            "恐怖"
+          ],
+          "speed": "7+"
+        }
+      ],
+      "wind_types": [
+        {
+          "type": "阵风",
+          "prompt": "的,,,",
+          "mood": "变化无常、紧张"
+        },
+        {
+          "type": "持续强风",
+          "prompt": ",平稳,",
+          "mood": "压迫感、持续紧张"
+        },
+        {
+          "type": "穿堂风",
+          "prompt": "或,,",
+          "mood": "突然、混乱"
+        }
+      ]
+    },
+    {
+      "dynamic_type": "雨",
+      "intensity_levels": [
+        {
+          "level": "毛毛雨",
+          "ai_prompt": ",,,",
+          "visual_effect": "极细的雨滴，物体表面微微湿润",
+          "mood_association": [
+            "宁静",
+            "浪漫",
+            "忧郁"
+          ],
+          "surface_effect": ","
+        },
+        {
+          "level": "小雨",
+          "ai_prompt": ",,,",
+          "visual_effect": "可见雨滴，柔和的滴答声，地面有反射",
+          "mood_association": [
+            "舒适",
+            "思考",
+            "悲伤"
+          ],
+          "surface_effect": ","
+        },
+        {
+          "level": "中雨",
+          "ai_prompt": ",,-,,",
+          "visual_effect": "明显的雨滴，行走时明显的溅起",
+          "mood_association": [
+            "忧郁",
+            "匆忙",
+            "孤独"
+          ],
+          "surface_effect": ",,"
+        },
+        {
+          "level": "大雨",
+          "ai_prompt": ",的,-,,",
+          "visual_effect": "雨幕效果，能见度降低，声音低沉",
+          "mood_association": [
+            "压抑",
+            "戏剧性",
+            "危险"
+          ],
+          "surface_effect": ",,"
+        },
+        {
+          "level": "暴雨",
+          "ai_prompt": ",,,",
+          "visual_effect": "几乎白茫茫的雨幕，猛烈拍打",
+          "mood_association": [
+            "危险",
+            "戏剧性",
+            "混乱"
+          ],
+          "surface_effect": ",,"
+        }
+      ],
+      "rain_interactions": [
+        {
+          "interaction": "雨滴落在物体上",
+          "prompt": ",,"
+        },
+        {
+          "interaction": "雨中行走",
+          "prompt": "角色,,"
+        },
+        {
+          "interaction": "雨中使用伞",
+          "prompt": ",,"
+        },
+        {
+          "interaction": "雨后水洼",
+          "prompt": ",,"
+        }
+      ]
+    },
+    {
+      "dynamic_type": "光影变化",
+      "time_based": true,
+      "entries": [
+        {
+          "time_of_day": "日出入",
+          "duration": "5-10分钟",
+          "ai_prompt": "黄金时刻,,阴影,对比",
+          "visual_effect": "金色光芒，温暖色调，长影子",
+          "mood_association": [
+            "希望",
+            "浪漫",
+            "变化"
+          ],
+          "movement": "或,"
+        },
+        {
+          "time_of_day": "正午",
+          "duration": "",
+          "ai_prompt": "阳光,-阴影,对比,",
+          "visual_effect": "刺眼的顶光，向下的强影子，高对比",
+          "mood_association": [
+            "炎热",
+            "直白",
+            "压力"
+          ],
+          "movement": ","
+        },
+        {
+          "time_of_day": "阴天",
+          "duration": "",
+          "ai_prompt": ",,对比,",
+          "visual_effect": "柔和散射光，均匀照明，低对比",
+          "mood_association": [
+            "平静",
+            "忧郁",
+            "柔和"
+          ],
+          "movement": ","
+        },
+        {
+          "time_of_day": "蓝调时刻",
+          "duration": "20-30分钟",
+          "ai_prompt": "蓝调时刻,,,",
+          "visual_effect": "蓝色调，城市灯光开始亮起，魔术般氛围",
+          "mood_association": [
+            "神秘",
+            "浪漫",
+            "都市"
+          ],
+          "movement": ""
+        },
+        {
+          "time_of_day": "夜晚",
+          "duration": "",
+          "ai_prompt": "光线,的,对比,阴影",
+          "visual_effect": "人造光源黑暗中成片，高对比，深阴影",
+          "mood_association": [
+            "神秘",
+            "危险",
+            "亲密"
+          ],
+          "movement": ",,"
+        }
+      ]
+    },
+    {
+      "dynamic_type": "云层变化",
+      "time_based": true,
+      "entries": [
+        {
+          "movement": "云朵飘过",
+          "ai_prompt": ",阴影,",
+          "duration": "10-60秒",
+          "visual_effect": "云朵移动，地面上移动的影子",
+          "mood_association": [
+            "变化",
+            "时间流逝",
+            "梦幻"
+          ]
+        },
+        {
+          "movement": "云层加厚",
+          "ai_prompt": ",,,",
+          "duration": "1-5分钟",
+          "visual_effect": "云层变厚，光线逐渐变暗",
+          "mood_association": [
+            "压迫",
+            "等待",
+            "不安"
+          ]
+        },
+        {
+          "movement": "云开雾散",
+          "ai_prompt": ",,,",
+          "duration": "30秒-2分钟",
+          "visual_effect": "云层散开，光线突然照入",
+          "mood_association": [
+            "释放",
+            "希望",
+            "解脱"
+          ]
+        }
+      ]
+    },
+    {
+      "dynamic_type": "火焰/烟雾",
+      "entries": [
+        {
+          "type": "烛火",
+          "ai_prompt": ",,",
+          "visual_effect": "烛光摇曳，温，墙上舞动的光影",
+          "mood_association": [
+            "温馨",
+            "亲密",
+            "危险"
+          ],
+          "movement": ",,"
+        },
+        {
+          "type": "篝火",
+          "ai_prompt": ",,,",
+          "visual_effect": "篝火火焰噼啪，火星升起，强烈的闪烁光",
+          "mood_association": [
+            "温暖",
+            "危险",
+            "社交"
+          ],
+          "movement": ",,"
+        },
+        {
+          "type": "火灾",
+          "ai_prompt": ",,,,",
+          "visual_effect": "猛烈火焰，吞噬，黑烟滚滚，橙色光晕，热扭曲",
+          "mood_association": [
+            "危险",
+            "破坏",
+            "紧急"
+          ],
+          "movement": ",,,"
+        },
+        {
+          "type": "烟雾",
+          "ai_prompt": ",,,",
+          "visual_effect": "烟雾飘荡，卷曲的缕缕，柔和扩散，空灵质感",
+          "mood_association": [
+            "神秘",
+            "危险",
+            "梦幻"
+          ],
+          "movement": ",,,"
+        }
+      ]
+    },
+    {
+      "dynamic_type": "水面",
+      "entries": [
+        {
+          "type": "平静水面",
+          "ai_prompt": ",,-,",
+          "visual_effect": "静止水面，完美反射，镜面效果",
+          "mood_association": [
+            "平静",
+            "对称",
+            "反射"
+          ]
+        },
+        {
+          "type": "涟漪",
+          "ai_prompt": "带,,或",
+          "visual_effect": "轻柔涟漪，同心圆扩散",
+          "mood_association": [
+            "柔和",
+            "传播",
+            "干扰"
+          ]
+        },
+        {
+          "type": "波浪",
+          "ai_prompt": ",和,,",
+          "visual_effect": "波浪运动，有节奏的起伏，溅起，拍岸",
+          "mood_association": [
+            "力量",
+            "节奏",
+            "自然"
+          ]
+        },
+        {
+          "type": "雨滴水面",
+          "ai_prompt": ",,,",
+          "visual_effect": "雨滴落在水面，形成扩散的圆环，复杂图案",
+          "mood_association": [
+            "动态",
+            "混乱",
+            "美丽"
+          ]
+        }
+      ]
+    },
+    {
+      "dynamic_type": "树叶/植被",
+      "entries": [
+        {
+          "type": "微风树叶",
+          "ai_prompt": ",,的",
+          "visual_effect": "树叶轻轻沙沙作响，微颤",
+          "mood_association": [
+            "平静",
+            "自然",
+            "户外"
+          ]
+        },
+        {
+          "type": "强风树木",
+          "ai_prompt": ",,,",
+          "visual_effect": "风中树木弯曲，树枝摇摆，叶子抽打",
+          "mood_association": [
+            "力量",
+            "自然",
+            "危险"
+          ]
+        },
+        {
+          "type": "飘落",
+          "ai_prompt": ",,,",
+          "visual_effect": "叶子慢慢飘落，螺旋下降，温和降落",
+          "mood_association": [
+            "秋天",
+            "结束",
+            "美丽"
+          ]
+        }
+      ]
+    },
+    {
+      "dynamic_type": "人物交互",
+      "entries": [
+        {
+          "interaction": "雨水流过窗户",
+          "ai_prompt": ",,",
+          "visual_effect": "水顺着窗玻璃流下，扭曲外面景象，形成抽象图案"
+        },
+        {
+          "interaction": "风中头发",
+          "ai_prompt": ",,面部,",
+          "visual_effect": "头发在风中飘舞，发丝飞舞，框住脸部"
+        },
+        {
+          "interaction": "光影移动",
+          "ai_prompt": "阴影面部,,,",
+          "visual_effect": "影子在脸上移动，时间流逝，图案变化，情绪变化"
+        }
+      ]
+    }
+  ],
+  "环境动态组合": {
+    "浪漫雨夜": [
+      "中雨",
+      "城市霓虹灯反射",
+      "温暖的室内光",
+      "两人共伞"
+    ],
+    "紧张追逐": [
+      "强风",
+      "快速剪辑",
+      "手电筒光束",
+      "阴影闪动"
+    ],
+    "宁静午后": [
+      "微风",
+      "阳光斑驳",
+      "树叶阴影",
+      "缓慢推近"
+    ],
+    "危险森林": [
+      "昏暗光线",
+      "树枝摇晃",
+      "雾气",
+      "快速移动阴影"
+    ],
+    "都市清晨": [
+      "柔和阳光",
+      "雾气",
+      "开始工作的城市声",
+      "长镜头"
+    ]
+  }
+}

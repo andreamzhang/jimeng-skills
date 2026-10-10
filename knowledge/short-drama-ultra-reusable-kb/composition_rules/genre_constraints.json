@@ -1,0 +1,340 @@
+{
+  "rule_id": "genre_constraints",
+  "name": "类型风格约束",
+  "version": "1.0",
+  "description": "定义不同短剧类型的风格约束和镜头使用规则",
+  "category": "genre_specific",
+  "principle": "不同类型（甜宠、虐恋、悬疑、爽剧等）需要不同的视觉语言和镜头策略",
+  "applies_to": [
+    "_"
+  ],
+  "genres": {
+    "sweet_romance": {
+      "name": "甜宠剧",
+      "aliases": [
+        "甜剧",
+        "浪漫喜剧",
+        "恋爱甜剧"
+      ],
+      "visual_style": {
+        "color_palette": [
+          "",
+          "",
+          "黄金时刻光线"
+        ],
+        "lighting": "_,_,_",
+        "camera_movement": ",,",
+        "composition": "-,"
+      },
+      "shot_preferences": {
+        "CU_preference": "",
+        "WS_preference": "",
+        "camera_angles": [
+          "_",
+          "__"
+        ],
+        "camera_movement": [
+          "_",
+          "__"
+        ]
+      },
+      "pacing_style": {
+        "rhythm": "缓慢和",
+        "shot_duration": "",
+        "transitions": ","
+      },
+      "common_patterns": [
+        "__",
+        "_",
+        "___"
+      ],
+      "emotional_beats": {
+        "type": "",
+        "key_moments": [
+          "__",
+          "_",
+          "_",
+          ""
+        ]
+      },
+      "forbidden_elements": [
+        "_",
+        "_",
+        "_",
+        "_"
+      ]
+    },
+    "虐恋_drama": {
+      "name": "虐恋剧",
+      "aliases": [
+        "虐剧",
+        "催泪剧",
+        "悲剧爱情"
+      ],
+      "visual_style": {
+        "color_palette": [
+          "",
+          "",
+          "对比"
+        ],
+        "lighting": "_,_,_",
+        "camera_movement": ",",
+        "composition": ","
+      },
+      "shot_preferences": {
+        "CU_preference": "_",
+        "WS_preference": "",
+        "camera_angles": [
+          "_",
+          "_对比"
+        ],
+        "camera_movement": [
+          "_",
+          "__"
+        ]
+      },
+      "pacing_style": {
+        "rhythm": ",",
+        "shot_duration": "",
+        "transitions": ",-"
+      },
+      "common_patterns": [
+        "_",
+        "_",
+        "_"
+      ],
+      "emotional_beats": {
+        "type": "",
+        "key_moments": [
+          "",
+          "",
+          "_",
+          "_"
+        ]
+      },
+      "forbidden_elements": [
+        "_",
+        "__",
+        "_"
+      ]
+    },
+    "爽剧_revenge": {
+      "name": "爽剧/复仇",
+      "aliases": [
+        "逆袭",
+        "打脸剧",
+        "复仇爽剧"
+      ],
+      "visual_style": {
+        "color_palette": [
+          "",
+          "",
+          ""
+        ],
+        "lighting": "_,_,_",
+        "camera_movement": ",",
+        "composition": ","
+      },
+      "shot_preferences": {
+        "CU_preference": "__",
+        "WS_preference": "__",
+        "camera_angles": [
+          "_",
+          "_"
+        ],
+        "camera_movement": [
+          "__",
+          "_"
+        ]
+      },
+      "pacing_style": {
+        "rhythm": ",",
+        "shot_duration": ",",
+        "transitions": "_,_"
+      },
+      "common_patterns": [
+        "_",
+        "_",
+        "_"
+      ],
+      "emotional_beats": {
+        "type": "",
+        "key_moments": [
+          "_",
+          "_",
+          "_",
+          "_"
+        ]
+      },
+      "forbidden_elements": [
+        "_",
+        "__",
+        "__"
+      ]
+    },
+    "悬疑_thriller": {
+      "name": "悬疑剧",
+      "aliases": [
+        "推理",
+        "烧脑",
+        "惊悚"
+      ],
+      "visual_style": {
+        "color_palette": [
+          "",
+          "",
+          "_"
+        ],
+        "lighting": "_,_,_",
+        "camera_movement": ",",
+        "composition": ",_"
+      },
+      "shot_preferences": {
+        "CU_preference": "",
+        "WS_preference": "__",
+        "camera_angles": [
+          "_",
+          "_"
+        ],
+        "camera_movement": [
+          "_",
+          "_"
+        ]
+      },
+      "pacing_style": {
+        "rhythm": "",
+        "shot_duration": "",
+        "transitions": "_,_"
+      },
+      "common_patterns": [
+        "",
+        "_",
+        "_"
+      ],
+      "emotional_beats": {
+        "type": "",
+        "key_moments": [
+          "_",
+          "_",
+          "_",
+          ""
+        ]
+      },
+      "forbidden_elements": [
+        "__",
+        "_",
+        "__"
+      ]
+    },
+    "职场_professional": {
+      "name": "职场剧",
+      "aliases": [
+        "商战",
+        "都市",
+        "励志"
+      ],
+      "visual_style": {
+        "color_palette": [
+          "",
+          "",
+          ""
+        ],
+        "lighting": "_,_",
+        "camera_movement": ",",
+        "composition": ",_"
+      },
+      "shot_preferences": {
+        "CU_preference": "",
+        "MS_preference": "",
+        "camera_angles": [
+          "_",
+          "_"
+        ],
+        "camera_movement": [
+          "",
+          "_"
+        ]
+      },
+      "pacing_style": {
+        "rhythm": ",",
+        "shot_duration": "",
+        "transitions": ","
+      },
+      "common_patterns": [
+        "_",
+        "_",
+        "_"
+      ],
+      "emotional_beats": {
+        "type": "",
+        "key_moments": [
+          "_",
+          "_",
+          "_",
+          "_"
+        ]
+      },
+      "forbidden_elements": [
+        "__",
+        "__",
+        "__"
+      ]
+    }
+  },
+  "genre_switching": {
+    "description": "如何在不同类型之间切换或混合",
+    "transition_strategies": [
+      {
+        "from": "_",
+        "to": "虐恋_",
+        "method": "光线,",
+        "key_shots": [
+          "_-",
+          "_"
+        ]
+      },
+      {
+        "from": "爽剧_",
+        "to": "悬疑_",
+        "method": "缓慢,,",
+        "key_shots": [
+          "_",
+          "_"
+        ]
+      }
+    ]
+  },
+  "universal_constraints": {
+    "description": "所有类型都应遵守的基本规则",
+    "continuity": "和的",
+    "emotional_authenticity": "光线和镜头",
+    "story_service": ",",
+    "audience_comfort": ""
+  },
+  "quick_reference": {
+    "romance": {
+      "lighting": ",",
+      "camera": ",",
+      "angles": "_,_",
+      "pacing": "缓慢,"
+    },
+    "drama": {
+      "lighting": ",",
+      "camera": ",",
+      "angles": "_,",
+      "pacing": ","
+    },
+    "action": {
+      "lighting": ",对比",
+      "camera": ",手持",
+      "angles": "__",
+      "pacing": "快速,"
+    },
+    "thriller": {
+      "lighting": ",阴影",
+      "camera": ",",
+      "angles": ",",
+      "pacing": "缓慢,"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "description": "绘图提示词知识库索引",
+  "files": [
+    {
+      "file": "shot_sizes.json",
+      "category": "shot_size",
+      "description": "景别映射表"
+    },
+    {
+      "file": "moods.json",
+      "category": "mood_to_visual",
+      "description": "情绪→视觉关键词映射"
+    },
+    {
+      "file": "actions.json",
+      "category": "action_templates",
+      "description": "人物动作模板"
+    },
+    {
+      "file": "camera_angles.json",
+      "category": "camera_angle",
+      "description": "镜头角度模板"
+    },
+    {
+      "file": "environments.json",
+      "category": "environment_template",
+      "description": "环境构建模板"
+    },
+    {
+      "file": "lighting.json",
+      "category": "lighting",
+      "description": "光影效果模板"
+    },
+    {
+      "file": "compositions.json",
+      "category": "composition",
+      "description": "构图规则模板"
+    }
+  ]
+}

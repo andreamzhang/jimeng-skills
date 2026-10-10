@@ -1,0 +1,227 @@
+{
+  "pattern_id": "power_shift_sequence",
+  "name": "权力反转",
+  "version": "1.0",
+  "description": "用于展现角色之间权力关系动态转变的镜头序列，从弱势到强势或",
+  "category": "power_dynamics",
+  "usage_frequency": "",
+  "structure": {
+    "shot_sequence": [
+      {
+        "shot_id": "pre_shift_dominance",
+        "name": "反转前：强势方主导",
+        "shot_type": "中近景",
+        "camera_setup": "_",
+        "eye_line": "_",
+        "duration": "2-3",
+        "visual_prompt_template": "{_},{_},",
+        "camera_movement": "",
+        "lighting": "_",
+        "composition": "_画面,",
+        "power_state": ""
+      },
+      {
+        "shot_id": "shift_trigger",
+        "name": "反转触发点",
+        "shot_type": "近景",
+        "camera_setup": "_",
+        "eye_line": "__",
+        "duration": "1.5-2",
+        "visual_prompt_template": "-{_},{_}带{}",
+        "camera_movement": "__",
+        "pacing": "__",
+        "trigger_type": "_||"
+      },
+      {
+        "shot_id": "power_exchange",
+        "name": "权力交换",
+        "shot_type": "特写",
+        "camera_setup": "_",
+        "eye_line": "_",
+        "duration": "2-3",
+        "visual_prompt_template": "特写{_}__面部,{__},眼睛",
+        "camera_movement": "__",
+        "lighting": "逆光",
+        "power_state": ""
+      },
+      {
+        "shot_id": "post_shift_dominance",
+        "name": "反转后：新强势方",
+        "shot_type": "中近景",
+        "camera_setup": "_",
+        "eye_line": "__",
+        "duration": "3-4",
+        "visual_prompt_template": "{_}__,{_},{_}{_}",
+        "camera_movement": "_",
+        "lighting": "_",
+        "composition": "镜头",
+        "power_state": ""
+      },
+      {
+        "shot_id": "dominance_reaction",
+        "name": "弱势方反应",
+        "shot_type": "特写",
+        "camera_setup": "过肩",
+        "eye_line": "_",
+        "duration": "2-3",
+        "visual_prompt_template": "的{_}__,{_},",
+        "camera_movement": "",
+        "pacing": "_",
+        "power_state": ""
+      },
+      {
+        "shot_id": "power_sealed",
+        "name": "权力确立",
+        "shot_type": "中景",
+        "camera_setup": "",
+        "eye_line": "__",
+        "duration": "3-5",
+        "visual_prompt_template": "镜头,,{}",
+        "camera_movement": "__",
+        "lighting": "__",
+        "composition": "",
+        "power_state": ""
+      }
+    ],
+    "pattern_flow": "→→→→→",
+    "minimum_shots": 4,
+    "key_shots": [
+      "_",
+      "_",
+      "__"
+    ]
+  },
+  "rules": {
+    "must_use": [
+      "_",
+      "__",
+      "_"
+    ],
+    "recommended": [
+      "__",
+      "_"
+    ],
+    "forbidden": [
+      "__"
+    ],
+    "constraints": {
+      "angle_reversal": "__主体",
+      "composition_reversal": "",
+      "eye_direction": "主体/"
+    }
+  },
+  "customizable_slots": {
+    "dominant_subject": {
+      "type": "",
+      "description": "初始强势方角色",
+      "default": ""
+    },
+    "weak_subject": {
+      "type": "",
+      "description": "初始弱势方角色",
+      "default": ""
+    },
+    "trigger_type": {
+      "type": "",
+      "description": "反转触发类型",
+      "default": "_",
+      "options": [
+        "_",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "reaction": {
+      "type": "",
+      "description": "原强势方反应",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "new_power_emotion": {
+      "type": "",
+      "description": "新强势方情绪",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "_",
+        "",
+        "",
+        ""
+      ]
+    },
+    "weak_expression": {
+      "type": "",
+      "description": "新弱势方表情",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "atmosphere": {
+      "type": "",
+      "description": "场景氛围",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "power_dynamics": {
+    "physical": {
+      "dominant_posture": ",,",
+      "weak_posture": ",,",
+      "camera_angle": ","
+    },
+    "spatial": {
+      "dominant_position": "画面,,镜头",
+      "weak_position": "画面,,镜头"
+    },
+    "gaze": {
+      "dominant_gaze": ",,",
+      "weak_gaze": ",,"
+    }
+  },
+  "trigger_examples": {
+    "information_reveal": "{_}{},",
+    "action": "{_}{_},",
+    "declaration": "{_}{},",
+    "intervention": ",",
+    "revelation": "{道具},"
+  },
+  "example_bindings": {
+    "dominant_subject": "霸道总裁",
+    "weak_subject": "平民女主",
+    "trigger_type": "_",
+    "reaction": "",
+    "new_power_emotion": "_",
+    "weak_expression": "",
+    "atmosphere": "",
+    "secret": "他们是同父异母的兄妹"
+  },
+  "use_cases": [
+    "身份反转",
+    "地位转变",
+    "真相揭露",
+    "权力争夺",
+    "逆袭时刻"
+  ]
+}

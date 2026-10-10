@@ -1,0 +1,294 @@
+{
+  "pattern_id": "chase_sequence",
+  "name": "追逐场景",
+  "version": "1.0",
+  "description": "用于展现追逐、逃跑或紧迫场景的动态镜头序列",
+  "category": "action",
+  "usage_frequency": "",
+  "structure": {
+    "shot_sequence": [
+      {
+        "shot_id": "chase_setup",
+        "name": "追逐准备",
+        "shot_type": "或",
+        "camera_setup": "或_",
+        "eye_line": "_",
+        "duration": "2-3",
+        "visual_prompt_template": "{地点},{}{},和",
+        "camera_movement": "___",
+        "pacing": ""
+      },
+      {
+        "shot_id": "chaser_pursuit",
+        "name": "追逐者主视角",
+        "shot_type": "或",
+        "camera_setup": "手持或",
+        "eye_line": "_",
+        "duration": "1.5-2",
+        "visual_prompt_template": "{},镜头,{}",
+        "camera_movement": "_",
+        "pacing": "",
+        "perspective": "_"
+      },
+      {
+        "shot_id": "chased_reaction",
+        "name": "被追逐者反应",
+        "shot_type": "或",
+        "camera_setup": "手持",
+        "eye_line": "_",
+        "duration": "0.5-1",
+        "visual_prompt_template": "{},{_},,",
+        "camera_movement": "__",
+        "pacing": "",
+        "focus": "_"
+      },
+      {
+        "shot_id": "obstacle_approach",
+        "name": "障碍物接近",
+        "shot_type": "或",
+        "camera_setup": "或",
+        "eye_line": "/",
+        "duration": "0.5-1",
+        "visual_prompt_template": "{_}快速,{_}",
+        "camera_movement": "_",
+        "pacing": "",
+        "focus": ""
+      },
+      {
+        "shot_id": "action_moment",
+        "name": "动作时刻",
+        "shot_type": "或",
+        "camera_setup": "手持或",
+        "eye_line": "",
+        "duration": "1-2",
+        "visual_prompt_template": "-{_},{}",
+        "camera_movement": "_",
+        "pacing": "_",
+        "technique": "__"
+      },
+      {
+        "shot_id": "result_reaction",
+        "name": "结果反应",
+        "shot_type": "或",
+        "camera_setup": "手持",
+        "eye_line": "",
+        "duration": "1-2",
+        "visual_prompt_template": "-{_},或的",
+        "camera_movement": "_",
+        "pacing": "_"
+      },
+      {
+        "shot_id": "chase_continuation",
+        "name": "追逐继续",
+        "shot_type": "或",
+        "camera_setup": "",
+        "eye_line": "",
+        "duration": "2-3",
+        "visual_prompt_template": ",或,{_}",
+        "camera_movement": "_",
+        "pacing": "_",
+        "loop_back": "_"
+      }
+    ],
+    "pattern_flow": "→→→→→→()",
+    "minimum_shots": 4,
+    "loop_cap": "3",
+    "key_shots": [
+      "_",
+      "_",
+      "_"
+    ]
+  },
+  "rules": {
+    "must_use": [
+      "_",
+      "_",
+      "_"
+    ],
+    "recommended": [
+      "_",
+      "宽广"
+    ],
+    "forbidden": [
+      "___",
+      "_"
+    ],
+    "constraints": {
+      "camera_movement": "和",
+      "distance_shots": "和",
+      "obstacle_frequency": "2-3"
+    }
+  },
+  "customizable_slots": {
+    "location": {
+      "type": "",
+      "description": "追逐发生地点",
+      "default": ""
+    },
+    "chaser": {
+      "type": "",
+      "description": "追逐者角色",
+      "default": ""
+    },
+    "chased": {
+      "type": "",
+      "description": "被追逐者角色",
+      "default": ""
+    },
+    "chase_type": {
+      "type": "",
+      "description": "追逐类型",
+      "default": "_",
+      "options": [
+        "_",
+        "_",
+        "_",
+        "_",
+        "_"
+      ]
+    },
+    "fear_expression": {
+      "type": "",
+      "description": "被追逐者恐惧表情",
+      "default": "___",
+      "options": [
+        "___",
+        "__",
+        "",
+        ""
+      ]
+    },
+    "obstacle_type": {
+      "type": "",
+      "description": "障碍物类型",
+      "default": "_",
+      "options": [
+        "_",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "action_decision": {
+      "type": "",
+      "description": "面对障碍物的动作决策",
+      "default": "_",
+      "options": [
+        "_",
+        "_",
+        "_",
+        "",
+        "_",
+        "_"
+      ]
+    },
+    "action_description": {
+      "type": "",
+      "description": "关键动作描述",
+      "default": "带"
+    },
+    "result_expression": {
+      "type": "",
+      "description": "动作结果后的表情",
+      "default": "____",
+      "options": [
+        "____",
+        "_",
+        "_",
+        ""
+      ]
+    },
+    "new_element": {
+      "type": "",
+      "description": "追逐中出现的新元素",
+      "default": "_",
+      "options": [
+        "_",
+        "_",
+        "_",
+        "_",
+        "_"
+      ]
+    }
+  },
+  "chase_variations": {
+    "foot_pursuit": {
+      "camera_movement": "_",
+      "shot_types": [
+        "近景",
+        "中景",
+        "特写"
+      ],
+      "obstacle_frequency": "",
+      "pacing": "快速"
+    },
+    "vehicle_chase": {
+      "camera_movement": "_",
+      "shot_types": [
+        "远景",
+        "中景",
+        "大特写"
+      ],
+      "obstacle_frequency": "",
+      "pacing": "_",
+      "safety_notes": ""
+    },
+    "staircase_chase": {
+      "camera_movement": "_",
+      "shot_types": [
+        "中近景",
+        "近景",
+        "大特写"
+      ],
+      "obstacle_frequency": "",
+      "pacing": "快速",
+      "notes": ""
+    },
+    "corridor_chase": {
+      "camera_movement": "__",
+      "shot_types": [
+        "近景",
+        "特写",
+        ""
+      ],
+      "obstacle_frequency": "_",
+      "pacing": "快速",
+      "notes": "和"
+    }
+  },
+  "energy_maintenance": {
+    "pacing_strategy": "1.5-2镜头",
+    "camera_movement": "",
+    "sound_design": [
+      "",
+      "",
+      "_"
+    ],
+    "visual_cues": [
+      "_",
+      "_",
+      "_"
+    ]
+  },
+  "example_bindings": {
+    "location": "废弃工厂",
+    "chaser": "黑帮打手",
+    "chased": "女主角",
+    "chase_type": "_",
+    "fear_expression": "",
+    "obstacle_type": "_",
+    "action_decision": "_",
+    "action_description": ",",
+    "result_expression": "____",
+    "new_element": "_"
+  },
+  "use_cases": [
+    "逃离危险",
+    "追赶目标",
+    "紧迫任务",
+    "追逐戏",
+    "追逐+反转"
+  ]
+}

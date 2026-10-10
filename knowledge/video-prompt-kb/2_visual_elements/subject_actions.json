@@ -1,0 +1,364 @@
+{
+  "category": "subject_actions",
+  "version": "1.0",
+  "description": "主体动作库，包含时间轴描述和动作细节",
+  "entries": [
+    {
+      "action_type": "行走",
+      "time_based": true,
+      "template": "{角色}{_},{},{方向},{姿态},{_}",
+      "time_phases": [
+        {
+          "phase": "开始",
+          "prompt": "角色,,",
+          "duration": "0.3-0.5"
+        },
+        {
+          "phase": "进行",
+          "prompt": ",或,,",
+          "duration": "1-3"
+        },
+        {
+          "phase": "停止",
+          "prompt": ",,",
+          "duration": "0.5-1"
+        }
+      ],
+      "variations": [
+        {
+          "style": "自信行走",
+          "prompt": ",,,",
+          "mood": "自信、有目的"
+        },
+        {
+          "style": "匆忙行走",
+          "prompt": ",,,",
+          "mood": "匆忙、有目的"
+        },
+        {
+          "style": "偷偷摸摸",
+          "prompt": ",,,,",
+          "mood": "秘密、紧张"
+        },
+        {
+          "style": "受伤跛行",
+          "prompt": ",,,",
+          "mood": "痛苦、受伤"
+        },
+        {
+          "style": "醉酒行走",
+          "prompt": ",,,",
+          "mood": "醉酒、失控"
+        }
+      ],
+      "direction_options": [
+        "镜头",
+        "镜头",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "action_type": "奔跑",
+      "time_based": true,
+      "template": "{角色}{},{_},{}",
+      "time_phases": [
+        {
+          "phase": "起跑",
+          "prompt": ",,",
+          "duration": "0.5-1"
+        },
+        {
+          "phase": "全力奔跑",
+          "prompt": ",90,,/",
+          "duration": "2-5"
+        },
+        {
+          "phase": "减速停止",
+          "prompt": ",,",
+          "duration": "1-2"
+        }
+      ],
+      "variations": [
+        {
+          "style": "恐慌奔跑",
+          "prompt": ",,,眼睛宽广带",
+          "mood": "恐惧、恐慌"
+        },
+        {
+          "style": "兴奋奔跑",
+          "prompt": ",宽广,,",
+          "mood": "快乐、兴奋"
+        },
+        {
+          "style": "追逐奔跑",
+          "prompt": ",的,,眼睛",
+          "mood": "专注、决心"
+        },
+        {
+          "style": "艰难奔跑",
+          "prompt": ",,,",
+          "mood": "疲惫、困难"
+        }
+      ]
+    },
+    {
+      "action_type": "对话反应",
+      "time_based": true,
+      "template": "{角色}带{_},{_}",
+      "time_phases": [
+        {
+          "phase": "听到",
+          "prompt": "-,眼睛,",
+          "duration": "0.3-0.5"
+        },
+        {
+          "phase": "处理",
+          "prompt": "-,,-",
+          "duration": "0.5-1"
+        },
+        {
+          "phase": "回应",
+          "prompt": "-,",
+          "duration": "1-2"
+        }
+      ],
+      "reaction_types": [
+        {
+          "type": "震惊",
+          "prompt": "眼睛宽广,,,",
+          "mood": "震惊、惊讶"
+        },
+        {
+          "type": "怀疑",
+          "prompt": ",,,",
+          "mood": "怀疑、不信"
+        },
+        {
+          "type": "愤怒",
+          "prompt": "面部,,,",
+          "mood": "愤怒、生气"
+        },
+        {
+          "type": "悲伤",
+          "prompt": "眼睛,,,",
+          "mood": "悲伤、难过"
+        },
+        {
+          "type": "喜悦",
+          "prompt": "面部,,眼睛,带",
+          "mood": "开心、喜悦"
+        }
+      ]
+    },
+    {
+      "action_type": "手势动作",
+      "time_based": false,
+      "template": "{角色}{_}带{_},{_}",
+      "gestures": [
+        {
+          "type": "挥手告别",
+          "prompt": ",,,",
+          "mood": "告别、愉快"
+        },
+        {
+          "type": "召唤",
+          "prompt": ",,",
+          "mood": "召唤、邀请"
+        },
+        {
+          "type": "拒绝",
+          "prompt": ",,",
+          "mood": "拒绝、制止"
+        },
+        {
+          "type": "投降",
+          "prompt": ",,",
+          "mood": "投降、放弃"
+        },
+        {
+          "type": "思考托腮",
+          "prompt": ",,眼睛和",
+          "mood": "思考、困惑"
+        },
+        {
+          "type": "捂嘴惊讶",
+          "prompt": ",眼睛宽广,",
+          "mood": "惊讶、震惊"
+        }
+      ]
+    },
+    {
+      "action_type": "物体交互",
+      "time_based": true,
+      "template": "{角色}带{道具}{_},{_}",
+      "time_phases": [
+        {
+          "phase": "接近",
+          "prompt": ",,眼睛",
+          "duration": "0.5-1"
+        },
+        {
+          "phase": "接触",
+          "prompt": "或,,",
+          "duration": "0.3-0.5"
+        },
+        {
+          "phase": "操作",
+          "prompt": "带-,,,",
+          "duration": "1-3"
+        }
+      ],
+      "interactions": [
+        {
+          "object": "手机",
+          "actions": [
+            {
+              "action": "查看消息",
+              "prompt": ",,"
+            },
+            {
+              "action": "拨打电话",
+              "prompt": ",,"
+            },
+            {
+              "action": "发送消息",
+              "prompt": ",,"
+            }
+          ]
+        },
+        {
+          "object": "门",
+          "actions": [
+            {
+              "action": "敲门",
+              "prompt": ",,"
+            },
+            {
+              "action": "开门",
+              "prompt": ",,,"
+            },
+            {
+              "action": "推门进入",
+              "prompt": ",,"
+            }
+          ]
+        },
+        {
+          "object": "文件/信件",
+          "actions": [
+            {
+              "action": "拆信",
+              "prompt": ",,"
+            },
+            {
+              "action": "阅读",
+              "prompt": "眼睛,,"
+            },
+            {
+              "action": "揉皱",
+              "prompt": ",,"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "action_type": "表情变化",
+      "time_based": true,
+      "template": "{角色}'面部{_}{_},{_}",
+      "time_phases": [
+        {
+          "phase": "初始",
+          "prompt": "面部{_},",
+          "duration": "0.5-1"
+        },
+        {
+          "phase": "转变",
+          "prompt": "--,,眼睛",
+          "duration": "1-2"
+        },
+        {
+          "phase": "完成",
+          "prompt": "面部{_},",
+          "duration": "1-2"
+        }
+      ],
+      "emotion_transitions": [
+        {
+          "from": "平静",
+          "to": "震惊",
+          "prompt": "眼睛,,"
+        },
+        {
+          "from": "开心",
+          "to": "悲伤",
+          "prompt": ",眼睛,"
+        },
+        {
+          "from": "自信",
+          "to": "恐惧",
+          "prompt": ",眼睛,面部,"
+        },
+        {
+          "from": "愤怒",
+          "to": "惊讶",
+          "prompt": "面部,"
+        }
+      ]
+    },
+    {
+      "action_type": "姿态变化",
+      "time_based": true,
+      "template": "{角色}{_}{_},{_}",
+      "time_phases": [
+        {
+          "phase": "初始姿态",
+          "prompt": "角色{_},",
+          "duration": "0.5-1"
+        },
+        {
+          "phase": "过渡",
+          "prompt": ",,",
+          "duration": "1-2"
+        },
+        {
+          "phase": "新姿态",
+          "prompt": "角色{_},",
+          "duration": "0.5-1"
+        }
+      ],
+      "pose_transitions": [
+        {
+          "from": "站立",
+          "to": "坐下",
+          "prompt": ",,,"
+        },
+        {
+          "from": "坐着",
+          "to": "站起",
+          "prompt": "带,,"
+        },
+        {
+          "from": "放松",
+          "to": "警觉",
+          "prompt": ",,,眼睛"
+        },
+        {
+          "from": "自信",
+          "to": "防御",
+          "prompt": ",,,眼睛"
+        }
+      ]
+    }
+  ],
+  "动作描述原则": [
+    "使用具体的身体部位描述（手指、手腕、肩部）",
+    "包含动作的速度和力度",
+    "描述重心的变化",
+    "说明面部表情的变化",
+    "考虑动作的连续性和流畅性",
+    "添加微表情细节增加真实感"
+  ]
+}

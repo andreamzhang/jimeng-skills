@@ -1,0 +1,372 @@
+{
+  "category": "environment_template",
+  "version": "1.0",
+  "description": "环境构建模板，提供各种场景的环境描述",
+  "template_structure": {
+    "format": "{地点},{__},{天气},{光源},{材质}",
+    "required_elements": [
+      "",
+      "__"
+    ],
+    "optional_elements": [
+      "",
+      "_",
+      "_",
+      "",
+      ""
+    ]
+  },
+  "entries": [
+    {
+      "scene_type": "都市雨夜",
+      "template": "夜晚,{_},{___},{},{_}",
+      "specific_location": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "neon_or_street_light": [
+        "霓虹",
+        "",
+        ""
+      ],
+      "surface": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "atmospheric_quality": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": "夜晚,,霓虹,",
+      "mood_association": [
+        "孤独",
+        "紧张",
+        "浪漫",
+        "神秘"
+      ],
+      "notes": "避免模糊地点描述（如''），必须包含具体文化/时代/材质线索"
+    },
+    {
+      "scene_type": "乡村黄昏",
+      "template": "{时间},{天气},{_},{},{_}",
+      "time": [
+        "黄金时刻",
+        "",
+        "蓝调时刻",
+        "黄昏"
+      ],
+      "weather": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "light_quality": [
+        "阳光阴影",
+        "",
+        ""
+      ],
+      "surface": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "atmospheric_element": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": "黄金时刻,,阳光阴影,",
+      "mood_association": [
+        "温馨",
+        "怀旧",
+        "平静",
+        "孤独"
+      ],
+      "notes": "黄昏是黄金时段，光线温暖且有长长的影子"
+    },
+    {
+      "scene_type": "未来实验室",
+      "template": "{地点},{时间},{__},{光源},{材质},{}",
+      "location": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "time": [
+        "白天",
+        "",
+        "清晨",
+        "夜晚"
+      ],
+      "weather_through_window": [
+        "阴天",
+        "",
+        ""
+      ],
+      "light_source": [
+        "",
+        "",
+        ""
+      ],
+      "surface_texture": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "atmosphere": [
+        "",
+        "-",
+        "和",
+        ""
+      ],
+      "filled_prompt_example": ",,阴天,,",
+      "mood_association": [
+        "紧张",
+        "好奇",
+        "冷漠",
+        "期待"
+      ],
+      "notes": "强调科技感和未来感"
+    },
+    {
+      "scene_type": "老旧居民楼天台",
+      "template": "的,{_},{时间},{天气},{_},{}",
+      "building_era": [
+        "-",
+        "",
+        "",
+        ""
+      ],
+      "time": [
+        "白天",
+        "夜晚",
+        "",
+        "黄昏"
+      ],
+      "weather": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "environmental_elements": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "surface": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": "的,,,,",
+      "mood_association": [
+        "绝望",
+        "孤独",
+        "思考",
+        "自由"
+      ],
+      "notes": "天台场景适合表现情绪高潮或转折"
+    },
+    {
+      "scene_type": "菜市场",
+      "template": "{_},{时间},{光线},{},{_},{_}",
+      "market_type": [
+        "",
+        "",
+        "'",
+        ""
+      ],
+      "time": [
+        "清晨",
+        "",
+        "清晨"
+      ],
+      "lighting": [
+        "",
+        "",
+        "光线"
+      ],
+      "surface": [
+        "",
+        "",
+        ""
+      ],
+      "activity_level": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "sensory_elements": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": ",清晨,,,,",
+      "mood_association": [
+        "活力",
+        "混乱",
+        "温馨",
+        "怀旧"
+      ],
+      "notes": "菜市场是充满生活气息的场景"
+    },
+    {
+      "scene_type": "室内公寓",
+      "template": "{_},{时间},{_},{_},{_},{}",
+      "room_type": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "time": [
+        "白天",
+        "夜晚",
+        "清晨"
+      ],
+      "light_quality": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "furnishing_style": [
+        "",
+        "",
+        "",
+        "-"
+      ],
+      "atmospheric_quality": [
+        "",
+        "",
+        "和",
+        ""
+      ],
+      "surface": [
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": ",夜晚,,,,",
+      "mood_association": [
+        "温馨",
+        "孤独",
+        "平静",
+        "混乱"
+      ],
+      "notes": "室内场景要体现角色的生活状态"
+    },
+    {
+      "scene_type": "街道",
+      "template": "{_},{时间},{_},{_},{_},{}",
+      "street_type": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "time": [
+        "白天",
+        "夜晚",
+        "",
+        "夜晚"
+      ],
+      "lighting_condition": [
+        "阳光",
+        "",
+        "霓虹",
+        ""
+      ],
+      "traffic_level": [
+        "",
+        "",
+        "-",
+        ""
+      ],
+      "building_style": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "surface": [
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": ",,阳光,,,带",
+      "mood_association": [
+        "活力",
+        "孤独",
+        "匆忙",
+        "怀旧"
+      ],
+      "notes": "街道场景要体现城市特征和时间感"
+    },
+    {
+      "scene_type": "自然环境",
+      "template": ",{_},{时间},{天气},{_},{_}",
+      "terrain_type": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "time": [
+        "黄金时刻",
+        "正午",
+        "蓝调时刻",
+        "夜晚"
+      ],
+      "weather": [
+        "",
+        "",
+        "阴天",
+        ""
+      ],
+      "light_quality": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "prominent_feature": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "filled_prompt_example": ",清晨,,,",
+      "mood_association": [
+        "平静",
+        "敬畏",
+        "孤独",
+        "神秘"
+      ],
+      "notes": "自然场景要突出地形特征和光线质量"
+    }
+  ],
+  "tips": [
+    "避免模糊地点描述（如''），必须包含具体文化/时代/材质线索",
+    "环境描述要与情绪基调相匹配",
+    "加入感官元素可以增强沉浸感",
+    "时代特征（复古/现代/未来）要通过道具和建筑风格体现"
+  ]
+}

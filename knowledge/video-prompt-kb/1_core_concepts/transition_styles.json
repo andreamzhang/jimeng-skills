@@ -1,0 +1,283 @@
+{
+  "category": "transition_styles",
+  "version": "1.0",
+  "description": "转场风格库，定义各种镜头切换方式",
+  "entries": [
+    {
+      "transition_type": "硬切",
+      "alias": [
+        "",
+        "",
+        "直接切换"
+      ],
+      "ai_prompt": "镜头,,",
+      "effect": "最基础的转场，保持节奏，强调对比",
+      "usage": "标准叙事，自然连接，对比镜头",
+      "mood_association": [
+        "直接",
+        "客观",
+        "紧凑"
+      ],
+      "prompt_example": ":",
+      "notes": "视频中最自然的转场方式"
+    },
+    {
+      "transition_type": "叠化",
+      "alias": [
+        "",
+        "",
+        "交叉淡化"
+      ],
+      "ai_prompt": ",镜头,0.5",
+      "effect": "时间流逝、梦幻、连接两个相关镜头",
+      "usage": [
+        "时间流逝",
+        "梦境/回忆",
+        "平行叙事"
+      ],
+      "mood_association": [
+        "梦幻",
+        "时间流逝",
+        "连接感"
+      ],
+      "prompt_example": ":",
+      "duration": "0.5-1",
+      "notes": "可表达时间流逝或梦幻感"
+    },
+    {
+      "transition_type": "淡入淡出",
+      "alias": [
+        "/",
+        "叠化"
+      ],
+      "ai_prompt": ",/",
+      "effect": "段落分隔、开始、结束、场景转换",
+      "usage": [
+        "场景开始",
+        "场景结束",
+        "章节分隔",
+        "时间跳跃"
+      ],
+      "mood_association": [
+        "仪式感",
+        "正式",
+        "段落感"
+      ],
+      "prompt_example": "/",
+      "notes": "常用于场景开始和结束"
+    },
+    {
+      "transition_type": "匹配剪辑",
+      "alias": [
+        "",
+        "匹配转场"
+      ],
+      "ai_prompt": ",或,//",
+      "effect": "创造视觉连接，强调相似性或对比",
+      "usage": [
+        "空间连接",
+        "主题对比",
+        "创意表达"
+      ],
+      "mood_association": [
+        "创意",
+        "连贯",
+        "对比"
+      ],
+      "types": [
+        {
+          "name": "动作匹配",
+          "prompt": ""
+        },
+        {
+          "name": "物体匹配",
+          "prompt": ""
+        },
+        {
+          "name": "构图匹配",
+          "prompt": "或构图"
+        },
+        {
+          "name": "色彩匹配",
+          "prompt": ""
+        }
+      ],
+      "notes": "需要两个镜头有视觉关联性"
+    },
+    {
+      "transition_type": "跳跃剪辑",
+      "alias": [
+        "",
+        "跳切"
+      ],
+      "ai_prompt": ",,",
+      "effect": "时间跳跃、强调、省略无聊时间",
+      "usage": [
+        "时间省略",
+        "节奏变化",
+        "强调关键动作"
+      ],
+      "mood_association": [
+        "跳跃感",
+        "不连贯",
+        "强调"
+      ],
+      "prompt_example": ":",
+      "notes": "故意的不连贯可创造节奏感"
+    },
+    {
+      "transition_type": "遮罩转场",
+      "alias": [
+        "",
+        "擦除"
+      ],
+      "ai_prompt": ",画面",
+      "effect": "分隔不同场景或时间，创造视觉趣味",
+      "usage": [
+        "场景分隔",
+        "时间过渡",
+        "风格化"
+      ],
+      "mood_association": [
+        "风格化",
+        "复古",
+        "分隔感"
+      ],
+      "types": [
+        {
+          "name": "水平擦除",
+          "prompt": ""
+        },
+        {
+          "name": "垂直擦除",
+          "prompt": ""
+        },
+        {
+          "name": "圆形擦除",
+          "prompt": "或"
+        },
+        {
+          "name": "渐变擦除",
+          "prompt": ""
+        }
+      ],
+      "notes": "视频中较难实现，使用要谨慎"
+    },
+    {
+      "transition_type": "声音先入",
+      "alias": [
+        "-",
+        "音频领先"
+      ],
+      "ai_prompt": ",",
+      "effect": "预告下一个场景，保持声音连续性",
+      "usage": [
+        "预告场景",
+        "声音连接",
+        "流畅过渡"
+      ],
+      "mood_association": [
+        "流畅",
+        "连接感"
+      ],
+      "prompt_example": "-:",
+      "notes": "声音先于画面切入"
+    },
+    {
+      "transition_type": "声音滞后",
+      "alias": [
+        "-",
+        "音频延后"
+      ],
+      "ai_prompt": "",
+      "effect": "声音延续前一个场景，加强连接",
+      "usage": [
+        "声音延续",
+        "情感延续",
+        "场景连接"
+      ],
+      "mood_association": [
+        "延续感",
+        "连接感"
+      ],
+      "prompt_example": "-:",
+      "notes": "画面已切换但声音延续"
+    },
+    {
+      "transition_type": "主观转场",
+      "alias": [
+        "主观视角"
+      ],
+      "ai_prompt": "主观视角镜头,角色或",
+      "effect": "代入角色视角，建立因果关系",
+      "usage": [
+        "角色视角",
+        "反应镜头",
+        "物体特写"
+      ],
+      "mood_association": [
+        "沉浸感",
+        "主观性"
+      ],
+      "prompt_example": ":角色'主观视角",
+      "notes": "常用于反应和观察场景"
+    },
+    {
+      "transition_type": "闪白",
+      "alias": [
+        "",
+        ""
+      ],
+      "ai_prompt": "的,,",
+      "effect": "强调、冲击、时间跳跃、惊吓",
+      "usage": [
+        "强调",
+        "惊吓",
+        "时间跳跃",
+        "强烈情绪"
+      ],
+      "mood_association": [
+        "冲击",
+        "强调",
+        "突然"
+      ],
+      "duration": "0.1-0.3",
+      "prompt_example": ":",
+      "notes": "短暂的白屏过渡"
+    },
+    {
+      "transition_type": "交叉缩放",
+      "alias": [
+        "/"
+      ],
+      "ai_prompt": ",或的",
+      "effect": "复古风格、强调开始或结束",
+      "usage": [
+        "复古风格",
+        "强调开始/结束",
+        "风格化"
+      ],
+      "mood_association": [
+        "复古",
+        "风格化",
+        "强调"
+      ],
+      "prompt_example": ":",
+      "notes": "老电影风格，视频较少使用"
+    }
+  ],
+  "转场选择指南": {
+    "叙事连接": "硬切、匹配剪辑",
+    "时间流逝": "叠化、跳跃剪辑",
+    "场景分隔": "淡入淡出、遮罩",
+    "声音设计": "声音先入、声音滞后",
+    "强调冲击": "闪白、硬切",
+    "风格化": "遮罩、交叉缩放"
+  },
+  "注意事项": [
+    "视频中硬切和叠化最自然",
+    "避免过多使用复杂转场",
+    "转场应服务于叙事而非炫技",
+    "考虑前后镜头的节奏匹配"
+  ]
+}

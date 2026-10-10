@@ -1,0 +1,130 @@
+{
+  "category": "action_templates",
+  "version": "1.0",
+  "description": "人物动作模板，用于生成自然的人物动作描述",
+  "entries": [
+    {
+      "action_type": "手部动作",
+      "template": "{hand_state}的手{verb}{object}，{grip_quality}的握持，{additional_detail}",
+      "placeholders": {
+        "hand_state": ["颤抖", "平稳", "放松", "紧绷", "紧握", "伸出", "抬起", "放下"],
+        "verb": ["握着", "抓住", "伸手去拿", "松开", "触碰", "指向", "挥动", "拍击"],
+        "object": ["某个物体", "杯子", "手机", "文件", "武器", "食物", "衣物"],
+        "grip_quality": ["用力", "松散", "牢固", "轻柔", "紧张", "自信"],
+        "additional_detail": ["手指微卷", "指节发白", "动作流畅", "轻微颤抖"]
+      },
+      "examples": [
+        "颤抖的手握着一封信，用力的握持，手指微卷",
+        "平稳的手伸手去拿杯子，松散的握持，动作流畅",
+        "伸出的手指向前方，自信的握持，手指伸直"
+      ],
+      "notes": "手部动作要结合情绪状态"
+    },
+    {
+      "action_type": "面部表情",
+      "template": "面部呈现{emotion}，{feature_detail}",
+      "placeholders": {
+        "emotion": ["震惊", "悲伤", "喜悦", "愤怒", "恐惧", "厌恶", "惊讶", "轻蔑", "难过", "希望"],
+        "feature_detail": ["眼睛睁大、嘴微张", "泪水滑落脸颊", "嘴角微扬", "眉头紧锁", "下颌紧绷"]
+      },
+      "examples": [
+        "面部呈现震惊，眼睛睁大、嘴微张，眉毛高高抬起",
+        "面部呈现悲伤，泪水滑落脸颊，嘴角下垂",
+        "面部呈现决心，下颌紧绷，目光聚焦"
+      ],
+      "notes": "表情描述要包含眼睛、眉毛、嘴巴的综合状态"
+    },
+    {
+      "action_type": "全身姿态",
+      "template": "姿态{posture}，重心在{leg_side}，视线{gaze_direction}，{arm_position}",
+      "placeholders": {
+        "posture": ["垂头弯腰", "自信站姿", "不安地小动作", "放松", "紧绷", "挑衅"],
+        "leg_side": ["左腿", "右腿", "双腿平均", "后脚发力"],
+        "gaze_direction": ["向下", "直视对方", "移开视线", "回避", "睁大双眼"],
+        "arm_position": ["双臂交叉", "双手插兜", "双臂自然下垂", "手势表达", "双臂张开"]
+      },
+      "examples": [
+        "垂头弯腰，重心在左腿，视线向下，双手插兜",
+        "自信站姿，重心在双腿平均，直视对方，双臂自然下垂",
+        "不安地小动作，重心左右摇摆，移开视线，双臂交叉"
+      ],
+      "notes": "姿态反映人物的心理状态和情绪"
+    },
+    {
+      "action_type": "行走运动",
+      "template": "{walking_style}行走，{speed}，{purposeful}{direction}",
+      "placeholders": {
+        "walking_style": ["自信", "匆忙", "拖沓", "轻快", "刻意", "潜行"],
+        "speed": ["缓慢", "快速", "急促", "拖着脚", "有目的地"],
+        "purposeful": ["有目的", "漫无目的", "坚决地", "犹豫地"],
+        "direction": ["向镜头走来", "背离镜头", "从左到右", "从右到左", "斜向前"]
+      },
+      "examples": [
+        "自信行走，急促，有目的向镜头走来",
+        "匆忙行走，快速，漫无目的背离镜头",
+        "潜行，缓慢，犹豫地从右到左"
+      ],
+      "notes": "行走动作可以传达情绪状态"
+    },
+    {
+      "action_type": "视线方向",
+      "template": "视线{gaze_type}，看向{target}，{implied_thought}",
+      "placeholders": {
+        "gaze_type": ["低头看", "抬头看", "凝视", "瞥视", "偷窥", "远望"],
+        "target": ["手机", "地平线", "另一个人", "远处", "地面", "窗外"],
+        "implied_thought": ["陷入沉思", "带着怀疑", "满怀希望", "显得担忧", "回忆往事"]
+      },
+      "examples": [
+        "视线远望，望向窗外，陷入沉思",
+        "视线凝视，看向手机，带着怀疑",
+        "视线瞥视，看向另一个人，显得担忧"
+      ],
+      "notes": "视线可以传达内心活动和情绪"
+    },
+    {
+      "action_type": "呼吸状态",
+      "template": "呼吸{breath_type}，胸口{chest_state}，{breath_visible}",
+      "placeholders": {
+        "breath_type": ["浅呼吸", "深呼吸", "屏住呼吸", "缓慢呼气", "喘息"],
+        "chest_state": ["缓慢起伏", "剧烈起伏", "静止", "收缩"],
+        "breath_visible": ["无可见呼气", "寒冷空气中可见呼气", "呼吸一滞"]
+      },
+      "examples": [
+        "呼吸浅促，胸口缓慢起伏，无可见呼气",
+        "深呼吸，胸口剧烈起伏，准备开口",
+        "屏住呼吸，胸口静止，呼吸一滞"
+      ],
+      "notes": "呼吸状态常用于紧张、等待等情绪场景"
+    },
+    {
+      "action_type": "空间位置",
+      "template": "位置在{location}{relative_position}，{spatial_relationship}",
+      "placeholders": {
+        "location": ["画面中央", "画面左侧", "画面右侧", "背景位置", "前景位置", "画面边缘"],
+        "relative_position": ["相对画面", "相对另一个角色", "相对光源", "靠近门口"],
+        "spatial_relationship": ["面向镜头", "背对观众", "侧身", "朝外侧"]
+      },
+      "examples": [
+        "位置在画面中央相对画面，面向镜头，人物独立",
+        "位置在画面左侧相对另一个角色，侧身朝向对方",
+        "位置在画面边缘相对光源，背对观众"
+      ],
+      "notes": "空间位置影响构图和叙事"
+    },
+    {
+      "action_type": "身体朝向",
+      "template": "身体{body_orientation}，肩部{shoulder_position}，头部{head_position}",
+      "placeholders": {
+        "body_orientation": ["正面朝向镜头", "微微转开", "三分之二侧身", "侧脸轮廓"],
+        "shoulder_position": ["平齐", "倾斜", "耸起", "放松"],
+        "head_position": ["水平", "微微歪头", "低垂", "后仰"]
+      },
+      "examples": [
+        "身体正面朝向镜头，肩部平齐，头部水平",
+        "身体三分之二侧身，肩部倾斜，头部微微歪头",
+        "身体微微转开，肩部耸起，头部低垂"
+      ],
+      "notes": "身体朝向传达开放或封闭的心理状态"
+    }
+  ]
+}

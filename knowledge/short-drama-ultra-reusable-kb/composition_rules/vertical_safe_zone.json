@@ -1,0 +1,251 @@
+{
+  "rule_id": "vertical_safe_zone",
+  "name": "垂直安全区规则",
+  "version": "1.0",
+  "description": "定义画面垂直方向上的安全区约束，确保重要元素不被裁切",
+  "category": "framing_composition",
+  "principle": "重要画面元素应位于安全区内，避免被画面边缘裁切或被元素遮挡",
+  "applies_to": [
+    "_"
+  ],
+  "screen_aspect_ratios": {
+    "16:9": {
+      "description": "标准横屏",
+      "safe_zone_percent": {
+        "top": "10%",
+        "bottom": "15%",
+        "left": "5%",
+        "right": "5%"
+      },
+      "critical_zone": {
+        "top": "5%",
+        "bottom": "20%",
+        "notes": "底部区域常被字幕和占用"
+      }
+    },
+    "9:16": {
+      "description": "竖屏/手机",
+      "safe_zone_percent": {
+        "top": "15%",
+        "bottom": "20%",
+        "left": "3%",
+        "right": "3%"
+      },
+      "critical_zone": {
+        "top": "10%",
+        "bottom": "25%",
+        "notes": "顶部和底部区域常被占用"
+      }
+    },
+    "1:1": {
+      "description": "方形/社交媒体",
+      "safe_zone_percent": {
+        "top": "10%",
+        "bottom": "15%",
+        "left": "5%",
+        "right": "5%"
+      },
+      "critical_zone": {
+        "all_edges": "8%",
+        "notes": "正方形画面所有边缘都可能有问题"
+      }
+    },
+    "21:9": {
+      "description": "超宽银幕",
+      "safe_zone_percent": {
+        "top": "8%",
+        "bottom": "12%",
+        "left": "3%",
+        "right": "3%"
+      },
+      "notes": "超宽屏上下安全区较小"
+    }
+  },
+  "framing_guidelines": {
+    "head_room": {
+      "description": "头顶空间（）",
+      "standard": "主体',",
+      "formula": "-的",
+      "too_much": "主体或",
+      "too_little": "主体或",
+      "adjustments": {
+        "looking_up": "",
+        "looking_down": "",
+        "low_angle": "()",
+        "high_angle": ""
+      }
+    },
+    "nose_room": {
+      "description": "鼻尖空间（）",
+      "standard": "主体",
+      "looking_right": "的画面",
+      "looking_left": "的画面",
+      "looking_camera": "",
+      "problem": "主体带",
+      "solution": "的"
+    },
+    "walking_room": {
+      "description": "行走空间（）",
+      "standard": "的",
+      "formula": "的2-3",
+      "walking_forward": "的主体",
+      "walking_into_frame": "主体镜头",
+      "problem": "主体带"
+    },
+    "lead_room": {
+      "description": "视线/行进前方空间（）",
+      "standard": "主体或",
+      "formula": "2/3的画面的/",
+      "looking_right": "主体1/3,2/3",
+      "walking_right": "主体1/3,2/3"
+    }
+  },
+  "character_positioning": {
+    "single_subject": {
+      "center_framing": {
+        "description": "居中构图",
+        "use_cases": [
+          "",
+          "特写",
+          ""
+        ],
+        "head_room": "-",
+        "eye_level": "的画面"
+      },
+      "off_center_framing": {
+        "description": "偏离中心构图",
+        "use_cases": [
+          "",
+          "",
+          ""
+        ],
+        "position": "或1/3",
+        "lead_room": "的/"
+      }
+    },
+    "two_subjects": {
+      "facing_each_other": {
+        "description": "面对面",
+        "position": "1/3",
+        "eye_contact": "",
+        "nose_room": "主体"
+      },
+      "same_direction": {
+        "description": "同向站立/行走",
+        "position": "或",
+        "lead_room": "",
+        "walking": "主体"
+      },
+      "profile": {
+        "description": "侧面/轮廓",
+        "position": ",",
+        "eye_line": "",
+        "lead_room": ""
+      }
+    }
+  },
+  "vertical_framing": {
+    "eye_level": {
+      "description": "平视角度",
+      "subject_position": "眼睛50-55%的画面",
+      "emotional_effect": ",,",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "low_angle": {
+      "description": "仰拍（从下往上）",
+      "subject_position": "眼睛画面(55-60%)",
+      "emotional_effect": ",,",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "high_angle": {
+      "description": "俯拍（从上往下）",
+      "subject_position": "眼睛画面(40-45%)",
+      "emotional_effect": ",,",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "extreme_low": {
+      "description": "极端仰拍",
+      "subject_position": "主体画面",
+      "emotional_effect": ",",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "extreme_high": {
+      "description": "极端俯拍",
+      "subject_position": "主体,的画面",
+      "emotional_effect": ",,",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "common_framing_errors": [
+    {
+      "error": "",
+      "description": "头部被裁切",
+      "cause": "",
+      "fix": "主体画面"
+    },
+    {
+      "error": "主体带",
+      "description": "主体居中但无行进空间",
+      "cause": "主体带",
+      "fix": "主体,"
+    },
+    {
+      "error": "-",
+      "description": "双下巴被裁切",
+      "cause": "镜头",
+      "fix": "镜头或"
+    },
+    {
+      "error": "主体",
+      "description": "前景主体过大",
+      "cause": "镜头",
+      "fix": "和"
+    },
+    {
+      "error": "主体画面",
+      "description": "主体在画面中过小",
+      "cause": "镜头或远景",
+      "fix": "镜头或"
+    }
+  ],
+  "aspect_ratio_adaptations": {
+    "16:9_to_9:16": {
+      "description": "横屏转竖屏的构图调整",
+      "strategy": ",主体",
+      "common_changes": [
+        "-镜头带",
+        "宽广",
+        ""
+      ]
+    },
+    "9:16_to_16:9": {
+      "description": "竖屏转横屏",
+      "strategy": ",",
+      "common_changes": [
+        "-镜头",
+        "",
+        ""
+      ]
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "category": "shot_size",
+  "version": "1.2",
+  "description": "景别映射表，定义各种景别的提示词模板（标准电影术语）",
+  "entries": [
+    {
+      "director_term": "大特写",
+      "alias": [
+        "大特写",
+        "大特写",
+        "超大特写",
+        "极端特写"
+      ],
+      "ai_prompt": "大特写的{主体},皮肤纹理或,浅景深,背景虚化,微距-",
+      "notes": "必须浅景深，背景虚化，奶油般柔焦，突出细节",
+      "compatible_models": [
+        "深度扩散",
+        "光流",
+        "中途6"
+      ],
+      "screen_ratio": "1:1或3:4",
+      "scene_coverage": "5%",
+      "background_blur": true
+    },
+    {
+      "director_term": "特写",
+      "alias": [
+        "特写",
+        "特写",
+        "面部特写"
+      ],
+      "ai_prompt": "特写人像的{主体},面部画面,清晰对焦眼睛,,浅景深,背景虚化",
+      "notes": "必须浅景深，背景虚化奶油般柔滑，眼睛清晰对焦",
+      "compatible_models": [
+        "深度扩散",
+        "达利3",
+        "中途"
+      ],
+      "screen_ratio": "3:4或1:1",
+      "scene_coverage": "15%",
+      "background_blur": true
+    },
+    {
+      "director_term": "中近景",
+      "alias": [
+        "中近景",
+        "特写",
+        "中特写"
+      ],
+      "ai_prompt": "特写的{主体},,和,,,浅景深,背景虚化",
+      "notes": "胸部以上，脖子可见，必须浅景深，背景虚化奶油般柔滑",
+      "compatible_models": [
+        "深度扩散",
+        "中途6"
+      ],
+      "screen_ratio": "3:4或1:1",
+      "scene_coverage": "25%",
+      "background_blur": true
+    },
+    {
+      "director_term": "近景",
+      "alias": [
+        "近景",
+        "近景",
+        "胸像",
+        "半身"
+      ],
+      "ai_prompt": "近景的{主体},,和,浅景深,背景虚化",
+      "notes": "腰部以上，包含上半身和手部动作，建议浅景深，背景虚化",
+      "compatible_models": [
+        "深度扩散",
+        "稳定3"
+      ],
+      "screen_ratio": "3:4或16:9",
+      "scene_coverage": "35%",
+      "background_blur": true
+    },
+    {
+      "director_term": "中景",
+      "alias": [
+        "中景",
+        "中景",
+        "膝盖以上"
+      ],
+      "ai_prompt": "中景的{主体},,和",
+      "notes": "膝盖以上，完整展现上半身和部分腿部，不需要背景虚化",
+      "compatible_models": [
+        "深度扩散",
+        "索拉"
+      ],
+      "screen_ratio": "16:9",
+      "scene_coverage": "50%",
+      "background_blur": false
+    },
+    {
+      "director_term": "全景",
+      "alias": [
+        "全景",
+        "远景",
+        "全身",
+        "膝下"
+      ],
+      "ai_prompt": "全景的{主体},,",
+      "notes": "从头到脚完整展示人物，包括完整服装，不需要背景虚化",
+      "compatible_models": [
+        "深度扩散",
+        "索拉",
+        "皮卡"
+      ],
+      "screen_ratio": "16:9或9:16",
+      "scene_coverage": "70%",
+      "background_blur": false
+    },
+    {
+      "director_term": "远景",
+      "alias": [
+        "远景",
+        "远景",
+        "大远景",
+        "环境镜头"
+      ],
+      "ai_prompt": "远景的{主体},,电影感,构图,画面",
+      "notes": "加强化电影感，人物虽小但要突出，不需要背景虚化",
+      "compatible_models": [
+        "索拉",
+        "跑道第二代",
+        "深度扩散"
+      ],
+      "screen_ratio": "16:9或21:9",
+      "scene_coverage": "25%",
+      "background_blur": false
+    },
+    {
+      "director_term": "极远景",
+      "alias": [
+        "极远景",
+        "极远景",
+        "超远景",
+        "建立镜头"
+      ],
+      "ai_prompt": "极远景,{主体},镜头,",
+      "notes": "主要用于建立场景氛围，人物可能只是点缀，不需要背景虚化",
+      "compatible_models": [
+        "索拉",
+        "跑道"
+      ],
+      "screen_ratio": "21:9或16:9",
+      "scene_coverage": "10%",
+      "background_blur": false
+    }
+  ],
+  "background_blur_rules": {
+    "description": "背景虚化规则：景别为特写、大特写、中近景时必须添加浅景深和背景虚化要求",
+    "required_shots": [
+      "大特写",
+      "特写",
+      "中近景",
+      "近景"
+    ],
+    "optional_shots": [
+      "近景"
+    ],
+    "forbidden_shots": [
+      "中景",
+      "全景",
+      "远景",
+      "极远景"
+    ],
+    "blur_description": "浅景深，奶油般柔滑的背景虚化效果，主体清晰对焦"
+  },
+  "standard_shot_hierarchy": {
+    "order": [
+      "极远景",
+      "远景",
+      "全景",
+      "中景",
+      "近景",
+      "中近景",
+      "特写",
+      "大特写"
+    ],
+    "scene_coverage_desc": "从极远景（环境为主）到大特写（细节为主）"
+  },
+  "usage_guide": {
+    "emotional_highlight": [
+      "大特写",
+      "特写"
+    ],
+    "character_focus": [
+      "中近景",
+      "近景"
+    ],
+    "action_context": [
+      "中景",
+      "全景"
+    ],
+    "environment_establishing": [
+      "远景",
+      "极远景"
+    ]
+  }
+}

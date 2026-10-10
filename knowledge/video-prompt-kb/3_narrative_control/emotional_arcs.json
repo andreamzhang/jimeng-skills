@@ -1,0 +1,429 @@
+{
+  "category": "emotional_arcs",
+  "version": "1.0",
+  "description": "情绪弧线 → 视觉变化映射库",
+  "entries": [
+    {
+      "arc_type": "建立→紧张",
+      "description": "从平静状态逐渐建立紧张感",
+      "visual_progression": [
+        {
+          "stage": "平静",
+          "duration_ratio": 0.3,
+          "elements": [
+            "稳定构图",
+            "柔和光线",
+            "慢节奏",
+            "固定镜头"
+          ]
+        },
+        {
+          "stage": "不安",
+          "duration_ratio": 0.2,
+          "elements": [
+            "轻微手持晃动",
+            "光影变化",
+            "节奏加快",
+            "特写增加"
+          ]
+        },
+        {
+          "stage": "紧张",
+          "duration_ratio": 0.3,
+          "elements": [
+            "快速剪辑",
+            "手持晃动",
+            "倾斜角度",
+            "短镜头"
+          ]
+        },
+        {
+          "stage": "高潮",
+          "duration_ratio": 0.2,
+          "elements": [
+            "极快节奏",
+            "特写",
+            "混乱构图",
+            "声音强化"
+          ]
+        }
+      ],
+      "example_sequence": "→→→",
+      "mood_keywords": [
+        "平静",
+        "不安",
+        "紧张",
+        "恐惧"
+      ],
+      "recommended_for": [
+        "悬疑片",
+        "惊悚片",
+        "恐怖片开场"
+      ]
+    },
+    {
+      "arc_type": "绝望→希望",
+      "description": "从最低谷逐渐转向希望",
+      "visual_progression": [
+        {
+          "stage": "绝望",
+          "duration_ratio": 0.25,
+          "elements": [
+            "低角度",
+            "暗色调",
+            "固定镜头",
+            "长镜头",
+            "孤独构图"
+          ]
+        },
+        {
+          "stage": "转折",
+          "duration_ratio": 0.15,
+          "elements": [
+            "光线变化",
+            "色彩微变",
+            "镜头微动",
+            "声音变化"
+          ]
+        },
+        {
+          "stage": "希望萌芽",
+          "duration_ratio": 0.25,
+          "elements": [
+            "柔和光线",
+            "暖色调",
+            "缓慢推近",
+            "特写"
+          ]
+        },
+        {
+          "stage": "希望",
+          "duration_ratio": 0.35,
+          "elements": [
+            "明亮光线",
+            "开阔构图",
+            "长镜头",
+            "上升运动"
+          ]
+        }
+      ],
+      "example_sequence": ",角色→→→角色",
+      "mood_keywords": [
+        "绝望",
+        "低谷",
+        "转折",
+        "希望",
+        "解脱"
+      ],
+      "recommended_for": [
+        "励志片",
+        "剧情片",
+        "救赎故事"
+      ]
+    },
+    {
+      "arc_type": "开心→悲伤",
+      "description": "从快乐急剧转向悲伤的反差",
+      "visual_progression": [
+        {
+          "stage": "开心",
+          "duration_ratio": 0.2,
+          "elements": [
+            "明亮光线",
+            "暖色调",
+            "广角",
+            "运动感",
+            "特写"
+          ]
+        },
+        {
+          "stage": "转折",
+          "duration_ratio": 0.1,
+          "elements": [
+            "色彩变化",
+            "光线减弱",
+            "声音变化",
+            "构图变化"
+          ]
+        },
+        {
+          "stage": "悲伤",
+          "duration_ratio": 0.35,
+          "elements": [
+            "暗色调",
+            "冷色调",
+            "固定镜头",
+            "长镜头",
+            "孤独构图"
+          ]
+        },
+        {
+          "stage": "持续悲伤",
+          "duration_ratio": 0.35,
+          "elements": [
+            "低饱和",
+            "特写",
+            "慢节奏",
+            "留白"
+          ]
+        }
+      ],
+      "example_sequence": ",→→面部→,",
+      "mood_keywords": [
+        "开心",
+        "幸福",
+        "转折",
+        "悲伤",
+        "失落"
+      ],
+      "recommended_for": [
+        "悲剧",
+        "剧情片",
+        "情感片"
+      ]
+    },
+    {
+      "arc_type": "跟踪→暴露",
+      "description": "秘密行动逐渐被发现的紧张过程",
+      "visual_progression": [
+        {
+          "stage": "隐蔽",
+          "duration_ratio": 0.25,
+          "elements": [
+            "低角度",
+            "阴影中",
+            "缓慢移动",
+            "长镜头",
+            "环境音"
+          ]
+        },
+        {
+          "stage": "接近",
+          "duration_ratio": 0.25,
+          "elements": [
+            "推进",
+            "特写",
+            "呼吸声",
+            "紧张节奏"
+          ]
+        },
+        {
+          "stage": "即将暴露",
+          "duration_ratio": 0.2,
+          "elements": [
+            "手持晃动",
+            "镜头",
+            "快节奏",
+            "特写"
+          ]
+        },
+        {
+          "stage": "暴露",
+          "duration_ratio": 0.3,
+          "elements": [
+            "反应镜头",
+            "硬切",
+            "惊吓音效",
+            "特写"
+          ]
+        }
+      ],
+      "example_sequence": "→,→,→眼睛",
+      "mood_keywords": [
+        "秘密",
+        "紧张",
+        "危险",
+        "暴露",
+        "惊恐"
+      ],
+      "recommended_for": [
+        "惊悚片",
+        "悬疑片",
+        "间谍片"
+      ]
+    },
+    {
+      "arc_type": "对抗→胜利",
+      "description": "从冲突到最终胜利的过程",
+      "visual_progression": [
+        {
+          "stage": "对抗开始",
+          "duration_ratio": 0.25,
+          "elements": [
+            "中景",
+            "稳定构图",
+            "对话节奏",
+            "双向拍摄"
+          ]
+        },
+        {
+          "stage": "冲突升级",
+          "duration_ratio": 0.2,
+          "elements": [
+            "特写增加",
+            "节奏加快",
+            "手持晃动",
+            "倾斜角度"
+          ]
+        },
+        {
+          "stage": "高潮对抗",
+          "duration_ratio": 0.25,
+          "elements": [
+            "快节奏",
+            "动作特写",
+            "混乱构图",
+            "声音强化"
+          ]
+        },
+        {
+          "stage": "胜利",
+          "duration_ratio": 0.3,
+          "elements": [
+            "稳定构图",
+            "光线改善",
+            "慢节奏",
+            "上升运动",
+            "开阔构图"
+          ]
+        }
+      ],
+      "example_sequence": "→→→",
+      "mood_keywords": [
+        "对抗",
+        "紧张",
+        "激烈",
+        "胜利",
+        "释放"
+      ],
+      "recommended_for": [
+        "动作片",
+        "体育片",
+        "励志片"
+      ]
+    },
+    {
+      "arc_type": "发现→顿悟",
+      "description": "从困惑到突然理解的过程",
+      "visual_progression": [
+        {
+          "stage": "困惑",
+          "duration_ratio": 0.3,
+          "elements": [
+            "特写",
+            "手持",
+            "碎片剪辑",
+            "主观角度"
+          ]
+        },
+        {
+          "stage": "线索出现",
+          "duration_ratio": 0.15,
+          "elements": [
+            "聚焦",
+            "光线变化",
+            "声音变化"
+          ]
+        },
+        {
+          "stage": "连接",
+          "duration_ratio": 0.15,
+          "elements": [
+            "特写",
+            "快速剪辑",
+            "匹配剪辑"
+          ]
+        },
+        {
+          "stage": "顿悟",
+          "duration_ratio": 0.4,
+          "elements": [
+            "稳定",
+            "光线穿透",
+            "慢推近",
+            "清晰构图"
+          ]
+        }
+      ],
+      "example_sequence": "→→快速→,眼睛",
+      "mood_keywords": [
+        "困惑",
+        "线索",
+        "连接",
+        "顿悟",
+        "清晰"
+      ],
+      "recommended_for": [
+        "悬疑片",
+        "推理片",
+        "剧情片"
+      ]
+    },
+    {
+      "arc_type": "浪漫→表白",
+      "description": "从暧昧到表白的浪漫过程",
+      "visual_progression": [
+        {
+          "stage": "吸引",
+          "duration_ratio": 0.2,
+          "elements": [
+            "特写",
+            "柔和光线",
+            "暖色调",
+            "慢节奏"
+          ]
+        },
+        {
+          "stage": "靠近",
+          "duration_ratio": 0.25,
+          "elements": [
+            "推进",
+            "反应镜头",
+            "环境虚化",
+            "音乐"
+          ]
+        },
+        {
+          "stage": "表白",
+          "duration_ratio": 0.2,
+          "elements": [
+            "手持特写",
+            "微光",
+            "慢动作",
+            "呼吸声"
+          ]
+        },
+        {
+          "stage": "接受",
+          "duration_ratio": 0.35,
+          "elements": [
+            "拥抱构图",
+            "双人中景",
+            "光线温暖",
+            "慢节奏"
+          ]
+        }
+      ],
+      "example_sequence": "→→→",
+      "mood_keywords": [
+        "吸引",
+        "紧张",
+        "浪漫",
+        "表白",
+        "幸福"
+      ],
+      "recommended_for": [
+        "爱情片",
+        "浪漫喜剧"
+      ]
+    }
+  ],
+  "情绪弧线设计原则": [
+    "视觉变化应与情绪变化同步",
+    "节奏变化要服务于叙事",
+    "光线和色彩是最直接的情绪语言",
+    "构图可以传达角色的心理状态",
+    "声音设计（音效/音乐）配合视觉弧线",
+    "高潮点应该是视觉和情绪的顶点"
+  ]
+}

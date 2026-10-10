@@ -1,0 +1,100 @@
+{
+  "template_name": "__",
+  "description": "城市追逐场景标准模板",
+  "category": "action_scene",
+  "prompt_template": "{_}→{_}→{_}→{_}→{}→{_}",
+  "slots": {
+    "opening_shot": {
+      "description": "开场镜头建立紧张感",
+      "default": "特写的面部,,眼睛宽广带",
+      "prompt_fragments": [
+        "大特写的眼睛,宽广带",
+        "特写的面部,,",
+        "主观视角,"
+      ],
+      "duration": "1-2"
+    },
+    "chase_motion": {
+      "description": "主体奔跑动作",
+      "default": ",",
+      "prompt_fragments": [
+        ",",
+        ",",
+        ","
+      ],
+      "duration": "2-4"
+    },
+    "camera_movement": {
+      "description": "摄像机跟随方式",
+      "default": "手持镜头带,",
+      "prompt_fragments": [
+        "手持镜头,",
+        ",",
+        "镜头角色,"
+      ],
+      "duration": "持续整个场景"
+    },
+    "environment_dynamics": {
+      "description": "环境动态元素",
+      "default": ",霓虹,",
+      "prompt_fragments": [
+        ",霓虹",
+        ",",
+        "阳光,"
+      ],
+      "duration": "持续整个场景"
+    },
+    "pacing": {
+      "description": "剪辑节奏",
+      "default": "快速1–2,",
+      "prompt_fragments": [
+        "快速1-2,",
+        ",镜头",
+        "宽广和2"
+      ],
+      "duration": "整个序列"
+    },
+    "ending_shot": {
+      "description": "结束镜头",
+      "default": "角色-,",
+      "prompt_fragments": [
+        ",面部",
+        "角色,",
+        "画面,画面面部"
+      ],
+      "duration": "2-3"
+    }
+  },
+  "full_example": "大特写的眼睛宽广带→,→手持镜头带→,霓虹→快速1.5,→,面部,5-,电影感",
+  "mood_keywords": [
+    "紧张",
+    "恐惧",
+    "紧急",
+    "危险"
+  ],
+  "recommended_duration": "8-15秒",
+  "model_recommendations": [
+    "索拉",
+    "跑道第二代"
+  ],
+  "variations": [
+    {
+      "name": "夜间版本",
+      "description": "增强夜间氛围",
+      "modifications": [
+        "霓虹",
+        "光线",
+        "阴影"
+      ]
+    },
+    {
+      "name": "日间版本",
+      "description": "日间追逐",
+      "modifications": [
+        "阳光",
+        "",
+        "阴影对比"
+      ]
+    }
+  ]
+}

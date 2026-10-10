@@ -1,0 +1,194 @@
+{
+  "version": "1.0",
+  "description": "短剧分镜知识库 - 原子+模式+规则三层结构",
+  "design_principle": "极致原子化 + 模板化结构并存，支持原子级复用、模式级效率和自由组合",
+  "last_updated": "2026-01-26",
+  "structure": {
+    "atoms": {
+      "description": "极致原子（最小不可分单元）",
+      "directory": "atoms/",
+      "files": [
+        {
+          "file": "subjects.json",
+          "category": "character_placeholder",
+          "description": "主体占位符定义（_,_,_等）"
+        },
+        {
+          "file": "shot_types.json",
+          "category": "shot_size",
+          "description": "景别原子（,,,,等）"
+        },
+        {
+          "file": "camera_setups.json",
+          "category": "camera_setup",
+          "description": "机位设置原子（,主观视角,_,_等）"
+        },
+        {
+          "file": "eye_line_rules.json",
+          "category": "eye_direction",
+          "description": "视线规则原子（__,_,__等）"
+        },
+        {
+          "file": "pacing_atoms.json",
+          "category": "rhythm_timing",
+          "description": "剪辑节奏原子（,_,_,__等）"
+        },
+        {
+          "file": "lighting_atoms.json",
+          "category": "lighting_effect",
+          "description": "光影原子（_,_,_,等）"
+        }
+      ],
+      "total_atoms": 6,
+      "usage": "基础构建块，可自由组合成更复杂的模式"
+    },
+    "patterns": {
+      "description": "高频模式（原子组合）",
+      "directory": "patterns/",
+      "files": [
+        {
+          "file": "dialogue_reverse.json",
+          "pattern_id": "standard_dialogue_reverse",
+          "category": "dialogue",
+          "description": "标准对话正反打（适用于90%对话场景）",
+          "usage_frequency": "",
+          "customizable_slots": [
+            "_",
+            "_",
+            "_",
+            "_"
+          ]
+        },
+        {
+          "file": "object_reveal.json",
+          "pattern_id": "object_reveal_sequence",
+          "category": "reveal",
+          "description": "关键道具揭示序列",
+          "usage_frequency": "",
+          "customizable_slots": [
+            "_",
+            "_",
+            "_",
+            "",
+            ""
+          ]
+        },
+        {
+          "file": "power_shift.json",
+          "pattern_id": "power_shift_sequence",
+          "category": "power_dynamics",
+          "description": "权力反转序列",
+          "usage_frequency": "",
+          "customizable_slots": [
+            "_",
+            "_",
+            "_",
+            "__"
+          ]
+        },
+        {
+          "file": "emotional_reaction.json",
+          "pattern_id": "emotional_reaction_sequence",
+          "category": "emotion",
+          "description": "情绪反应序列",
+          "usage_frequency": "",
+          "customizable_slots": [
+            "_",
+            "_",
+            "_",
+            "_"
+          ]
+        },
+        {
+          "file": "chase_sequence.json",
+          "pattern_id": "chase_sequence",
+          "category": "action",
+          "description": "追逐场景序列",
+          "usage_frequency": "",
+          "customizable_slots": [
+            "_",
+            "_",
+            "_",
+            "_"
+          ]
+        },
+        {
+          "file": "time_jump.json",
+          "pattern_id": "time_jump_sequence",
+          "category": "time_manipulation",
+          "description": "时间跳跃/闪回序列",
+          "usage_frequency": "",
+          "customizable_slots": [
+            "__",
+            "__",
+            "_",
+            "_"
+          ]
+        }
+      ],
+      "total_patterns": 6,
+      "usage": "高频场景一键调用，可通过参数调整适配不同情境"
+    },
+    "composition_rules": {
+      "description": "组合约束规则",
+      "directory": "composition_rules/",
+      "files": [
+        {
+          "file": "180_degree_rule.json",
+          "rule_id": "180_degree_rule",
+          "category": "spatial_continuity",
+          "description": "180度轴线规则，保持双人场景空间一致性"
+        },
+        {
+          "file": "vertical_safe_zone.json",
+          "rule_id": "vertical_safe_zone",
+          "category": "framing_composition",
+          "description": "垂直安全区规则，确保重要元素不被裁切"
+        },
+        {
+          "file": "genre_constraints.json",
+          "rule_id": "genre_constraints",
+          "category": "genre_specific",
+          "description": "类型风格约束（甜宠、虐恋、爽剧、悬疑、职场）"
+        }
+      ],
+      "total_rules": 3,
+      "usage": "约束检查和质量保证，确保分镜符合专业标准"
+    },
+    "templates": {
+      "description": "完整场景模板（可选）",
+      "directory": "templates/",
+      "files": [],
+      "status": "待开发",
+      "usage": "可直接复用的完整场景模板，由多个模式组合而成"
+    }
+  },
+  "usage_flow": {
+    "step_1": "选择原子或模式",
+    "step_2": "绑定角色和参数",
+    "step_3": "应用组合规则",
+    "step_4": "生成具体分镜"
+  },
+  "example_workflow": {
+    "scenario": "生成'办公室对峙'镜头（老板员工）",
+    "steps": [
+      "选择模式：patterns/dialogue_reverse.json",
+      "绑定角色：_='(50岁男性，西装)',_='(25岁女性，紧张)'",
+      "注入情绪：_='',_=''",
+      "应用规则：从_/180__.确保空间一致",
+      "输出分镜：自动生成符合规范的分镜描述"
+    ]
+  },
+  "knowledge_base_advantages": {
+    "traditional_templates": "本方案",
+    "单一模板": "对话模式 + 情绪参数",
+    "修改剧情需重写整个模板": "只需换参数，原子/模式不变",
+    "无法混合类型": "自由组合_+__",
+    "编剧无法理解底层逻辑": "原子清晰，可教育团队"
+  },
+  "technical_notes": {
+    "rag_compatible": "支持检索，可按、_或检索",
+    "skill_compatible": "支持调用，可直接调用单个原子或完整模式",
+    "extensible": "易于扩展，可添加新的原子类型或模式"
+  }
+}

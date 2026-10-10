@@ -1,0 +1,148 @@
+{
+  "rule_id": "180_degree_rule",
+  "name": "180度轴线规则",
+  "version": "1.0",
+  "description": "定义双人场景中摄像机位置的轴线约束，保持空间一致性",
+  "category": "spatial_continuity",
+  "principle": "摄像机不应跨越两个主体之间的假想轴线，否则会导致空间方向混乱",
+  "applies_to": [
+    "_",
+    "_",
+    "_"
+  ],
+  "rules": {
+    "axis_line": {
+      "description": "假想轴线连接两个主体，摄像机必须保持在轴线一侧",
+      "visual_representation": "_和_.镜头的.",
+      "consequence_of_violation": ","
+    },
+    "camera_zone": {
+      "safe_zone": "180-的",
+      "danger_zone": "180-()",
+      "optimum_zone": "45-"
+    }
+  },
+  "spatial_continuity": {
+    "description": "保持画面中主体左右位置的一致性",
+    "guidelines": [
+      "_的画面镜头1,",
+      "_的画面镜头1,",
+      "主体(,)"
+    ],
+    "common_violations": [
+      "-",
+      "镜头",
+      ""
+    ]
+  },
+  "practical_implementation": {
+    "establishing_shot": {
+      "description": "先用建立镜头确定轴线方向",
+      "recommended_shot_type": "远景或-镜头",
+      "purpose": "-"
+    },
+    "consistent_shots": {
+      "description": "所有后续镜头保持在轴线同侧",
+      "techniques": [
+        "镜头",
+        "",
+        "-"
+      ]
+    },
+    "crossing_axis": {
+      "when_allowed": [
+        "",
+        "角色",
+        "镜头"
+      ],
+      "how_to_do": "镜头"
+    }
+  },
+  "eye_direction_matrix": {
+    "description": "基于角色在画面中位置的视线方向矩阵",
+    "subject_A_position": {
+      "left_of_frame": {
+        "eye_direction": "___",
+        "B_position": "__"
+      },
+      "right_of_frame": {
+        "eye_direction": "___",
+        "B_position": "__"
+      }
+    }
+  },
+  "visual_examples": [
+    {
+      "shot": "镜头(,)",
+      "A_position": "_",
+      "B_position": "_",
+      "A_eye_direction": "___",
+      "B_eye_direction": "___"
+    },
+    {
+      "shot": "镜头(,)",
+      "B_position": "_",
+      "A_position": "_",
+      "B_eye_direction": "___",
+      "A_eye_direction": "___"
+    }
+  ],
+  "common_scenarios": {
+    "dialogue": {
+      "axis": "",
+      "safe_zone": "的",
+      "eye_lines": ""
+    },
+    "chase": {
+      "axis": "",
+      "safe_zone": "或,",
+      "eye_lines": ",或"
+    },
+    "confrontation": {
+      "axis": "",
+      "safe_zone": ",-",
+      "eye_lines": "或()"
+    }
+  },
+  "exceptions": {
+    "type": "",
+    "examples": [
+      {
+        "exception": "",
+        "when": "角色或",
+        "how": "镜头",
+        "emotional_effect": ",,"
+      },
+      {
+        "exception": "",
+        "when": "'",
+        "how": "镜头",
+        "example": "或"
+      },
+      {
+        "exception": "",
+        "when": "的",
+        "how": "",
+        "example": ""
+      }
+    ]
+  },
+  "checklist": {
+    "before_shooting": [
+      "",
+      "/",
+      "镜头",
+      "带远景"
+    ],
+    "during_shooting": [
+      "镜头镜头",
+      "",
+      ""
+    ],
+    "in_review": [
+      "",
+      "",
+      ""
+    ]
+  }
+}

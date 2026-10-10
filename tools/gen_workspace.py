@@ -1,0 +1,688 @@
+# -*- coding: utf-8 -*-
+"""
+即梦分镜师 · 分层工作台生成器（深色编辑器风格）
+层级：项目（剧）→ 集 → 提示词 / 资产 → 细分条目
+用法: python tools/gen_workspace.py
+"""
+import os
+import re
+import json
+import sys
+import datetime
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCRIPTS_DIR = os.path.join(ROOT, "scripts")
+OUTPUT_FILE = os.path.join(ROOT, "工作台.html")
+
+EP_RE = re.compile(r"^ep(\d{1,3})$")
+TAG30 = "-seedance30s"
+
+ASSET_KNOWN = {
+    "character-prompts.md", "scene-prompts.md", "prop-prompts.md",
+    "_face-allocation.md",
+    "_character-inventory.md", "_scene-inventory.md",
+}
+
+REPORT_KNOWN = {
+    "characterReport": "character-report.html",
+    "sceneReport": "scene-report.html",
+    "propReport": "prop-report.html",
+    "masterReport": "master-report.html",
+}
+
+
+def rel(path):
+    if path and os.path.isfile(path):
+        return os.path.relpath(path, ROOT).replace(os.sep, "/")
+    return ""
+
+
+def scan_assets(base):
+    assets_dir = os.path.join(base, "assets")
+    a = {"characterMd": "", "sceneMd": "", "propMd": "", "alloc": "",
+         "charInv": "", "sceneInv": "", "characterReport": "", "sceneReport": "",
+         "propReport": "", "masterReport": "", "extras": []}
+    if not os.path.isdir(assets_dir):
+        return a
+    for key, fname in [
+        ("characterMd", "character-prompts.md"), ("sceneMd", "scene-prompts.md"),
+        ("propMd", "prop-prompts.md"), ("alloc", "_face-allocation.md"),
+        ("charInv", "_character-inventory.md"), ("sceneInv", "_scene-inventory.md"),
+    ] + [(k, v) for k, v in REPORT_KNOWN.items()]:
+        a[key] = rel(os.path.join(assets_dir, fname))
+    a["hasReport"] = any(a[k] for k in REPORT_KNOWN)
+    for f in sorted(os.listdir(assets_dir)):
+        p = os.path.join(assets_dir, f)
+        if f.endswith(".md") and f not in ASSET_KNOWN and os.path.isfile(p):
+            a["extras"].append({"name": f, "path": rel(p)})
+    return a
+
+
+def scan_play(name):
+    base = os.path.join(SCRIPTS_DIR, name)
+    outputs = os.path.join(base, "outputs")
+    config_dir = os.path.join(base, "config")
+    script_dir = os.path.join(base, "script")
+    play = {"name": name, "tag30": name.endswith(TAG30), "mtime": 0,
+            "assets": scan_assets(base),
+            "config": {
+                "globalStyle": rel(os.path.join(config_dir, "global-style.md")),
+                "globalStyleView": rel(os.path.join(config_dir, "global-style-view.html")),
+                "conventions": rel(os.path.join(config_dir, "conventions.md")),
+            },
+            "eps": []}
+    if play["tag30"] and os.path.isdir(base):
+        root30 = {"view": "", "index": "", "md": "", "clean": "", "review": "",
+                  "assetList": "", "brief": "", "xlsx": ""}
+        latest30 = 0
+        for f in sorted(os.listdir(base)):
+            p = os.path.join(base, f)
+            if not os.path.isfile(p):
+                continue
+            r = rel(p)
+            mt = os.path.getmtime(p)
+            if f == "seedance30s-view.html":
+                root30["view"] = r
+            elif f == "episode-index-30s.html":
+                root30["index"] = r
+            elif f.startswith("02-seedance30s") and f.endswith(".md") and not f.endswith("-clean.txt"):
+                root30["md"] = r
+            elif f.startswith("02-seedance30s") and f.endswith("-clean.txt"):
+                root30["clean"] = r
+            elif "final-review" in f.lower():
+                root30["review"] = r
+            elif f.endswith("-asset-list.md"):
+                root30["assetList"] = r
+            elif f.endswith("-episode-brief.md"):
+                root30["brief"] = r
+            elif f.endswith(".xlsx") and not root30["xlsx"]:
+                root30["xlsx"] = r
+            latest30 = max(latest30, mt)
+        if any(root30.values()):
+            play["root30"] = root30
+            play["mtime"] = max(play["mtime"], latest30)
+    if os.path.isdir(outputs):
+        for d in sorted(os.listdir(outputs)):
+            m = EP_RE.match(d)
+            if not m or not os.path.isdir(os.path.join(outputs, d)):
+                continue
+            ep_dir = os.path.join(outputs, d)
+            xlsx = ""
+            review = ""
+            for f in sorted(os.listdir(ep_dir)):
+                p = os.path.join(ep_dir, f)
+                if f.endswith(".xlsx") and not xlsx:
+                    xlsx = rel(p)
+                if "final-review" in f.lower() and os.path.isfile(p):
+                    review = rel(p)
+            files = {
+                "panorama": rel(os.path.join(ep_dir, "00-panorama-blocking.md")),
+                "director": rel(os.path.join(ep_dir, "01-director-analysis.md")),
+                "lens": rel(os.path.join(ep_dir, "01-lens-design.json")),
+                "dialogueMd": rel(os.path.join(ep_dir, d + "-dialogue-list.md")),
+                "dialogueJson": rel(os.path.join(ep_dir, d + "-dialogue-list.json")),
+                "durations": rel(os.path.join(ep_dir, d + "-sub-durations.json")),
+                "corrections": rel(os.path.join(ep_dir, "corrections.json")),
+                "sbMd": rel(os.path.join(ep_dir, "02-jimeng-prompts.md")),
+                "sbClean": rel(os.path.join(ep_dir, "02-jimeng-prompts-clean.txt")),
+                "sbView": rel(os.path.join(ep_dir, "02-jimeng-prompts-view.html")),
+                "assetList": rel(os.path.join(ep_dir, d + "-asset-list.md")),
+                "xlsx": xlsx, "review": review,
+                "scriptSrc": rel(os.path.join(script_dir, d + ".txt")),
+            }
+            if not any(files.values()):
+                continue
+            if files["sbMd"]:
+                play["mtime"] = max(play["mtime"], os.path.getmtime(os.path.join(ROOT, files["sbMd"])))
+            play["eps"].append({"num": int(m.group(1)), "dir": d, "files": files})
+        play["eps"].sort(key=lambda e: e["num"])
+    return play
+
+
+def scan_all():
+    plays = []
+    if os.path.isdir(SCRIPTS_DIR):
+        for name in os.listdir(SCRIPTS_DIR):
+            if not os.path.isdir(os.path.join(SCRIPTS_DIR, name)):
+                continue
+            p = scan_play(name)
+            has_assets = any(v for k, v in p["assets"].items() if k != "extras") or p["assets"]["extras"]
+            script_dir = os.path.join(SCRIPTS_DIR, name, "script")
+            has_material = any(p["config"].values()) or (
+                os.path.isdir(script_dir)
+                and any(os.path.isfile(os.path.join(script_dir, f)) for f in os.listdir(script_dir))
+            )
+            if p["eps"] or has_assets or p.get("root30") or has_material:
+                plays.append(p)
+        plays.sort(key=lambda p: p["mtime"], reverse=True)
+    return plays
+
+
+HTML_TMPL = """<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>即梦分镜师 · 分层工作台</title>
+<style>
+html{color-scheme:dark}
+:root{--bg:#141414;--panel:#1c1c1c;--panel2:#242424;--panel3:#2e2e2e;--ink:#f2f2f2;--muted:#9a9a9a;--dim:#6f6f6f;
+  --line:rgba(255,255,255,.08);--acc:#e5484d;--acc2:#ff7376;--acc-soft:rgba(229,72,77,.16);
+  --ok:#4fc48a;--ok-soft:rgba(79,196,138,.14);--warn:#e0a04a;--warn-soft:rgba(224,160,74,.14)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif}
+.body-bg{min-height:100vh;padding:18px 18px 30px;
+  background-image:radial-gradient(rgba(255,255,255,.045) 1px,transparent 1px);background-size:22px 22px}
+.frame{max-width:1340px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:26px;
+  padding:20px 28px 46px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.top{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.top-btn{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:52px;text-decoration:none}
+.top-btn>span:last-child{font-size:11px;color:var(--muted)}
+.rbtn{width:42px;height:42px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--ink);font-size:17px;text-decoration:none;cursor:pointer;
+  transition:background .12s;font:inherit}
+.rbtn:hover{background:var(--panel3)}
+.titlebox{padding-top:3px}
+.titlebox h1{margin:0;font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.titlebox h1 .dim{color:var(--dim);font-weight:400}
+.titlebox .sub{margin:2px 0 0;color:var(--muted);font-size:12px}
+.tag30{display:inline-block;margin-left:6px;font-size:10px;color:var(--acc2);border:1px solid var(--line);
+  border-radius:6px;padding:0 5px;vertical-align:2px;font-weight:400}
+.center-pill{display:flex;gap:2px;background:var(--panel2);border:1px solid var(--line);border-radius:15px;
+  padding:4px;margin:0 auto;align-self:center}
+.center-pill a{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);text-decoration:none;
+  font-size:11px;padding:5px 16px;border-radius:11px;min-width:64px}
+.center-pill a .g{font-size:15px;color:var(--ink)}
+.center-pill a.on{background:var(--panel3);color:var(--ink)}
+.center-pill .stat{display:flex;flex-direction:column;align-items:center;color:var(--muted);font-size:11px;padding:5px 16px;min-width:64px}
+.center-pill .stat b{color:var(--ink);font-size:14px}
+.right-grp{display:flex;gap:14px;margin-left:auto;align-items:flex-start}
+#search{padding:8px 12px;width:200px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:13px;
+  background:var(--panel2);color:var(--ink);margin-top:2px}
+#search::placeholder{color:var(--dim)}
+.badge{font-size:11px;padding:2px 9px;border-radius:10px;display:inline-block}
+.badge.done{background:var(--ok-soft);color:var(--ok)}
+.badge.doing{background:var(--warn-soft);color:var(--warn)}
+.sect-wrap{margin-bottom:6px}
+.sect{margin:24px 0 12px;display:flex;align-items:center;gap:10px}
+.sect h2{margin:0;font-size:13px;color:var(--muted);letter-spacing:.08em}
+.sect .rule{flex:1;border-top:1px solid var(--line)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.card.hero{border-color:rgba(255,255,255,.14);cursor:pointer;transition:transform .12s,border-color .12s,box-shadow .12s}
+.card.hero:hover{transform:translateY(-2px);border-color:var(--acc);box-shadow:0 14px 34px -14px rgba(229,72,77,.35)}
+.card .hd{display:flex;align-items:center;gap:9px;margin-bottom:6px;flex-wrap:wrap}
+.ic{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;
+  background:var(--panel3);color:var(--ink);border:1px solid var(--line)}
+.card.hero .ic{background:var(--acc-soft);color:var(--acc2);border-color:transparent}
+.card .t{font-weight:700;font-size:14.5px;word-break:break-all}
+.card .m{color:var(--muted);font-size:12px;margin:2px 0 8px}
+.links{display:flex;flex-wrap:wrap;gap:6px}
+.btn{font-size:12px;text-decoration:none;color:var(--ink);border:1px solid var(--line);
+  border-radius:9px;padding:3px 10px;background:var(--panel3);display:inline-block}
+.btn:hover{border-color:var(--acc2)}
+.btn.big{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700;padding:4px 13px}
+.btn.big:hover{background:var(--acc2)}
+.links a{font-size:12px;text-decoration:none;color:var(--ink);border:1px solid var(--line);
+  border-radius:9px;padding:3px 10px;background:var(--panel3)}
+.links a:hover{border-color:var(--acc2)}
+.links a.big{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700;padding:4px 13px}
+.links a.big:hover{background:var(--acc2)}
+.links .none{font-size:12px;color:var(--dim);border:1px dashed var(--line);border-radius:9px;padding:3px 10px}
+.empty{text-align:center;color:var(--dim);padding:50px 0}
+#msg{font-size:12px;color:var(--dim);margin:0 0 6px}
+.viewer{position:fixed;inset:0;background:rgba(0,0,0,.62);display:flex;align-items:center;justify-content:center;z-index:50}
+.viewer[hidden]{display:none}
+.viewer-panel{width:min(940px,92vw);max-height:86vh;background:var(--panel);border:1px solid var(--line);
+  border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.viewer-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.viewer-bar .vt{font-weight:700;font-size:14px;flex:1;word-break:break-all}
+.viewer-bar a{color:var(--muted);font-size:12px;text-decoration:none;border:1px solid var(--line);
+  border-radius:8px;padding:3px 10px}
+.viewer-bar a:hover{color:var(--ink);border-color:var(--acc2)}
+.vclose{width:30px;height:30px;font-size:14px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);
+  color:var(--ink);cursor:pointer;font:inherit}
+.vclose:hover{background:var(--panel3)}
+.viewer-body{overflow:auto;padding:18px 24px 30px;font-size:14px;line-height:1.85}
+.viewer-body h1{font-size:19px;margin:18px 0 8px;font-weight:700}
+.viewer-body h2{font-size:16.5px;margin:16px 0 6px}
+.viewer-body h3,.viewer-body h4{font-size:14.5px;margin:14px 0 5px}
+.viewer-body p{margin:8px 0}
+.viewer-body ul,.viewer-body ol{margin:8px 0 8px 24px;padding:0}
+.viewer-body li{margin:3px 0}
+.viewer-body code{background:var(--panel3);border-radius:6px;padding:1px 6px;font-size:12.5px}
+.viewer-body .code{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;
+  overflow:auto;font-size:12.5px;margin:10px 0;white-space:pre}
+.viewer-body blockquote{border-left:3px solid var(--acc);margin:8px 0;padding:3px 14px;color:var(--muted)}
+.viewer-body table{border-collapse:collapse;margin:10px 0;font-size:12.5px}
+.viewer-body th,.viewer-body td{border:1px solid var(--line);padding:5px 11px;text-align:left;vertical-align:top}
+.viewer-body th{background:var(--panel2)}
+.viewer-body hr{border:none;border-top:1px solid var(--line);margin:14px 0}
+.viewer-body .plain{white-space:pre-wrap;font-size:13px;line-height:1.8}
+@media(max-width:900px){.body-bg{padding:8px}.frame{padding:14px 14px 30px;border-radius:18px}
+  .center-pill{margin:0;order:5;flex-basis:100%;justify-content:center}.right-grp{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="body-bg"><div class="frame" id="main"></div></div>
+<div class="viewer" id="viewer" hidden>
+  <div class="viewer-panel">
+    <div class="viewer-bar"><span class="vt" id="viewerTitle"></span>
+      <a id="viewerRaw" href="#" target="_blank">原始文件</a>
+      <button class="vclose" id="viewerClose" title="关闭">&#215;</button></div>
+    <div class="viewer-body" id="viewerBody"></div>
+  </div>
+</div>
+<script>
+var DATA = __DATA_JSON__;
+
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\\"/g,"&quot;");}
+var UI={
+  badge:function(done){return done?'<span class="badge done">已完成</span>':'<span class="badge doing">进行中</span>';},
+  btn:function(href,label,big,blank){return '<a class="btn'+(big?" big":"")+'" href="'+href+'"'
+    +(blank===false?"":' target="_blank"')+">"+esc(label)+"</a>";},
+  nav:function(href,label,active){return '<a href="'+href+'"'+(active?' class="on"':"")+">"+esc(label)+"</a>";},
+  tab:function(href,glyph,label,active){return '<a href="'+href+'"'+(active?' class="on"':"")+'><span class="g">'
+    +esc(glyph)+"</span>"+esc(label)+"</a>";},
+  stat:function(v,k){return '<span class="stat"><b>'+v+"</b>"+esc(k)+"</span>";},
+  icon:function(href,glyph,label){return '<a class="top-btn" href="'+href+'"><span class="rbtn">'+glyph
+    +"</span><span>"+esc(label)+"</span></a>";}
+};
+function inlineMd(s){
+  s=esc(s);
+  s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s=s.replace(/\\*\\*([^*]+)\\*\\*/g,"<b>$1</b>");
+  s=s.replace(/\\*([^*]+)\\*/g,"<i>$1</i>");
+  s=s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return s;
+}
+function md2html(src){
+  var lines=src.replace(/\\r\\n/g,"\\n").split("\\n");var out=[];var p=[];var ul=false,ol=false;
+  function flushP(){if(p.length){out.push("<p>"+p.map(inlineMd).join("<br>")+"</p>");p=[];}}
+  function closeLists(){if(ul){out.push("</ul>");ul=false;}if(ol){out.push("</ol>");ol=false;}}
+  for(var i=0;i<lines.length;i++){
+    var L=lines[i];
+    if(/^\s*```/.test(L)){
+      flushP();closeLists();var code=[];i++;
+      while(i<lines.length&&!/^\s*```/.test(lines[i])){code.push(lines[i]);i++;}
+      out.push('<pre class="code">'+code.join("\\n")+"</pre>");continue;
+    }
+    var hm=/^(#{1,6})\s+(.*)$/.exec(L);
+    if(hm){flushP();closeLists();var n=hm[1].length;
+      out.push("<h"+n+">"+inlineMd(hm[2])+"</h"+n+">");continue;}
+    if(/^\s*(---+|\*\*\*+|___+)\s*$/.test(L)){flushP();closeLists();out.push("<hr>");continue;}
+    if(/^\s*>\s?/.test(L)){
+      flushP();closeLists();var q=[];
+      while(i<lines.length&&/^\s*>\s?/.test(lines[i])){q.push(lines[i].replace(/^\s*>\s?/,""));i++;}
+      i--;out.push("<blockquote>"+q.map(inlineMd).join("<br>")+"</blockquote>");continue;}
+    var tp=/^\s*\|(.+)\|\s*$/.exec(L);
+    if(tp&&i+1<lines.length&&/^\s*\|[\s:|\-]+\|\s*$/.test(lines[i+1])){
+      flushP();closeLists();
+      var heads=tp[1].split("|").map(function(c){return inlineMd(c.trim());});
+      out.push("<table><thead><tr>"+heads.map(function(c){return "<th>"+c+"</th>";}).join("")+"</tr></thead><tbody>");
+      i++;
+      while(true){
+        i++;var row=/^\s*\|(.*)\|\s*$/.exec(lines[i]);
+        if(!row){i--;break;}
+        out.push("<tr>"+row[1].split("|").map(function(c){return "<td>"+inlineMd(c.trim())+"</td>";}).join("")+"</tr>");
+      }
+      out.push("</tbody></table>");continue;
+    }
+    var lm=/^\s*[-*]\s+(.*)$/.exec(L);
+    var om=/^\s*(\d+)[\.、)]\s*(.*)$/.exec(L);
+    if(lm){flushP();if(ol){out.push("</ol>");ol=false;}if(!ul){out.push("<ul>");ul=true;}
+      out.push("<li>"+inlineMd(lm[1])+"</li>");continue;}
+    if(om){flushP();if(ul){out.push("</ul>");ul=false;}if(!ol){out.push("<ol>");ol=true;}
+      out.push("<li>"+inlineMd(om[2])+"</li>");continue;}
+    if(/^\s*$/.test(L)){flushP();closeLists();continue;}
+    p.push(L);
+  }
+  flushP();closeLists();
+  return out.join("\\n");
+}
+function openViewer(href){
+  var v=document.getElementById("viewer");
+  document.getElementById("viewerTitle").textContent=decodeURIComponent(href.split("/").pop());
+  document.getElementById("viewerRaw").setAttribute("href",href);
+  var body=document.getElementById("viewerBody");body.textContent="加载中…";v.hidden=false;
+  fetch(href,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text();})
+  .then(function(t){
+    body.innerHTML=/\.md(\?|#|$)/.test(href)?md2html(t):'<pre class="plain">'+esc(t)+"</pre>";
+    body.scrollTop=0;
+  })
+  .catch(function(){v.hidden=true;window.open(href,"_blank");});
+}
+function closeViewer(){document.getElementById("viewer").hidden=true;}
+function bindViewer(){
+  var v=document.getElementById("viewer");
+  v.addEventListener("click",function(e){if(e.target===v)closeViewer();});
+  document.getElementById("viewerClose").addEventListener("click",closeViewer);
+  document.getElementById("viewerRaw").addEventListener("click",function(e){e.stopPropagation();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!v.hidden)closeViewer();});
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a");
+    if(!a||v.contains(a))return;
+    var href=a.getAttribute("href")||"";
+    if(/\.md(\?|#|$)|\.txt(\?|#|$)/.test(href)){e.preventDefault();openViewer(href);}
+  });
+}
+function cnt(p){var d=0;for(var i=0;i<p.eps.length;i++)if(p.eps[i].files.review)d++;return d;}
+function dname(n){return String(n).replace(/-seedance30s$/,"");}
+function findPlay(name){for(var i=0;i<DATA.plays.length;i++)if(DATA.plays[i].name===name)return DATA.plays[i];return null;}
+function route(){var h=location.hash.replace(/^#\\/?/,"");var m=h.match(/^play\\/([^/]+)(?:\\/(ep\\d+))?(?:\\/(assets|prompts))?$/);
+  if(m){return {play:decodeURIComponent(m[1]),ep:m[2]||null,tab:m[3]||"prompts"};}return {tab:"prompts"};}
+function link(path,label,cls){return path?UI.btn(path,label,cls==="big"):'<span class="none">'+esc(label)+" 未产出</span>";}
+function badge(done){return UI.badge(done);}
+function card(opts){var links=opts.links||"";
+  return '<div class="card'+(opts.hero?" hero":"")+'"'+(opts.search?' data-search="'+esc(opts.search).toLowerCase()+'"':"")+'>'
+  +'<div class="hd">'+(opts.ic?'<span class="ic">'+esc(opts.ic)+"</span>":"")+'<span class="t">'+esc(opts.t)+"</span>"+(opts.badge||"")+"</div>"
+  +(opts.m?'<div class="m">'+esc(opts.m)+"</div>":"")+'<div class="links">'+links+"</div></div>";}
+function sect(title){return '<div class="sect-wrap"><div class="sect"><h2>'+esc(title)+'</h2><div class="rule"></div></div>';}
+function gridOpen(){return '<div class="grid">';}
+function gridClose(){return '</div></div>';}
+
+function topbar(r){
+  var back="";
+  if(r.ep)back=UI.icon("#/play/"+encodeURIComponent(r.play),"&#8592;","返回");
+  else if(r.play)back=UI.icon("#/","&#8592;","返回");
+  var title="",sub="",p2=null,done=0;
+  if(r.play){p2=findPlay(r.play);done=p2?cnt(p2):0;}
+  if(r.play&&r.ep){
+    var e=null;if(p2)for(var i=0;i<p2.eps.length;i++)if(p2.eps[i].dir===r.ep)e=p2.eps[i];
+    title=esc(dname(r.play))+' <span class="dim">·</span> '+esc(r.ep);
+    sub=(e?badge(!!e.files.review):"")+" 生成时间 "+esc(DATA.genTime);
+  }else if(r.play){
+    title=esc(dname(r.play))+(p2&&p2.tag30?'<span class="tag30">30s</span>':"");
+    sub=(p2&&p2.root30)?((p2.root30.review?"30s 成片 · 终审通过":"30s 成片 · 进行中")+" · 生成时间 "+esc(DATA.genTime))
+      :((p2?p2.eps.length+" 集 · "+done+" 集已完成":"")+" · 生成时间 "+esc(DATA.genTime));
+  }else{
+    title="项目总览";sub="共 "+DATA.plays.length+" 部剧 · 生成时间 "+esc(DATA.genTime);
+  }
+  var center="";
+  if(r.play&&r.ep){
+    var base="#/play/"+encodeURIComponent(r.play)+"/"+r.ep;
+    center='<div class="center-pill">'
+      +UI.tab(base+"/prompts","词","提示词",r.tab!=="assets")
+      +UI.tab(base+"/assets","资","资产",r.tab==="assets")+"</div>";
+  }else if(r.play&&p2){
+    center='<div class="center-pill">'
+      +UI.stat(p2.root30?"30s":p2.eps.length,p2.root30?"成片":"集数")
+      +UI.stat(done,"已完成")+"</div>";
+  }
+  return '<div class="top">'+back
+    +'<div class="titlebox"><h1>'+title+'</h1><div class="sub">'+sub+"</div></div>"+center
+    +'<div class="right-grp"><input id="search" type="text" placeholder="搜索本页" autocomplete="off">'
+    +'<div class="top-btn"><button id="refresh" class="rbtn">&#8635;</button><span>刷新</span></div></div>'
+    +"</div><p id=\\"msg\\"></p>";
+}
+
+function bindTop(){
+  var s=document.getElementById("search");
+  if(s)s.addEventListener("input",function(){applySearch(this.value);});
+  var b=document.getElementById("refresh");
+  if(b)b.addEventListener("click",function(){
+    b.disabled=true;b.textContent="…";
+    fetch("refresh",{cache:"no-store"}).then(function(r){return r.text().then(function(t){return{status:r.status,text:t};});})
+    .then(function(res){if(res.status===200){document.getElementById("msg").textContent=res.text;setTimeout(function(){location.reload();},500);}
+      else{document.getElementById("msg").textContent="刷新失败："+res.text;b.disabled=false;b.textContent="↻";}})
+    .catch(function(){staticRefresh();});
+  });
+}
+
+function applySearch(q){
+  q=q.trim().toLowerCase();var main=document.getElementById("main");var any=false;
+  main.querySelectorAll(".sect-wrap").forEach(function(sw){
+    var tw=sw.closest(".tab-wrap");
+    if(tw&&tw.style.display==="none"){sw.style.display="none";return;}
+    var vis=0;sw.querySelectorAll(".card").forEach(function(c){
+      var ok=!q||(c.getAttribute("data-search")||"").indexOf(q)>-1;
+      c.style.display=ok?"":"none";if(ok)vis++;});
+    sw.style.display=vis?"":"none";any=any||vis>0;});
+  var em=document.getElementById("emptyState");if(em)em.style.display=any?"none":"";
+}
+
+function renderHome(){
+  var h=topbar({});
+  h+=sect("项目");h+=gridOpen();
+  DATA.plays.forEach(function(p){
+    var done=cnt(p);var chips=[];
+    if(p.assets.hasReport)chips.push("资产");
+    if(p.config.globalStyle)chips.push("风格");
+    if(p.root30){var r30=!!p.root30.review;
+      h+=card({hero:true,ic:"剧",t:dname(p.name)+" · 30s",badge:badge(r30),
+        m:"30s 成片"+(r30?" · 终审通过":" · 进行中")+(chips.length?" · "+chips.join(" / "):""),
+        links:UI.btn("#/play/"+encodeURIComponent(p.name),"进入项目",true,false),search:p.name+" 30s"});
+      return;}
+    var links=UI.btn("#/play/"+encodeURIComponent(p.name),"进入项目",true,false)
+      +(p.assets.masterReport?UI.btn(esc(p.assets.masterReport),"资产报告"):"");
+    h+=card({hero:true,ic:"剧",t:dname(p.name),badge:badge(done>0&&done===p.eps.length),
+      m:p.eps.length+" 集 · "+done+" 集已完成"+(chips.length?" · "+chips.join(" / "):" · 资产未建库"),
+      links:links,search:p.name+" ep"});
+  });
+  h+=gridClose()+'<div class="empty" id="emptyState" style="display:none">没有匹配的项目</div>';
+  document.getElementById("main").innerHTML=h;bindTop();applySearch("");
+}
+
+function renderPlay(name){
+  var p=findPlay(name);if(!p){renderHome();return;}
+  var done=cnt(p);var h=topbar({play:name});
+  if(p.root30){
+    var r30=p.root30;
+    h+=sect("30s 成片");h+=gridOpen();
+    h+=card({ic:"片",t:"30s 成片提示词",m:"Seedance 2.5 竖屏成片",
+      links:link(r30.view,"打开 HTML 视图","big")+link(r30.md,"成片 .md")+link(r30.clean,"clean.txt"),
+      search:"成片 提示词 view clean"});
+    h+=card({ic:"表",t:"素材清单表",m:"30s 出图素材 Excel",links:link(r30.xlsx,"素材清单表.xlsx","big")+link(r30.assetList,"asset-list.md"),
+      search:"素材 清单"});
+    h+=card({ic:"审",t:"终审报告",m:r30.review?"已通过":"未产出",links:link(r30.review,"final-review-30s","big")+link(r30.brief,"episode-brief"),
+      search:"终审 review"});
+    h+=card({ic:"引",t:"集索引",m:"episode-index-30s.html",links:link(r30.index,"打开索引","big"),search:"索引 index"});
+    h+=gridClose();
+  }else{
+    h+=sect("剧集");h+=gridOpen();
+    p.eps.forEach(function(e){
+      var f=e.files;var chips=[];
+      if(f.sbView)chips.push("视图");if(f.sbClean)chips.push("文本");if(f.xlsx)chips.push("清单");if(f.review)chips.push("终审");
+      var links=(f.sbView?UI.btn(esc(f.sbView),"打开视图",true):"")
+        +UI.nav("#/play/"+encodeURIComponent(name)+"/"+e.dir,"详情",false);
+      h+=card({hero:true,ic:e.dir.replace("ep",""),t:e.dir,badge:badge(!!f.review),
+        m:chips.length?"含："+chips.join(" / "):"仅有台词本/讲戏等前置产出",links:links,search:e.dir+" ep"+e.num});
+    });
+    h+=gridClose();
+  }
+  h+=sect("资产（全剧）");h+=gridOpen();
+  var A=p.assets;
+  h+=card({ic:"人",t:"人物资产",m:A.characterMd?"源：character-prompts.md":(A.characterReport?"资产报告版":"未建库"),
+    links:link(A.characterMd,"prompts.md","big")+link(A.characterReport,"打开人物报告 →"),search:"人物 character"});
+  h+=card({ic:"景",t:"场景资产",m:A.sceneMd?"源：scene-prompts.md":(A.sceneReport?"资产报告版":"未建库"),
+    links:link(A.sceneMd,"prompts.md","big")+link(A.sceneReport,"打开场景报告 →"),search:"场景 scene"});
+  h+=card({ic:"物",t:"道具资产",m:A.propMd?"源：prop-prompts.md":(A.propReport?"资产报告版":"未建库"),
+    links:link(A.propMd,"prompts.md","big")+link(A.propReport,"打开道具报告 →"),search:"道具 prop"});
+  h+=card({ic:"档",t:"清点与分配",m:"脸型分配 / 人物清点 / 场景清点",
+    links:link(A.alloc,"分配表","big")+link(A.charInv,"人物清点")+link(A.sceneInv,"场景清点"),search:"分配 清点"});
+  h+=card({ic:"报",t:"资产总报告",m:A.masterReport?"master-report.html":"未生成",
+    links:link(A.masterReport,"打开总报告 →","big"),search:"总报告 master"});
+  (A.extras||[]).forEach(function(x){h+=card({ic:"＋",t:x.name,m:"assets/ 其他资产文件",links:link(x.path,"打开"),search:x.name});});
+  h+=gridClose();
+  h+=sect("设定与剧本");h+=gridOpen();
+  h+=card({ic:"风",t:"全局风格设定",m:p.config.globalStyleView?"global-style-view.html":"config/global-style.md",
+    links:link(p.config.globalStyleView,"打开视图 →","big")+(p.config.globalStyle?link(p.config.globalStyle,"global-style.md"):''),search:"风格 global"});
+  h+=card({ic:"规",t:"剧内规范",m:p.config.conventions?"config/conventions.md":"未配置",
+    links:link(p.config.conventions,"conventions.md"),search:"规范"});
+  h+=gridClose()+'<div class="empty" id="emptyState" style="display:none">没有匹配的条目</div>';
+  document.getElementById("main").innerHTML=h;bindTop();applySearch("");
+}
+
+function renderEp(name,dir,tab){
+  var p=findPlay(name);if(!p){renderHome();return;}
+  var e=null;for(var i=0;i<p.eps.length;i++)if(p.eps[i].dir===dir)e=p.eps[i];
+  if(!e){renderPlay(name);return;}
+  var f=e.files;var A=p.assets;
+  var h=topbar({play:name,ep:dir,tab:tab});
+  h+='<div class="tab-wrap" id="sec-prompts"'+(tab==="assets"?' style="display:none"':"")+">";
+  h+=sect("分镜产出");h+=gridOpen();
+  h+=card({ic:"词",t:"分镜提示词",m:"即梦平台格式 · 母镜头+子镜头",
+    links:link(f.sbView,"打开 HTML 视图","big")+link(f.sbClean,"clean.txt")+link(f.sbMd,"02 .md"),
+    search:"分镜 提示词 view clean"});
+  h+=card({ic:"景",t:"全景站位",m:"单一母镜头 · 零台词",links:link(f.panorama,"00-panorama-blocking.md","big"),search:"全景 站位"});
+  h+=gridClose();
+  h+=sect("前置产出");h+=gridOpen();
+  h+=card({ic:"台",t:"台词本",m:"逐字对照剧本",links:link(f.dialogueMd,"台词本 .md","big")+link(f.dialogueJson,"台词 .json"),
+    search:"台词 dialogue"});
+  h+=card({ic:"导",t:"导演讲戏",m:"剧情点拆解与预算",links:link(f.director,"01-director-analysis.md","big")+link(f.lens,"lens.json"),
+    search:"导演 讲戏"});
+  h+=gridClose();
+  h+=sect("交付与终审");h+=gridOpen();
+  h+=card({ic:"表",t:"素材清单表",m:"分镜出图素材 Excel",links:link(f.xlsx,"素材清单表.xlsx","big"),search:"素材 清单 xlsx"});
+  h+=card({ic:"校",t:"时长校准",m:"子镜头时长与修正记录",links:link(f.durations,"sub-durations.json")+link(f.corrections,"corrections.json"),
+    search:"时长 校准"});
+  h+=card({ic:"审",t:"终审报告",m:f.review?"已通过即完成判定":"未产出（进行中）",links:link(f.review,"final-review","big"),search:"终审 review"});
+  h+=gridClose();
+  h+='</div><div class="tab-wrap" id="sec-assets"'+(tab==="assets"?'':" style=\\"display:none\\"")+">";
+  h+=sect("本集资产");h+=gridOpen();
+  h+=card({ic:"单",t:"本集资产清单",m:"ep 资产引用唯一权威",links:link(f.assetList,"asset-list.md","big"),search:"资产 清单"});
+  h+=card({ic:"文",t:"剧本原文",m:"台词字面唯一权威",links:link(f.scriptSrc,dir+".txt","big"),search:"剧本 原文 txt"});
+  h+=gridClose();
+  h+=sect("全剧资产库");h+=gridOpen();
+  h+=card({ic:"人",t:"人物资产",m:"全剧人物库",links:link(A.characterMd,"prompts.md"),search:"人物"});
+  h+=card({ic:"景",t:"场景资产",m:"全剧场景库",links:link(A.sceneMd,"prompts.md"),search:"场景"});
+  h+=card({ic:"物",t:"道具资产",m:"全剧道具库",links:link(A.propMd,"prompts.md"),search:"道具"});
+  h+=gridClose();
+  h+='</div><div class="empty" id="emptyState" style="display:none">没有匹配的条目</div>';
+  document.getElementById("main").innerHTML=h;bindTop();applySearch("");
+}
+
+function render(){
+  var r=route();
+  if(r.play&&r.ep)renderEp(r.play,r.ep,r.tab);
+  else if(r.play)renderPlay(r.play);
+  else renderHome();
+}
+window.addEventListener("hashchange",render);
+
+function supportsFS(){return typeof window.showDirectoryPicker==="function";}
+function pathExists(dir,name){return dir.getFileHandle(name).then(function(h){return h.getFile();}).then(function(){return true;},function(){return false;});}
+async function staticScan(root){
+  var scripts=await root.getDirectoryHandle("scripts");
+  var names=[];for await(var h of scripts.values())if(h.kind==="directory")names.push(h.name);
+  names.sort();
+  var plays=[];
+  for(var i=0;i<names.length;i++){
+    var name=names[i];var base=await scripts.getDirectoryHandle(name);
+    var play={name:name,tag30:name.endsWith("-seedance30s"),mtime:0,eps:[],
+      assets:{characterMd:"",sceneMd:"",propMd:"",alloc:"",charInv:"",sceneInv:"",extras:[]},
+      config:{globalStyle:"",globalStyleView:"",conventions:""}};
+    try{var ad=await base.getDirectoryHandle("assets");
+      play.assets.characterMd=await pathExists(ad,"character-prompts.md")?"scripts/"+name+"/assets/character-prompts.md":"";
+      play.assets.sceneMd=await pathExists(ad,"scene-prompts.md")?"scripts/"+name+"/assets/scene-prompts.md":"";
+      play.assets.propMd=await pathExists(ad,"prop-prompts.md")?"scripts/"+name+"/assets/prop-prompts.md":"";
+      play.assets.alloc=await pathExists(ad,"_face-allocation.md")?"scripts/"+name+"/assets/_face-allocation.md":"";
+      play.assets.charInv=await pathExists(ad,"_character-inventory.md")?"scripts/"+name+"/assets/_character-inventory.md":"";
+      play.assets.sceneInv=await pathExists(ad,"_scene-inventory.md")?"scripts/"+name+"/assets/_scene-inventory.md":"";
+      play.assets.characterReport=await pathExists(ad,"character-report.html")?"scripts/"+name+"/assets/character-report.html":"";
+      play.assets.sceneReport=await pathExists(ad,"scene-report.html")?"scripts/"+name+"/assets/scene-report.html":"";
+      play.assets.propReport=await pathExists(ad,"prop-report.html")?"scripts/"+name+"/assets/prop-report.html":"";
+      play.assets.masterReport=await pathExists(ad,"master-report.html")?"scripts/"+name+"/assets/master-report.html":"";
+      play.assets.hasReport=!!(play.assets.characterReport||play.assets.sceneReport||play.assets.propReport||play.assets.masterReport);
+    }catch(e){}
+    if(play.tag30){
+      try{
+        var r30={view:"",index:"",md:"",clean:"",review:"",assetList:"",brief:"",xlsx:""};
+        for await(var bf of base.values()){if(bf.kind!=="file")continue;
+          if(bf.name==="seedance30s-view.html")r30.view="scripts/"+name+"/"+bf.name;
+          else if(bf.name==="episode-index-30s.html")r30.index="scripts/"+name+"/"+bf.name;
+          else if(bf.name.indexOf("02-seedance30s")===0&&bf.name.endsWith(".md")&&!bf.name.endsWith("-clean.txt"))r30.md="scripts/"+name+"/"+bf.name;
+          else if(bf.name.indexOf("02-seedance30s")===0&&bf.name.endsWith("-clean.txt"))r30.clean="scripts/"+name+"/"+bf.name;
+          else if(bf.name.toLowerCase().indexOf("final-review")>-1)r30.review="scripts/"+name+"/"+bf.name;
+          else if(bf.name.endsWith("-asset-list.md"))r30.assetList="scripts/"+name+"/"+bf.name;
+          else if(bf.name.endsWith("-episode-brief.md"))r30.brief="scripts/"+name+"/"+bf.name;
+          else if(bf.name.endsWith(".xlsx")&&!r30.xlsx)r30.xlsx="scripts/"+name+"/"+bf.name;}
+        if(r30.view||r30.md)play.root30=r30;
+      }catch(e){}
+    }
+    try{var cd=await base.getDirectoryHandle("config");
+      play.config.globalStyle=await pathExists(cd,"global-style.md")?"scripts/"+name+"/config/global-style.md":"";
+      play.config.globalStyleView=await pathExists(cd,"global-style-view.html")?"scripts/"+name+"/config/global-style-view.html":"";
+      play.config.conventions=await pathExists(cd,"conventions.md")?"scripts/"+name+"/config/conventions.md":"";
+    }catch(e){}
+    try{var sd=await base.getDirectoryHandle("script");var anyScript=false;
+      for await(var sf of sd.values())if(sf.kind==="file"){anyScript=true;break;}
+      play.scriptTxt=anyScript;}catch(e){play.scriptTxt=false;}
+    try{var od=await base.getDirectoryHandle("outputs");
+      for await(var d of od.values()){
+        if(d.kind!=="directory")continue;var m=/^ep(\\d{1,3})$/.exec(d.name);if(!m)continue;
+        var ed=await od.getDirectoryHandle(d.name);var f={scriptSrc:""};
+        var map={"panorama":"00-panorama-blocking.md","director":"01-director-analysis.md","lens":"01-lens-design.json",
+          "dialogueMd":d.name+"-dialogue-list.md","dialogueJson":d.name+"-dialogue-list.json",
+          "durations":d.name+"-sub-durations.json","corrections":"corrections.json",
+          "sbMd":"02-jimeng-prompts.md","sbClean":"02-jimeng-prompts-clean.txt","sbView":"02-jimeng-prompts-view.html",
+          "assetList":d.name+"-asset-list.md"};
+        for(var k in map)f[k]=await pathExists(ed,map[k])?"scripts/"+name+"/outputs/"+d.name+"/"+map[k]:"";
+        f.xlsx="";f.review="";
+        for await(var fh of ed.values()){if(fh.kind!=="file")continue;
+          if(!f.xlsx&&fh.name.endsWith(".xlsx"))f.xlsx="scripts/"+name+"/outputs/"+d.name+"/"+fh.name;
+          if(fh.name.toLowerCase().indexOf("final-review")>-1)f.review="scripts/"+name+"/outputs/"+d.name+"/"+fh.name;}
+        var sc;try{sc=await base.getDirectoryHandle("script");}catch(e2){sc=null;}
+        if(sc)f.scriptSrc=await pathExists(sc,d.name+".txt")?"scripts/"+name+"/script/"+d.name+".txt":"";
+        var any=false;for(var k2 in f)if(f[k2])any=true;if(!any)continue;
+        play.eps.push({num:parseInt(m[1],10),dir:d.name,files:f});
+      }
+    }catch(e){}
+    play.eps.sort(function(a,b){return a.num-b.num;});
+    if(play.eps.length||play.assets.characterMd||play.assets.sceneMd||play.assets.propMd||play.root30||play.config.globalStyle||play.scriptTxt)plays.push(play);
+  }
+  return {genTime:new Date().toLocaleString("zh-CN"),plays:plays};
+}
+function staticRefresh(){
+  if(!supportsFS()){document.getElementById("msg").textContent="刷新失败：请通过本地服务访问（双击桌面「工作台」即可）。";return;}
+  idbLoad().then(function(saved){
+    if(!saved)return window.showDirectoryPicker({mode:"read"}).then(function(h){return idbSave(h).then(function(){return h;});});
+    return saved.queryPermission({mode:"read"}).then(function(st){
+      if(st==="granted")return saved;
+      return saved.requestPermission({mode:"read"}).then(function(s2){return s2==="granted"?saved:null;});});
+  }).then(function(root){
+    if(!root)throw new Error("未授权");
+    return staticScan(root);
+  }).then(function(d){DATA=d;var b=document.getElementById("refresh");b.disabled=false;b.innerHTML="&#8635;";
+    document.getElementById("msg").textContent="已通过本地目录静态刷新。";render();})
+  .catch(function(err){var b=document.getElementById("refresh");b.disabled=false;b.innerHTML="&#8635;";
+    document.getElementById("msg").textContent="静态刷新未完成："+err.message;});
+}
+function idbOpen(){return new Promise(function(res,rej){var r=indexedDB.open("workspace-scanner",1);
+  r.onupgradeneeded=function(){r.result.createObjectStore("handles");};r.onsuccess=function(){res(r.result);};r.onerror=function(){rej(r.error);};});}
+function idbLoad(){return idbOpen().then(function(db){return new Promise(function(res,rej){
+  var rq=db.transaction("handles","readonly").objectStore("handles").get("root");
+  rq.onsuccess=function(){res(rq.result);};rq.onerror=function(){rej(rq.error);};});});}
+function idbSave(h){return idbOpen().then(function(db){return new Promise(function(res,rej){
+  var tx=db.transaction("handles","readwrite");tx.objectStore("handles").put(h,"root");
+  tx.oncomplete=function(){res();};tx.onerror=function(){rej(tx.error);};});});}
+
+bindViewer();
+render();
+</script>
+</body>
+</html>
+"""
+
+
+def generate():
+    plays = scan_all()
+    total_eps = sum(len(p["eps"]) for p in plays)
+    total_done = sum(1 for p in plays for e in p["eps"] if e["files"]["review"])
+    gen_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    data = json.dumps({"genTime": gen_time, "plays": plays}, ensure_ascii=False)
+    html = HTML_TMPL.replace("__DATA_JSON__", data.replace("</", "<\\/"))
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        f.write(html)
+    return OUTPUT_FILE, len(plays), total_eps, total_done
+
+
+def main():
+    path, n_plays, n_eps, n_done = generate()
+    print("已生成分层工作台: %s" % path)
+    print("剧本数: %d, 剧集总数: %d, 已完成: %d" % (n_plays, n_eps, n_done))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

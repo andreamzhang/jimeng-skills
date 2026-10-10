@@ -1,0 +1,196 @@
+{
+  "model": "索拉",
+  "version": "1.0",
+  "description": "索拉专属提示技巧和最佳实践",
+  "best_practices": [
+    {
+      "tip_category": "物理运动",
+      "good_example": {
+        "prompt": "和,带",
+        "explanation": "明确物理规律，水花大小、方向符合现实"
+      },
+      "bad_example": {
+        "prompt": "",
+        "explanation": "违反物理规律，难以正确处理"
+      },
+      "guidelines": [
+        "明确指定物理运动逻辑（重力、惯性、碰撞）",
+        "描述物体的运动轨迹和相互作用",
+        "避免'漂浮'、'传送'等抽象运动",
+        "描述速度、方向、力度的变化"
+      ]
+    },
+    {
+      "tip_category": "时间顺序",
+      "good_example": {
+        "prompt": ",,阴影",
+        "explanation": "用时间词引导连续动作"
+      },
+      "guidelines": [
+        "使用时间词：,,,,",
+        "明确动作的先后顺序",
+        "描述动作的持续时间或节奏",
+        "对于复杂场景，用时间轴方式描述"
+      ]
+    },
+    {
+      "tip_category": "避免抽象概念",
+      "avoid": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_instead": [
+        {
+          "abstract": "",
+          "concrete": ",,"
+        },
+        {
+          "abstract": "",
+          "concrete": ",,"
+        },
+        {
+          "abstract": "",
+          "concrete": ",,清晨"
+        },
+        {
+          "abstract": "",
+          "concrete": ",,"
+        },
+        {
+          "abstract": "",
+          "concrete": ",,"
+        }
+      ],
+      "principle": "用可观测的行为、动作、场景代替抽象概念"
+    },
+    {
+      "tip_category": "摄像机运动",
+      "good_example": {
+        "prompt": "缓慢角色面部,",
+        "explanation": "明确摄像机类型和运动方式"
+      },
+      "bad_example": {
+        "prompt": "镜头面部",
+        "explanation": "缺少专业术语，理解可能不一致"
+      },
+      "recommended_terms": [
+        "/",
+        "镜头",
+        "",
+        "/",
+        "/",
+        "/",
+        "/",
+        "手持",
+        "平稳",
+        "360",
+        "(主观视角)"
+      ]
+    },
+    {
+      "tip_category": "人物动作",
+      "good_example": {
+        "prompt": ",,",
+        "explanation": "具体描述动作、速度、环境互动"
+      },
+      "guidelines": [
+        "描述具体动作（,,,,）",
+        "指定速度或节奏（,,）",
+        "描述身体语言和姿势",
+        "描述与环境的互动"
+      ]
+    },
+    {
+      "tip_category": "场景描述",
+      "good_example": {
+        "prompt": "夜晚,霓虹,,",
+        "explanation": "具体、详细、可视化"
+      },
+      "bad_example": {
+        "prompt": "",
+        "explanation": "过于笼统，可能生成完全不同的场景"
+      },
+      "guidelines": [
+        "指定具体地点（,,）",
+        "描述时间（日/夜、季节、光线）",
+        "描述环境细节（建筑、街道、植被）",
+        "包括声音元素（交通、人群、音乐）"
+      ]
+    },
+    {
+      "tip_category": "光影效果",
+      "good_example": {
+        "prompt": "黄金时刻,,阴影",
+        "explanation": "明确光线类型、效果、氛围"
+      },
+      "recommended_light_terms": [
+        "黄金时刻",
+        "蓝调时刻",
+        "",
+        "",
+        "",
+        "光线",
+        "",
+        "霓虹",
+        "",
+        "",
+        "月光"
+      ]
+    },
+    {
+      "tip_category": "风格化",
+      "good_example": {
+        "prompt": ",对比和,阴影,",
+        "explanation": "明确风格参考"
+      },
+      "style_references": [
+        "",
+        "",
+        "电影感",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "sora_strengths": [
+    "长镜头连续性",
+    "复杂摄像机运动",
+    "物理准确的动作",
+    "多角色场景",
+    "环境细节丰富",
+    "光影效果出色"
+  ],
+  "sora_limitations": [
+    "文字渲染不准确",
+    "快速动作可能出现变形",
+    "多人场景中人物一致性",
+    "精确的道具交互",
+    "复杂的时间跳跃"
+  ],
+  "recommended_prompt_structure": {
+    "structure": "[镜头描述] + [主体动作] + [摄像机运动] + [环境/氛围] + [时间/光线]",
+    "example": "近景的,霓虹,,镜头,蓝调时刻光线",
+    "key_elements": [
+      "镜头(,特写,宽广)",
+      "主体和",
+      "镜头",
+      "",
+      "光线/的",
+      "/"
+    ]
+  }
+}

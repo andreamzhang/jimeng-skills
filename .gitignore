@@ -1,0 +1,37 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.tmp
+*.bak
+~*.*
+.~*
+
+# 用户剧本与剧产出：绝不入库
+/scripts/*
+!/scripts/.gitkeep
+
+# 本机解释器路径
+/tools/python-path.txt
+
+# 本机剧级记忆
+/.codex/memory/*
+!/.codex/memory/_template/
+!/.codex/memory/_template/**
+
+# 不随分发包携带的旧目录
+/backup/
+/docs/
+/panorama-test/
+/npx-jimeng-skills/

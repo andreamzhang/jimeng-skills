@@ -1,0 +1,313 @@
+{
+  "pattern_id": "time_jump_sequence",
+  "name": "时间跳跃",
+  "version": "1.0",
+  "description": "用于展现时间流逝、闪回或时间线跳跃的镜头序列",
+  "category": "time_manipulation",
+  "usage_frequency": "",
+  "structure": {
+    "shot_sequence": [
+      {
+        "shot_id": "time_anchor_before",
+        "name": "时间锚点（跳跃前）",
+        "shot_type": "或",
+        "camera_setup": "",
+        "eye_line": "/",
+        "duration": "2-3",
+        "visual_prompt_template": "{__},{角色}{},的",
+        "camera_movement": "__",
+        "transition_to": "__"
+      },
+      {
+        "shot_id": "time_jump_indicator",
+        "name": "时间跳跃指示",
+        "shot_type": "",
+        "camera_setup": "/",
+        "eye_line": "/",
+        "duration": "0.5-1",
+        "visual_prompt_template": "-{_},的或",
+        "transition_effect": [
+          "",
+          "",
+          "",
+          "_"
+        ],
+        "optional_text": "{_}"
+      },
+      {
+        "shot_id": "time_anchor_after",
+        "name": "时间锚点（跳跃后）",
+        "shot_type": "或",
+        "camera_setup": "_",
+        "eye_line": "/",
+        "duration": "2-3",
+        "visual_prompt_template": "{__},或{角色}{_},镜头",
+        "camera_movement": "___",
+        "matching_element": "构图,,或_"
+      }
+    ],
+    "pattern_flow": "_→→_",
+    "minimum_shots": 3,
+    "extended_versions": [
+      "__",
+      "__",
+      "__"
+    ],
+    "key_shots": [
+      "__",
+      "__"
+    ]
+  },
+  "rules": {
+    "must_use": [
+      "__",
+      "_"
+    ],
+    "recommended": [
+      "___",
+      "_"
+    ],
+    "forbidden": [
+      "____",
+      "__"
+    ],
+    "constraints": {
+      "transition_indicator": "",
+      "matching_element": "",
+      "text_clarity": ",和"
+    }
+  },
+  "customizable_slots": {
+    "time_period_A": {
+      "type": "",
+      "description": "时间点描述",
+      "default": ""
+    },
+    "time_period_B": {
+      "type": "",
+      "description": "时间点描述",
+      "default": ""
+    },
+    "character": {
+      "type": "",
+      "description": "涉及的角色",
+      "default": ""
+    },
+    "activity_A": {
+      "type": "",
+      "description": "时间点的角色活动",
+      "default": "和"
+    },
+    "activity_B": {
+      "type": "",
+      "description": "时间点的角色活动",
+      "default": "和"
+    },
+    "transition_type": {
+      "type": "",
+      "description": "时间跳跃转场类型",
+      "default": "",
+      "options": [
+        "",
+        "___",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_"
+      ]
+    },
+    "text_overlay": {
+      "type": "",
+      "description": "文字叠加（可选）",
+      "default": "5...",
+      "format": "_"
+    },
+    "matching_element": {
+      "type": "",
+      "description": "两个锚点之间的视觉匹配元素",
+      "default": "___",
+      "options": [
+        "_",
+        "___",
+        "___",
+        "___",
+        "_"
+      ]
+    },
+    "emotional_tone": {
+      "type": "",
+      "description": "时间跳跃的情感基调",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "flashback_trigger": {
+      "type": "",
+      "description": "闪回触发物（如果有）",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "transition_types": {
+    "dissolve": {
+      "visual": "",
+      "emotion": ",",
+      "audio": "或",
+      "use_cases": [
+        "的",
+        "",
+        ""
+      ]
+    },
+    "wipe_left_to_right": {
+      "visual": "",
+      "emotion": ",",
+      "audio": "或",
+      "use_cases": [
+        "",
+        "对比",
+        ""
+      ]
+    },
+    "flash_white": {
+      "visual": ",",
+      "emotion": ",",
+      "audio": "_",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "flash_black": {
+      "visual": ",",
+      "emotion": ",",
+      "audio": "_",
+      "use_cases": [
+        "__",
+        "",
+        "或"
+      ]
+    },
+    "digital_distortion": {
+      "visual": "或,",
+      "emotion": ",,",
+      "audio": "",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "matching_strategies": {
+    "same_composition": {
+      "description": "完全相同的画面构图，不同的内容",
+      "example": "角色,",
+      "emotional_effect": ","
+    },
+    "same_room_different_state": {
+      "description": "同一房间，但状态完全不同",
+      "example": "",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "same_object_different_condition": {
+      "description": "同一物体，状态或含义改变",
+      "example": "",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "same_angle_different_era": {
+      "description": "同一拍摄角度，不同年代",
+      "example": "",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "reflection_matching": {
+      "description": "通过反射元素匹配",
+      "example": ",,",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "extended_patterns": {
+    "with_flashback_emotion": {
+      "additional_shots": [
+        {
+          "shot_id": "flashback_emotion",
+          "name": "闪回情感",
+          "type": "",
+          "duration": "1-2",
+          "content": "特写(,,.)",
+          "placement": "__"
+        }
+      ]
+    },
+    "with_parallel_timeline": {
+      "description": "双时间线并行展示",
+      "pattern": "1→2→→1→2→",
+      "use_cases": [
+        "",
+        "",
+        "/对比"
+      ]
+    },
+    "with_foreshadowing_element": {
+      "additional_shots": [
+        {
+          "shot_id": "foreshadowing",
+          "name": "伏笔揭示",
+          "type": "",
+          "duration": "1-2",
+          "content": "",
+          "placement": "或_"
+        }
+      ]
+    }
+  },
+  "example_bindings": {
+    "time_period_A": "",
+    "time_period_B": "",
+    "character": "",
+    "activity_A": "带,,",
+    "activity_B": ",,",
+    "transition_type": "",
+    "text_overlay": "10...",
+    "matching_element": "___",
+    "emotional_tone": "",
+    "location": ""
+  },
+  "use_cases": [
+    "回忆闪回",
+    "时间流逝",
+    "身份变化",
+    "命运对比",
+    "平行时间线"
+  ]
+}

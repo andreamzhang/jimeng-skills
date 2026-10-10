@@ -1,0 +1,295 @@
+{
+  "category": "lighting_atoms",
+  "version": "1.0",
+  "description": "光影原子定义，定义各种光线类型、色温和情感氛围",
+  "usage_notes": "与场景类型和情绪基调配合使用，决定画面的视觉质感",
+  "atoms": [
+    {
+      "atom_id": "key_light",
+      "description": "主光（）",
+      "aliases": [
+        "主光",
+        "主光源"
+      ],
+      "ai_prompt": "光线,{方向},主体面部,阴影",
+      "parameters": {
+        "direction": "45-()",
+        "intensity": "70%的",
+        "purpose": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        "角色"
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "fill_light",
+      "description": "补光（）",
+      "aliases": [
+        "补光",
+        "辅助光"
+      ],
+      "ai_prompt": "阴影,对比,阴影",
+      "parameters": {
+        "direction": "",
+        "intensity": "30-50%的",
+        "quality": ","
+      },
+      "use_cases": [
+        "阴影",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "rim_light",
+      "description": "轮廓光（）",
+      "aliases": [
+        "边缘光",
+        "背光",
+        "发际光"
+      ],
+      "ai_prompt": "主体,,",
+      "parameters": {
+        "position": "主体,90-180",
+        "effect": "",
+        "intensity": ","
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "practical_light",
+      "description": "实光（）",
+      "aliases": [
+        "道具光",
+        "光源可见"
+      ],
+      "ai_prompt": "画面,{_},",
+      "parameters": {
+        "source": ",,,",
+        "effect": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "softbox_diffused",
+      "description": "柔光箱漫射",
+      "aliases": [
+        "柔光",
+        "漫射光"
+      ],
+      "ai_prompt": ",光线,阴影,,电影感",
+      "parameters": {
+        "source_size": "(或)",
+        "shadow_quality": ",",
+        "direction": "或-"
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "hard_direct",
+      "description": "硬光直射",
+      "aliases": [
+        "硬光",
+        "直射光"
+      ],
+      "ai_prompt": ",光线,阴影带,对比,",
+      "parameters": {
+        "source_size": ",",
+        "shadow_quality": ",-",
+        "contrast": ""
+      },
+      "use_cases": [
+        "对比",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "backlight",
+      "description": "背光（逆光）",
+      "aliases": [
+        "逆光",
+        "剪影光"
+      ],
+      "ai_prompt": ",主体或带,,",
+      "parameters": {
+        "source": "主体镜头",
+        "exposure": "主体或-",
+        "background": "或"
+      },
+      "use_cases": [
+        "",
+        "光线",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "motivated_lighting",
+      "description": "动机光（场景内光源）",
+      "aliases": [
+        "动机光源",
+        "场景光"
+      ],
+      "ai_prompt": "光线--,,,-",
+      "parameters": {
+        "source_must_be_visible": true,
+        "light_direction": "带",
+        "color_temperature": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        "-"
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "warm_tungsten",
+      "description": "暖色温（钨丝灯）",
+      "aliases": [
+        "暖光",
+        "钨丝灯",
+        "2800-3200"
+      ],
+      "ai_prompt": "光线,-(2800-3200),",
+      "color_temp": "2800-3200",
+      "use_cases": [
+        "夜晚",
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "cool_daylight",
+      "description": "冷色温（日光）",
+      "aliases": [
+        "冷光",
+        "日光",
+        "5000-6500"
+      ],
+      "ai_prompt": "光线,-(5000-6500),",
+      "color_temp": "5000-6500",
+      "use_cases": [
+        "白天",
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "mixed_color_temp",
+      "description": "混合色温",
+      "aliases": [
+        "冷暖对比",
+        "对比光"
+      ],
+      "ai_prompt": "光线,和,对比",
+      "parameters": {
+        "warm_source": "/",
+        "cool_source": "/",
+        "effect": "对比"
+      },
+      "use_cases": [
+        "对比",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "mood_lighting",
+      "description": "情绪氛围光",
+      "aliases": [
+        "氛围光",
+        "情绪光"
+      ],
+      "ai_prompt": "光线,{},{},对比",
+      "parameters": {
+        "mood": "",
+        "color": "",
+        "intensity": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        "光线"
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}

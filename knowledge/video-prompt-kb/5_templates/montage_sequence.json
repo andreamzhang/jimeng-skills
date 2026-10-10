@@ -1,0 +1,195 @@
+{
+  "template_name": "_",
+  "description": "蒙太奇序列模板，用于展示时间流逝或主题发展",
+  "category": "montage_sequence",
+  "prompt_template": "{}→{__}→{}",
+  "slots": {
+    "opening": {
+      "description": "蒙太奇开场，设定主题",
+      "default": "远景的,和",
+      "prompt_fragments": [
+        "宽广镜头的,",
+        "缓慢,清晨",
+        "镜头的(,,.)"
+      ],
+      "duration": "2-3"
+    },
+    "series_of_shots": {
+      "description": "一系列快速镜头，展示发展过程",
+      "default": ":→→→",
+      "shot_template": {
+        "action_type": "{_}",
+        "description": "具体展示的动作序列",
+        "example_sequence": [
+          {
+            "shot": "人物在桌前研究资料",
+            "duration": "1"
+          },
+          {
+            "shot": "深夜还在工作，咖啡杯堆满",
+            "duration": "1"
+          },
+          {
+            "shot": "实验失败，表情沮丧",
+            "duration": "1"
+          },
+          {
+            "shot": "重新振作，继续尝试",
+            "duration": "1"
+          },
+          {
+            "shot": "重要突破，兴奋站起",
+            "duration": "1"
+          }
+        ]
+      },
+      "montage_types": [
+        {
+          "type": "学习成长",
+          "shots": [
+            "阅读书籍",
+            "课堂学习",
+            "实践练习",
+            "失败",
+            "成功"
+          ]
+        },
+        {
+          "type": "关系发展",
+          "shots": [
+            "初次见面",
+            "尴尬对话",
+            "共同经历",
+            "矛盾",
+            "和解"
+          ]
+        },
+        {
+          "type": "准备过程",
+          "shots": [
+            "打包行李",
+            "告别家人",
+            "交通工具",
+            "到达目的地",
+            "开始冒险"
+          ]
+        },
+        {
+          "type": "训练过程",
+          "shots": [
+            "基础训练",
+            "体能挑战",
+            "技术练习",
+            "比赛",
+            "获胜"
+          ]
+        }
+      ],
+      "pacing": {
+        "description": "剪辑节奏控制",
+        "options": [
+          {
+            "pace": "快速",
+            "timing": "0.5-1每镜",
+            "effect": "紧迫、密集"
+          },
+          {
+            "pace": "中等",
+            "timing": "1-2每镜",
+            "effect": "平衡"
+          },
+          {
+            "pace": "慢速",
+            "timing": "2-3每镜",
+            "effect": "强调、诗意"
+          }
+        ]
+      }
+    },
+    "closing": {
+      "description": "蒙太奇结束，过渡到主要场景",
+      "default": "镜头或",
+      "prompt_fragments": [
+        "缓慢或",
+        "角色,",
+        ",角色"
+      ],
+      "duration": "2-4"
+    }
+  },
+  "montage_structure": {
+    "typical_shots": "5-15个镜头",
+    "total_duration": "10-30秒",
+    "transition_style": "快速切换、叠化、匹配剪辑",
+    "music_cue": "通常配合音乐节拍"
+  },
+  "emotional_montage_examples": [
+    {
+      "theme": "失去与哀悼",
+      "shots": [
+        "欢快回忆",
+        "突然失去",
+        "悲伤反应",
+        "遗物",
+        "慢慢接受"
+      ],
+      "pacing": "慢速，配合悲伤音乐",
+      "mood": [
+        "怀旧",
+        "悲伤",
+        "接受"
+      ]
+    },
+    {
+      "theme": "成功之路",
+      "shots": [
+        "设定目标",
+        "艰苦训练",
+        "多次失败",
+        "突破",
+        "成功时刻"
+      ],
+      "pacing": "由慢到快，逐渐加速",
+      "mood": [
+        "决心",
+        "坚持",
+        "喜悦"
+      ]
+    },
+    {
+      "theme": "日常生活",
+      "shots": [
+        "起床",
+        "通勤",
+        "工作",
+        "下班",
+        "回家休息"
+      ],
+      "pacing": "平稳，诗意",
+      "mood": [
+        "日常",
+        "平静",
+        "循环"
+      ]
+    }
+  ],
+  "full_example": "6→:,,→→→→→清晨→3带→镜头的带,20-,",
+  "mood_keywords": [
+    "时间流逝",
+    "发展",
+    "循环",
+    "主题展示"
+  ],
+  "recommended_duration": "10-30秒",
+  "model_recommendations": [
+    "索拉",
+    "跑道第二代"
+  ],
+  "tips": [
+    "每个镜头要有明确目的",
+    "节奏配合音乐或环境声",
+    "使用匹配剪辑增强连贯性",
+    "避免过多重复相似镜头",
+    "留白镜头也有表现力"
+  ]
+}

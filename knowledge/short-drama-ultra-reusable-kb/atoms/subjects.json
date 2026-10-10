@@ -1,0 +1,83 @@
+{
+  "category": "subjects",
+  "version": "1.0",
+  "description": "主体占位符定义，用于镜头脚本中的角色引用",
+  "usage_notes": "在模式绑定时，用实际角色描述替换这些占位符",
+  "atoms": [
+    {
+      "atom_id": "subject_A",
+      "type": "_",
+      "description": "主要角色（说话方/主动方）",
+      "constraints": {
+        "position": "__",
+        "eye_direction": ""
+      },
+      "examples": [
+        "男主角",
+        "老板",
+        "甲方",
+        "追求者"
+      ]
+    },
+    {
+      "atom_id": "subject_B",
+      "type": "_",
+      "description": "主要角色（倾听方/被动方）",
+      "constraints": {
+        "position": "__",
+        "eye_direction": ""
+      },
+      "examples": [
+        "女主角",
+        "员工",
+        "乙方",
+        "被追求者"
+      ]
+    },
+    {
+      "atom_id": "subject_C",
+      "type": "_",
+      "description": "第三角色（次要角色/旁观者）",
+      "constraints": {
+        "position": "",
+        "visibility": ""
+      },
+      "examples": [
+        "闺蜜",
+        "同事",
+        "保镖",
+        "服务员"
+      ]
+    },
+    {
+      "atom_id": "object_X",
+      "type": "_",
+      "description": "关键道具（剧情核心物品）",
+      "constraints": {
+        "focus": "",
+        "visibility": "__"
+      },
+      "examples": [
+        "信物",
+        "合同",
+        "戒指",
+        "照片"
+      ]
+    },
+    {
+      "atom_id": "crowd",
+      "type": "_",
+      "description": "人群/背景群众",
+      "constraints": {
+        "focus": "",
+        "movement": ""
+      },
+      "examples": [
+        "路人",
+        "宴会宾客",
+        "员工",
+        "学生"
+      ]
+    }
+  ]
+}

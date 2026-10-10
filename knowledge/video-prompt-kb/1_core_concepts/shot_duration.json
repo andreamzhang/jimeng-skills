@@ -1,0 +1,137 @@
+{
+  "category": "shot_duration",
+  "version": "1.0",
+  "description": "镜头时长与叙事节奏映射",
+  "entries": [
+    {
+      "duration_range": "0.5–1.5",
+      "seconds": 1,
+      "narrative_purpose": "快节奏、紧张感、信息密集",
+      "visual_effect": "快速切换，碎片化信息，高能量",
+      "recommended_for": [
+        "动作戏",
+        "追逐",
+        "新闻快剪",
+        "打斗场面",
+        "紧张追逐"
+      ],
+      "prompt_suffix": "快速,,1镜头,",
+      "camera_movement": "短促，可能伴随手持晃动",
+      "pacing": "快速-,"
+    },
+    {
+      "duration_range": "1.5–3",
+      "seconds": 2,
+      "narrative_purpose": "中等节奏、动作完整性、信息传递",
+      "visual_effect": "动作可被完整感知，节奏紧凑",
+      "recommended_for": [
+        "普通动作",
+        "对话切换",
+        "反应镜头",
+        "日常场景"
+      ],
+      "prompt_suffix": "2,,",
+      "camera_movement": "稳定器跟拍或固定",
+      "pacing": ","
+    },
+    {
+      "duration_range": "3–5",
+      "seconds": 4,
+      "narrative_purpose": "情绪沉淀、细节观察、自然呼吸",
+      "visual_effect": "观众有时间消化信息，情感传递",
+      "recommended_for": [
+        "对话反应",
+        "环境展示",
+        "情感特写",
+        "内心",
+        "环境建立"
+      ],
+      "prompt_suffix": "4,缓慢,",
+      "camera_movement": "缓慢推近或固定",
+      "pacing": ","
+    },
+    {
+      "duration_range": "5–8",
+      "seconds": 6,
+      "narrative_purpose": "强调、氛围营造、情绪延续",
+      "visual_effect": "镜头语言强调重要性，氛围感强",
+      "recommended_for": [
+        "重要台词",
+        "情绪高潮",
+        "环境全景",
+        "过渡镜头"
+      ],
+      "prompt_suffix": "6,镜头,",
+      "camera_movement": "缓慢推近/拉远/环绕",
+      "pacing": "缓慢,,"
+    },
+    {
+      "duration_range": "8–15",
+      "seconds": 10,
+      "narrative_purpose": "长镜头美学、沉浸体验、空间展示",
+      "visual_effect": "空间连续性，观众沉浸其中",
+      "recommended_for": [
+        "开场镜头",
+        "结尾镜头",
+        "一镜到底",
+        "复杂调度"
+      ],
+      "prompt_suffix": "10-,,电影感",
+      "camera_movement": "复杂运动（推拉摇移跟组合）",
+      "pacing": ",,"
+    },
+    {
+      "duration_range": "15+",
+      "seconds": 20,
+      "narrative_purpose": "史诗感、纪录风格、特殊效果",
+      "visual_effect": "强大的空间感和时间感",
+      "recommended_for": [
+        "航拍大全景",
+        "延时摄影",
+        "特殊效果展示"
+      ],
+      "prompt_suffix": "镜头15,,",
+      "camera_movement": "持续运动如环绕、跟随",
+      "pacing": "缓慢,,"
+    }
+  ],
+  "节奏指南": {
+    "快节奏": {
+      "关键词": [
+        "快速",
+        "",
+        "快速",
+        ""
+      ],
+      "时长": "0.5-2",
+      "用途": "动作、紧张、兴奋"
+    },
+    "中节奏": {
+      "关键词": [
+        "",
+        "平稳",
+        ""
+      ],
+      "时长": "2-4",
+      "用途": "对话、叙事、动作"
+    },
+    "慢节奏": {
+      "关键词": [
+        "",
+        "",
+        ""
+      ],
+      "时长": "4-8",
+      "用途": "情绪、环境、强调"
+    },
+    "长镜头": {
+      "关键词": [
+        "",
+        "",
+        ""
+      ],
+      "时长": "8+",
+      "用途": "沉浸、史诗、空间"
+    }
+  }
+}

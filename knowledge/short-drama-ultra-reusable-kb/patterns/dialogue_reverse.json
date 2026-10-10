@@ -1,0 +1,391 @@
+{
+  "pattern_id": "standard_dialogue_reverse",
+  "name": "标准对话正反打",
+  "version": "1.0",
+  "description": "适用于90%短剧对话场景的高效模板，支持各种情绪配置",
+  "category": "dialogue",
+  "usage_frequency": "",
+  "structure": {
+    "shot_sequence": [
+      {
+        "shot_id": "shot_A",
+        "name": "方近景",
+        "_type": "",
+        "camera_setup": "过肩",
+        "eye_line": "__",
+        "duration": "1.5-2.5",
+        "bindings": {
+          "foreground_subject": "_",
+          "background_subject": "_",
+          "foreground_visibility": "",
+          "eye_direction_A": ""
+        },
+        "visual_prompt_template": "过肩镜头的{主体},{主体},,",
+        "emotion_params": [
+          "_"
+        ]
+      },
+      {
+        "shot_id": "reaction_B",
+        "name": "方反应",
+        "shot_type": "特写",
+        "camera_setup": "过肩",
+        "eye_line": "_",
+        "duration": "1.5-2.5",
+        "bindings": {
+          "foreground_subject": "_",
+          "background_subject": "_",
+          "foreground_visibility": "",
+          "eye_direction_B": ""
+        },
+        "visual_prompt_template": "镜头的{主体},{情绪},{主体}",
+        "emotion_params": [
+          "_"
+        ]
+      },
+      {
+        "shot_id": "shot_B",
+        "name": "方近景",
+        "shot_type": "特写",
+        "camera_setup": "过肩",
+        "eye_line": "__",
+        "duration": "1.5-2.5",
+        "bindings": {
+          "foreground_subject": "_",
+          "background_subject": "_",
+          "foreground_visibility": "",
+          "eye_direction_B": ""
+        },
+        "visual_prompt_template": "过肩镜头的{主体},{主体},",
+        "emotion_params": [
+          "_"
+        ]
+      },
+      {
+        "shot_id": "reaction_A",
+        "name": "方反应",
+        "shot_type": "特写",
+        "camera_setup": "过肩",
+        "eye_line": "__",
+        "duration": "1.5-2.5",
+        "bindings": {
+          "foreground_subject": "_",
+          "background_subject": "_",
+          "foreground_visibility": "",
+          "eye_direction_A": ""
+        },
+        "visual_prompt_template": "镜头的{主体},{情绪},{主体}",
+        "emotion_params": [
+          "_"
+        ]
+      }
+    ],
+    "cycle_pattern": "",
+    "minimum_shots": 2,
+    "recommended_shots": "的+1"
+  },
+  "rules": {
+    "must_use": [
+      "__",
+      "180___"
+    ],
+    "recommended": [
+      "__"
+    ],
+    "forbidden": [
+      "_",
+      "_"
+    ],
+    "constraints": {
+      "eye_direction_consistency": "",
+      "axis_maintain": "180",
+      "camera_position": "的"
+    }
+  },
+  "customizable_slots": {
+    "emotion_A": {
+      "type": "",
+      "description": "方说话时的情绪",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "emotion_B": {
+      "type": "",
+      "description": "方倾听时的情绪",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "background_blur": {
+      "type": "",
+      "description": "背景虚化程度",
+      "default": "/2.8",
+      "options": [
+        "/1.8",
+        "/2.0",
+        "/2.8",
+        "/4.0",
+        ""
+      ]
+    },
+    "shot_duration": {
+      "type": "",
+      "description": "单镜头时长",
+      "default": "2.0",
+      "options": [
+        "1.5",
+        "2.0",
+        "2.5",
+        "3.0"
+      ]
+    }
+  },
+  "emotion_mappings": {
+    "anger": {
+      "eye_direction": "_",
+      "micro_expression": ",",
+      "camera_movement": "__"
+    },
+    "sadness": {
+      "eye_direction": "_",
+      "micro_expression": ",",
+      "camera_movement": "_"
+    },
+    "joy": {
+      "eye_direction": "__",
+      "micro_expression": ",眼睛",
+      "camera_movement": "_"
+    },
+    "fear": {
+      "eye_direction": "_",
+      "micro_expression": ",",
+      "camera_movement": "_"
+    },
+    "surprise": {
+      "eye_direction": "_",
+      "micro_expression": ",",
+      "camera_movement": "_"
+    },
+    "shock": {
+      "eye_direction": "",
+      "micro_expression": ",",
+      "camera_movement": "_"
+    }
+  },
+  "use_cases": [
+    "日常对话",
+    "争论场景",
+    "情感交流",
+    "谈判对话",
+    "质问场景"
+  ],
+  "group_comment_pattern": {
+    "pattern_id": "group_commentary",
+    "name": "群演评价镜头",
+    "version": "1.1",
+    "description": "用于群演轮流对主角行为进行评价的场景，让观众更有代入感，通过群众台词衬托剧情",
+    "category": "group_reaction",
+    "usage_frequency": "",
+    "scene_recognition": {
+      "trigger_conditions": [
+        "场景中出现3个或以上的群演角色",
+        "多个群演的台词都针对同一主角的行为",
+        "群演的台词是对主角的评价或反应（赞叹、惊讶、羡慕等）",
+        "群演台词简短有力，代表观众心声",
+        "群演之间没有相互对话，都是单独对主角说话"
+      ],
+      "non_trigger_conditions": [
+        "群演之间有相互对话（那是群聊，不是群演评价）",
+        "群演台词主角没有直接关系",
+        "只有1-2个群演（那是普通对话）"
+      ],
+      "recognition_examples": {
+        "should_trigger": [
+          "主角成功完成某事后，三个路人分别说：'看看人家多有本事！'、'那当然，也不看看是谁！'、'真是太厉害了...'",
+          "主角做出惊人举动后，围观群众说：'这人太猛了！'、'我从没见过这样的！'、'简直不可思议...'"
+        ],
+        "should_not_trigger": [
+          "路人甲对路人乙说：'你看到了吗？'，路人乙回答：'看到了'（这是普通对话）",
+          "主角和两个配角互相争论（这是标准正反打对话）"
+        ]
+      }
+    },
+    "structure": {
+      "shot_sequence": [
+        {
+          "shot_id": "comment_1",
+          "name": "群演1评价",
+          "shot_type": "特写",
+          "camera_setup": "过肩",
+          "eye_line": "___",
+          "duration": "1.5-2.0",
+          "bindings": {
+            "foreground_subject": "群演1",
+            "background_subject": "主角",
+            "foreground_visibility": "",
+            "target_subject": "主角",
+            "comment_purpose": "表达观众心声"
+          },
+          "visual_prompt_template": "群演1面部特写，表情丰富，视线看向主角方向，说出对主角的评价台词",
+          "emotion_params": [
+            "群演情绪"
+          ]
+        },
+        {
+          "shot_id": "comment_2",
+          "name": "群演2评价",
+          "shot_type": "特写",
+          "camera_setup": "过肩",
+          "eye_line": "___",
+          "duration": "1.5-2.0",
+          "bindings": {
+            "foreground_subject": "群演2",
+            "background_subject": "主角",
+            "foreground_visibility": "",
+            "target_subject": "主角",
+            "comment_purpose": "强化观众认同"
+          },
+          "visual_prompt_template": "群演2面部特写，点头或做出认同的表情，视线看向主角方向",
+          "emotion_params": [
+            "群演情绪"
+          ]
+        },
+        {
+          "shot_id": "comment_3",
+          "name": "群演3评价",
+          "shot_type": "特写",
+          "camera_setup": "过肩",
+          "eye_line": "___",
+          "duration": "1.5-2.0",
+          "bindings": {
+            "foreground_subject": "群演3",
+            "background_subject": "主角",
+            "foreground_visibility": "",
+            "target_subject": "主角",
+            "comment_purpose": "升华情感共鸣"
+          },
+          "visual_prompt_template": "群演3面部特写，露出佩服或羡慕的表情，视线看向主角方向",
+          "emotion_params": [
+            "群演情绪"
+          ]
+        }
+      ],
+      "minimum_shots": 2,
+      "recommended_shots": "等于群演数量",
+      "key_principle": "每个群演的台词必须对应至少1个独立镜头"
+    },
+    "rules": {
+      "must_use": [
+        "____",
+        "____",
+        "____"
+      ],
+      "recommended": [
+        "___",
+        "_"
+      ],
+      "forbidden": [
+        "____",
+        "____"
+      ],
+      "constraints": {
+        "shot_independence": "每个群演的台词必须分开，不能合并到一个镜头",
+        "foreground_background": "前景是评价的群演，背景要带出主角",
+        "comment_purpose": "群演台词代表观众心声，帮助观众代入剧情"
+      }
+    },
+    "scene_examples": [
+      {
+        "scenario": "主角成功完成某事",
+        "commenter_1": "路人甲",
+        "comment_1": "看看人家多有本事！",
+        "commenter_2": "路人乙",
+        "comment_2": "那当然，也不看看是谁！",
+        "commenter_3": "路人丙",
+        "comment_3": "真是太厉害了...",
+        "shot_count": 3
+      },
+      {
+        "scenario": "主角做出惊人举动",
+        "commenter_1": "围观群众1",
+        "comment_1": "这人太猛了！",
+        "commenter_2": "围观群众2",
+        "comment_2": "我从没见过这样的！",
+        "commenter_3": "围观群众3",
+        "comment_3": "简直不可思议...",
+        "shot_count": 3
+      }
+    ],
+    "customizable_slots": {
+      "群演1": {
+        "type": "",
+        "description": "第一个群演的描述",
+        "default": "围观群众（30岁男性）"
+      },
+      "群演2": {
+        "type": "",
+        "description": "第二个群演的描述",
+        "default": "围观群众（25岁女性）"
+      },
+      "群演3": {
+        "type": "",
+        "description": "第三个群演的描述",
+        "default": "围观群众（40岁女性）"
+      },
+      "群演情绪": {
+        "type": "",
+        "description": "群演的情绪",
+        "default": "佩服、惊讶、认同",
+        "options": [
+          "佩服",
+          "惊讶",
+          "认同",
+          "羡慕",
+          "崇拜",
+          "惊叹"
+        ]
+      },
+      "主角": {
+        "type": "",
+        "description": "被评价的主角",
+        "default": "主角（姓名+外貌特征）"
+      }
+    },
+    "use_cases": [
+      "主角成功时周围人的赞叹",
+      "主角做出惊人举动时的围观反应",
+      "主角逆袭时的群众惊呼",
+      "主角魅力展示时的羡慕眼光"
+    ],
+    "tips": [
+      "群演台词要简短有力，代表观众心声",
+      "群演的情绪要真实自然，不能过度夸张",
+      "镜头切换要快，保持节奏",
+      "背景要带出主角，让观众知道群演在看谁"
+    ]
+  },
+  "example_bindings": {
+    "subject_A": "霸道总裁（30岁男性，西装笔挺，表情冷峻）",
+    "subject_B": "普通职员（25岁女性，穿着职业装，表情紧张）",
+    "emotion_A": "_",
+    "emotion_B": "",
+    "background_blur": "/2.0"
+  }
+}

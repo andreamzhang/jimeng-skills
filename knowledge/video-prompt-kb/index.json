@@ -1,0 +1,112 @@
+{
+  "version": "1.0",
+  "description": "视频提示词知识库索引",
+  "directory": "video-prompt-kb",
+  "modules": [
+    {
+      "module": "1_core_concepts",
+      "description": "视频生成核心概念定义",
+      "files": [
+        {
+          "file": "shot_duration.json",
+          "category": "shot_duration",
+          "description": "镜头时长与节奏映射"
+        },
+        {
+          "file": "motion_types.json",
+          "category": "motion_types",
+          "description": "运动类型分类（主体/摄像机）"
+        },
+        {
+          "file": "transition_styles.json",
+          "category": "transition_styles",
+          "description": "转场风格库"
+        }
+      ]
+    },
+    {
+      "module": "2_visual_elements",
+      "description": "视觉构成要素",
+      "files": [
+        {
+          "file": "camera_movements.json",
+          "category": "camera_movement",
+          "description": "摄像机运动（推拉摇移跟）"
+        },
+        {
+          "file": "subject_actions.json",
+          "category": "subject_action",
+          "description": "主体动作（含时间轴描述）"
+        },
+        {
+          "file": "environment_dynamics.json",
+          "category": "environment_dynamics",
+          "description": "环境动态（风、雨、光影变化）"
+        }
+      ]
+    },
+    {
+      "module": "3_narrative_control",
+      "description": "叙事控制参数",
+      "files": [
+        {
+          "file": "pacing_keywords.json",
+          "category": "pacing_control",
+          "description": "节奏关键词（快切/慢镜/匀速）"
+        },
+        {
+          "file": "emotional_arcs.json",
+          "category": "emotional_arc",
+          "description": "情绪弧线 → 视觉变化映射"
+        },
+        {
+          "file": "continuity_rules.json",
+          "category": "continuity",
+          "description": "连续性规则（匹配剪辑、视线匹配）"
+        }
+      ]
+    },
+    {
+      "module": "4_model_specific",
+      "description": "模型适配指南",
+      "files": [
+        {
+          "file": "sora_tips.json",
+          "category": "sora",
+          "description": "索拉专属提示技巧"
+        },
+        {
+          "file": "pika_prompts.json",
+          "category": "pika",
+          "description": "皮卡最佳实践"
+        },
+        {
+          "file": "runway_guidelines.json",
+          "category": "runway",
+          "description": "跑道第二代注意事项"
+        }
+      ]
+    },
+    {
+      "module": "5_templates",
+      "description": "完整提示词模板",
+      "files": [
+        {
+          "file": "action_scene.json",
+          "category": "action_template",
+          "description": "动作场景模板"
+        },
+        {
+          "file": "dialogue_scene.json",
+          "category": "dialogue_template",
+          "description": "对话场景模板"
+        },
+        {
+          "file": "montage_sequence.json",
+          "category": "montage_template",
+          "description": "蒙太奇序列模板"
+        }
+      ]
+    }
+  ]
+}

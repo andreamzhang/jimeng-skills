@@ -1,0 +1,176 @@
+{
+  "category": "eye_line_rules",
+  "version": "1.0",
+  "description": "视线规则原子定义，控制对话场景中角色的视线方向匹配",
+  "usage_notes": "正反打镜头的核心，确保视线连续性和空间一致性",
+  "atoms": [
+    {
+      "atom_id": "eye_line_left",
+      "description": "视线向左，画内/画外交叉决定角色位置",
+      "visual_prompt": "{主体}的画面,眼睛,",
+      "spatial_implication": {
+        "if_gaze_inside": "主体的画面",
+        "if_gaze_outside": "主体的画面,-主体"
+      },
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "eye_line_right",
+      "description": "视线向右",
+      "visual_prompt": "{主体}的画面,眼睛,",
+      "spatial_implication": {
+        "if_gaze_inside": "主体的画面",
+        "if_gaze_outside": "主体的画面,-主体"
+      },
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "downward_gaze",
+      "description": "视线向下（低头/眼睛向下看）",
+      "visual_prompt": "{主体}眼睛,,或",
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "upward_gaze",
+      "description": "视线向上（抬头/眼睛向上看）",
+      "visual_prompt": "{主体}眼睛,,",
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "direct_camera",
+      "description": "直视镜头（打破第四面墙）",
+      "visual_prompt": "{主体}镜头,,",
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "eye_line_crossing",
+      "description": "视线交汇（两人相互对视）",
+      "visual_prompt": "{主体}和{主体},画面,",
+      "constraints": {
+        "must_be_paired": true,
+        "angle_between": "30的-"
+      },
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "的",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "matched_eye_line",
+      "description": "匹配的视线（看右，看左，视线在画外汇集）",
+      "visual_prompt": ":{主体}{主体},{主体}{主体},画面",
+      "constraints": {
+        "must_use_in_pairs": true,
+        "relative_directions": "",
+        "gaze_convergence": "画面"
+      },
+      "notes": "标准正反打的核心规则",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "avoiding_gaze",
+      "description": "躲避视线（目光躲闪）",
+      "visual_prompt": "{主体}眼睛,,或",
+      "animation_notes": "可添加-表示犹豫",
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "intense_stare",
+      "description": "凝视/注视（强烈、不移开的视线）",
+      "visual_prompt": "{主体},,和",
+      "duration_notes": "适合延长镜头，增强压迫感",
+      "emotional_effect": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "use_cases": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}

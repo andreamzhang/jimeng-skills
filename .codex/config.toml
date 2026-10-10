@@ -1,0 +1,8 @@
+# 项目级 Codex 配置（仅对本仓库生效；本目录已在 Codex 标记为 trusted）
+# 角色子代理定义见 .codex/agents/*.toml；技能见 .agents/skills/*/SKILL.md
+
+# AGENTS.md 是本工作流的规则主干（约 32KB）。默认每个 AGENTS.md 只读 32KiB，
+# 太贴边，放大到 96KiB 以免规则尾部（运行环境注意等）被静默截断。
+# 注意：project_doc_max_bytes 是顶层键，必须写在文件顶层，不能放进 [agents] 小节。
+project_doc_max_bytes = 98304
+

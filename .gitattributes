@@ -1,0 +1,2 @@
+# 关闭 EOL 自动转换：本项目源文件混用 LF/CRLF，交由 .agents/skills 与 docs 原样保留
+* -text

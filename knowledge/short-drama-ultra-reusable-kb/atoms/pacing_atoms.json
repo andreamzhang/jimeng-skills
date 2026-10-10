@@ -1,0 +1,210 @@
+{
+  "category": "pacing_atoms",
+  "version": "1.0",
+  "description": "剪辑节奏原子定义，定义镜头时长、剪辑点和节奏控制参数",
+  "usage_notes": "精确到帧的控制，影响视频生成时的运动平滑度和叙事节奏",
+  "atoms": [
+    {
+      "atom_id": "beat_beat",
+      "description": "极短镜头（0.5-1秒）",
+      "duration_range": "0.5-1.0",
+      "ai_suffix": ",快速,{}",
+      "visual_effect": "快速,,",
+      "use_cases": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "narrative_purpose": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "short_shot",
+      "description": "短镜头（1-2秒）",
+      "duration_range": "1.0-2.0",
+      "ai_suffix": "镜头,,{}",
+      "visual_effect": ",",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "narrative_purpose": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "medium_shot",
+      "description": "中镜头（2-3秒）",
+      "duration_range": "2.0-3.0",
+      "ai_suffix": "平稳镜头,,{}",
+      "visual_effect": ",",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "narrative_purpose": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "long_shot",
+      "description": "长镜头（3-5秒）",
+      "duration_range": "3.0-5.0",
+      "ai_suffix": "镜头,画面,{}",
+      "visual_effect": "缓慢,,",
+      "use_cases": [
+        "",
+        "",
+        "角色"
+      ],
+      "narrative_purpose": [
+        "",
+        "",
+        "角色"
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "extended_shot",
+      "description": "延展镜头（5-8秒）",
+      "duration_range": "5.0-8.0",
+      "ai_suffix": ",,{}",
+      "visual_effect": "缓慢,电影感,",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "narrative_purpose": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "establishing",
+      "description": "建立镜头（8+秒）",
+      "duration_range": "8.0-15.0",
+      "ai_suffix": "镜头,,{}",
+      "visual_effect": ",",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "narrative_purpose": [
+        "",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "cut_on_action",
+      "description": "动作剪辑点",
+      "description_detail": "在动作进行中切换镜头，增强连贯性和冲击力",
+      "ai_suffix": ",",
+      "technique": "",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "动作类场景的核心技巧，避免动作断裂",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "cut_on_reaction",
+      "description": "反应剪辑点",
+      "description_detail": "在关键动作后切换到反应镜头",
+      "ai_suffix": ",",
+      "timing": "或",
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "正反打的标准模式",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "j_cut",
+      "description": "切（声音先于画面）",
+      "description_detail": "下一个镜头的音频提前切入，声音先于画面",
+      "ai_suffix": ",-",
+      "technique": "镜头",
+      "use_cases": [
+        "-",
+        "",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "l_cut",
+      "description": "切（画面先于声音）",
+      "description_detail": "当前镜头的音频延续到下一个镜头",
+      "ai_suffix": ",-",
+      "technique": "镜头",
+      "use_cases": [
+        "",
+        "-",
+        ""
+      ],
+      "emotional_effect": [
+        "",
+        ""
+      ]
+    }
+  ]
+}

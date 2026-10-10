@@ -1,0 +1,519 @@
+{
+  "category": "composition",
+  "version": "1.0",
+  "description": "构图规则模板，定义各种构图方式",
+  "entries": [
+    {
+      "composition_type": "三分法",
+      "alias": [
+        "的",
+        "井字构图"
+      ],
+      "ai_prompt": "的构图,{主体},,或",
+      "usage": "将画面分成九宫格，主体放在交叉点或线上",
+      "mood_association": [
+        "平衡",
+        "和谐",
+        "经典"
+      ],
+      "recommended_for": [
+        "风景",
+        "人物",
+        "建筑"
+      ],
+      "example_positions": [
+        "眼睛",
+        "主体",
+        ""
+      ],
+      "notes": "最经典的构图法则，百搭且稳定"
+    },
+    {
+      "composition_type": "中心构图",
+      "alias": [
+        "构图",
+        "对称构图"
+      ],
+      "ai_prompt": "构图,{主体},,,带",
+      "usage": "主体位于画面正中央",
+      "mood_association": [
+        "正式",
+        "力量感",
+        "直接"
+      ],
+      "recommended_for": [
+        "人物特写",
+        "产品展示",
+        "对称建筑"
+      ],
+      "example_uses": [
+        "人像带主体",
+        "的",
+        "角色镜头"
+      ],
+      "notes": "简洁有力，但容易显得呆板"
+    },
+    {
+      "composition_type": "引导线",
+      "alias": [
+        "",
+        "线条引导"
+      ],
+      "ai_prompt": "构图,{主体},{线条类型},或",
+      "usage": "利用线条引导观众视线到主体",
+      "mood_association": [
+        "动态",
+        "引导感",
+        "深度"
+      ],
+      "recommended_for": [
+        "道路",
+        "建筑",
+        "自然风景"
+      ],
+      "line_types": [
+        {
+          "type": "道路/小径",
+          "prompt": "或"
+        },
+        {
+          "type": "建筑线条",
+          "prompt": ""
+        },
+        {
+          "type": "河流",
+          "prompt": "画面"
+        },
+        {
+          "type": "栏杆/围墙",
+          "prompt": "或"
+        }
+      ],
+      "notes": "线条可以是直线、曲线或汇聚线"
+    },
+    {
+      "composition_type": "框架构图",
+      "alias": [
+        "画面画面",
+        "画中画"
+      ],
+      "ai_prompt": "构图,{主体}{框架元素},或画面,和",
+      "usage": "用前景的框架框住主体",
+      "mood_association": [
+        "层次感",
+        "观察感",
+        "私密"
+      ],
+      "recommended_for": [
+        "门窗",
+        "树枝",
+        "拱门"
+      ],
+      "frame_elements": [
+        {
+          "element": "门窗",
+          "prompt": "或画面"
+        },
+        {
+          "element": "树枝",
+          "prompt": "或"
+        },
+        {
+          "element": "拱门",
+          "prompt": ""
+        },
+        {
+          "element": "镜子",
+          "prompt": "或"
+        }
+      ],
+      "notes": "增加画面层次和纵深感"
+    },
+    {
+      "composition_type": "对角线",
+      "alias": [
+        "构图",
+        "斜线构图"
+      ],
+      "ai_prompt": "构图,或,,和",
+      "usage": "利用对角线创造动感和张力",
+      "mood_association": [
+        "动态",
+        "紧张",
+        "活力"
+      ],
+      "recommended_for": [
+        "运动场景",
+        "建筑",
+        "时尚"
+      ],
+      "example_uses": [
+        "角色画面",
+        "或",
+        ""
+      ],
+      "notes": "打破水平垂直的稳定感"
+    },
+    {
+      "composition_type": "留白",
+      "alias": [
+        "",
+        "空白构图"
+      ],
+      "ai_prompt": "构图,{主体}画面带{_},,",
+      "usage": "主体小，画面大部分是空白",
+      "mood_association": [
+        "孤独",
+        "渺小",
+        "宁静",
+        "思考"
+      ],
+      "recommended_for": [
+        "风景",
+        "极简风格",
+        "情绪场景"
+      ],
+      "empty_space_types": [
+        {
+          "type": "天空",
+          "prompt": ""
+        },
+        {
+          "type": "水面",
+          "prompt": "或"
+        },
+        {
+          "type": "雾/霾",
+          "prompt": "带"
+        },
+        {
+          "type": "纯色背景",
+          "prompt": "背景带主体"
+        }
+      ],
+      "notes": "留白不等于空白，可以是有质感的背景"
+    },
+    {
+      "composition_type": "对比构图",
+      "alias": [
+        "对比构图",
+        "对比"
+      ],
+      "ai_prompt": "对比构图,{1}{2},//对比,",
+      "usage": "通过对比突出主题",
+      "mood_association": [
+        "冲突",
+        "戏剧性",
+        "张力"
+      ],
+      "recommended_for": [
+        "对立的角色",
+        "新旧对比",
+        "大小对比"
+      ],
+      "contrast_types": [
+        {
+          "type": "大小对比",
+          "prompt": ""
+        },
+        {
+          "type": "明暗对比",
+          "prompt": "阴影"
+        },
+        {
+          "type": "色彩对比",
+          "prompt": ""
+        },
+        {
+          "type": "动静对比",
+          "prompt": ""
+        }
+      ],
+      "notes": "对比要鲜明且有意义"
+    },
+    {
+      "composition_type": "三角形",
+      "alias": [
+        "构图",
+        "稳定构图"
+      ],
+      "ai_prompt": "构图,稳定,,",
+      "usage": "三个元素形成三角形",
+      "mood_association": [
+        "稳定",
+        "安全",
+        "永恒"
+      ],
+      "recommended_for": [
+        "三人互动",
+        "建筑",
+        "群像"
+      ],
+      "example_uses": [
+        "",
+        "或",
+        ""
+      ],
+      "notes": "三角形是最稳定的几何形状"
+    },
+    {
+      "composition_type": "重复与节奏",
+      "alias": [
+        "和",
+        "节奏"
+      ],
+      "ai_prompt": "构图,{},{_},和",
+      "usage": "重复的元素创造节奏感",
+      "mood_association": [
+        "秩序",
+        "韵律",
+        "现代"
+      ],
+      "recommended_for": [
+        "建筑细节",
+        "自然纹理",
+        "人群"
+      ],
+      "pattern_elements": [
+        {
+          "element": "窗户",
+          "prompt": "的"
+        },
+        {
+          "element": "树木",
+          "prompt": ""
+        },
+        {
+          "element": "柱子",
+          "prompt": ""
+        },
+        {
+          "element": "波浪",
+          "prompt": "带"
+        }
+      ],
+      "notes": "重复中需要有打破节奏的元素才有趣"
+    },
+    {
+      "composition_type": "浅景深",
+      "alias": [
+        "浅景深",
+        "背景虚化"
+      ],
+      "ai_prompt": "浅景深,清晰对焦{主体},背景虚化,主体,",
+      "usage": "主体清晰，背景模糊",
+      "mood_association": [
+        "专业",
+        "柔和",
+        "突出"
+      ],
+      "recommended_for": [
+        "人物特写",
+        "产品",
+        "微距"
+      ],
+      "focus_element": [
+        "面部",
+        ""
+      ],
+      "bokeh_quality": ",,",
+      "notes": "需要指定对焦主体和背景模糊程度"
+    },
+    {
+      "composition_type": "全景式",
+      "alias": [
+        "宽广全景式",
+        "广阔"
+      ],
+      "ai_prompt": "宽广全景式构图,,{宽广场景},,电影感,{画幅比例}",
+      "usage": "展现广阔的场景",
+      "mood_association": [
+        "史诗",
+        "震撼",
+        "宏大"
+      ],
+      "recommended_for": [
+        "风景",
+        "航拍",
+        "大场面"
+      ],
+      "wide_scenes": [
+        {
+          "scene": "山脉",
+          "prompt": ""
+        },
+        {
+          "scene": "城市",
+          "prompt": "黄昏"
+        },
+        {
+          "scene": "海洋",
+          "prompt": ""
+        },
+        {
+          "scene": "草原",
+          "prompt": ""
+        }
+      ],
+      "aspect_ratio": "16:9,21:9,或",
+      "notes": "适合表现大场面和史诗感"
+    },
+    {
+      "composition_type": "贴脸特写",
+      "alias": [
+        "大特写",
+        "面部填充"
+      ],
+      "ai_prompt": "大特写,{主体}画面,{细节焦点},和,",
+      "usage": "主体充满画面，只保留细节",
+      "mood_association": [
+        "亲密",
+        "紧张",
+        "直接"
+      ],
+      "recommended_for": [
+        "情感高潮",
+        "关键反应",
+        "细节强调"
+      ],
+      "detail_focus": [
+        {
+          "focus": "眼睛",
+          "prompt": "眼睛画面,"
+        },
+        {
+          "focus": "嘴唇",
+          "prompt": ","
+        },
+        {
+          "focus": "手",
+          "prompt": "带"
+        },
+        {
+          "focus": "表情",
+          "prompt": "-面部"
+        }
+      ],
+      "notes": "没有背景，完全聚焦于细节"
+    },
+    {
+      "composition_type": "反射",
+      "alias": [
+        "",
+        "倒影"
+      ],
+      "ai_prompt": "构图,{主体}{反射面},{反射质量},",
+      "usage": "利用反射创造视觉效果",
+      "mood_association": [
+        "双重性",
+        "神秘",
+        "对称"
+      ],
+      "recommended_for": [
+        "水面",
+        "镜子",
+        "玻璃",
+        "金属"
+      ],
+      "reflective_surfaces": [
+        {
+          "surface": "水面",
+          "prompt": ""
+        },
+        {
+          "surface": "镜子",
+          "prompt": "-"
+        },
+        {
+          "surface": "窗户",
+          "prompt": "夜晚"
+        },
+        {
+          "surface": "雨后地面",
+          "prompt": ""
+        }
+      ],
+      "reflection_quality": ",,",
+      "notes": "反射可以是清晰的或扭曲的"
+    },
+    {
+      "composition_type": "低角度",
+      "alias": [
+        "仰拍",
+        "仰视"
+      ],
+      "ai_prompt": "仰拍镜头,镜头{主体},主体,,画面",
+      "usage": "从低处向上拍摄",
+      "mood_association": [
+        "力量",
+        "威严",
+        "压迫"
+      ],
+      "recommended_for": [
+        "英雄展示",
+        "建筑",
+        "反派"
+      ],
+      "notes": "与仰拍角度配合使用",
+      "combination_with": "仰拍角度",
+      "example_uses": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "composition_type": "俯视",
+      "alias": [
+        "'",
+        "上帝视角"
+      ],
+      "ai_prompt": "',{主体},-,,{场景类型}",
+      "usage": "从高处向下拍摄",
+      "mood_association": [
+        "客观",
+        "控制",
+        "全景"
+      ],
+      "recommended_for": [
+        "俯视场景",
+        "地图视角",
+        "展示"
+      ],
+      "scene_types": [
+        {
+          "type": "餐桌",
+          "prompt": "的"
+        },
+        {
+          "type": "战场",
+          "prompt": "'的"
+        },
+        {
+          "type": "城市",
+          "prompt": "的"
+        },
+        {
+          "type": "人体",
+          "prompt": "的"
+        }
+      ],
+      "notes": "提供客观的视角和信息感"
+    }
+  ],
+  "aspect_ratios": {
+    "1:1": "正方形，适合社交媒体",
+    "3:4": "竖屏，适合手机全屏",
+    "4:3": "传统电视比例",
+    "16:9": "宽屏，标准电影/视频",
+    "21:9": "超宽屏，电影感",
+    "9:16": "竖屏全屏"
+  },
+  "tips": [
+    "构图不是死规则，可以打破但要有目的",
+    "考虑画面中元素的重量平衡",
+    "留白不等于浪费，是呼吸空间",
+    "视角选择影响观众心理感受",
+    "运动场景需要动态构图"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "template_name": "_",
+  "description": "对话场景标准模板",
+  "category": "dialogue_scene",
+  "prompt_template": "{_}→{_}→{_}→{_}→{_}→{_}",
+  "slots": {
+    "establishing_shot": {
+      "description": "建立镜头，设置场景",
+      "default": "远景的,窗光",
+      "prompt_fragments": [
+        "远景的,光线,",
+        "近景的,窗光",
+        "镜头的带,"
+      ],
+      "duration": "2-3"
+    },
+    "character_a": {
+      "description": "角色的镜头（说话或行动）",
+      "default": "近景的,,",
+      "prompt_fragments": [
+        "近景的,镜头,",
+        "特写的,,",
+        "镜头的,"
+      ],
+      "duration": "3-5"
+    },
+    "reaction_a": {
+      "description": "角色说完后的反应",
+      "default": ",,",
+      "prompt_fragments": [
+        ",,眼睛",
+        ",,",
+        "眼睛,,"
+      ],
+      "duration": "1-2"
+    },
+    "character_b": {
+      "description": "角色的反应和回应",
+      "default": ",,",
+      "prompt_fragments": [
+        "眼睛,",
+        ",带",
+        "面部,,"
+      ],
+      "duration": "2-4"
+    },
+    "reaction_b": {
+      "description": "角色说完后的微反应",
+      "default": "的,",
+      "prompt_fragments": [
+        "的面部,",
+        ",眼睛,",
+        ",,"
+      ],
+      "duration": "1-2"
+    },
+    "closing_shot": {
+      "description": "结束镜头",
+      "default": "远景,和",
+      "prompt_fragments": [
+        "缓慢,画面",
+        "远景,画面,",
+        "镜头,,"
+      ],
+      "duration": "3-5"
+    }
+  },
+  "conversation_patterns": [
+    {
+      "type": "正反打",
+      "description": "经典对话模式，两人交替说话",
+      "structure": "说话→反应→说话→反应→回应→回应→结束"
+    },
+    {
+      "type": "三人对话",
+      "description": "对说话，观察",
+      "structure": "对→反应→观察→对继续→介入→结束"
+    },
+    {
+      "type": "群体对话",
+      "description": "多人在场，焦点转移",
+      "structure": "群体 → 发言者 → 群体反应 → 新发言者 → 群体反应 → 结束"
+    }
+  ],
+  "dialogue_emotions": [
+    {
+      "emotion": "紧张",
+      "visual_cues": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "emotion": "浪漫",
+      "visual_cues": [
+        "",
+        "",
+        "光线",
+        ""
+      ]
+    },
+    {
+      "emotion": "冲突",
+      "visual_cues": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "emotion": "悲伤",
+      "visual_cues": [
+        "",
+        "",
+        "",
+        "光线"
+      ]
+    }
+  ],
+  "full_example": "远景的,→近景的,,→,,→'眼睛,,→的→缓慢,画面,,15-,电影感",
+  "mood_keywords": [
+    "对话",
+    "紧张",
+    "浪漫",
+    "冲突",
+    "情感"
+  ],
+  "recommended_duration": "15-30秒",
+  "model_recommendations": [
+    "索拉",
+    "跑道第二代",
+    "皮卡"
+  ],
+  "tips": [
+    "正反打是最自然的对话拍摄方式",
+    "注意视线方向匹配",
+    "反应镜头往往比说话镜头更有表现力",
+    "使用微表情增加真实感",
+    "节奏控制对话的张力"
+  ]
+}

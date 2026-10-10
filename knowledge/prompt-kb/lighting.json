@@ -1,0 +1,357 @@
+{
+  "category": "lighting",
+  "version": "1.0",
+  "description": "光影效果模板，定义各种光线的提示词",
+  "entries": [
+    {
+      "lighting_type": "自然光-黄金时刻",
+      "alias": [
+        "黄金时刻",
+        "日落光",
+        "暖色光"
+      ],
+      "ai_prompt": "黄金时刻光线,阳光,阴影,,",
+      "color_temperature": "2700-3500",
+      "mood_association": [
+        "温馨",
+        "怀旧",
+        "浪漫",
+        "美好"
+      ],
+      "recommended_for": [
+        "爱情场景",
+        "回忆场景",
+        "日落镜头"
+      ],
+      "shadow_quality": ",-",
+      "notes": "一天中最适合拍摄的时刻，光线温暖且柔和"
+    },
+    {
+      "lighting_type": "自然光-正午",
+      "alias": [
+        "正午",
+        "顶光",
+        "硬光"
+      ],
+      "ai_prompt": "正午阳光,,-阴影,对比,",
+      "color_temperature": "5000-5500",
+      "mood_association": [
+        "炎热",
+        "紧张",
+        "直白",
+        "曝光过度"
+      ],
+      "recommended_for": [
+        "夏日场景",
+        "沙漠场景",
+        "高对比场景"
+      ],
+      "shadow_quality": ",,",
+      "notes": "光线强烈，常用于表现炎热或压力感"
+    },
+    {
+      "lighting_type": "自然光-蓝色时刻",
+      "alias": [
+        "蓝调时刻",
+        "暮光",
+        "冷色光"
+      ],
+      "ai_prompt": "蓝调时刻光线,,,,",
+      "color_temperature": "4000-4500",
+      "mood_association": [
+        "孤独",
+        "思考",
+        "神秘",
+        "宁静"
+      ],
+      "recommended_for": [
+        "夜景过渡",
+        "城市镜头",
+        "情绪场景"
+      ],
+      "shadow_quality": ",",
+      "notes": "日落后天空变蓝的短暂时刻"
+    },
+    {
+      "lighting_type": "自然光-阴天",
+      "alias": [
+        "阴天",
+        "散射光",
+        "柔光"
+      ],
+      "ai_prompt": "阴天,,,对比,",
+      "color_temperature": "5500-6500",
+      "mood_association": [
+        "平静",
+        "忧郁",
+        "柔和",
+        "中性"
+      ],
+      "recommended_for": [
+        "日常场景",
+        "室内窗边",
+        "需要柔和光线的场景"
+      ],
+      "shadow_quality": ",",
+      "notes": "云层充当巨大柔光箱，光线均匀"
+    },
+    {
+      "lighting_type": "月光",
+      "alias": [
+        "月光",
+        "夜光",
+        "冷月"
+      ],
+      "ai_prompt": ",月光,,对比,阴影",
+      "color_temperature": "6500-9000",
+      "mood_association": [
+        "神秘",
+        "浪漫",
+        "孤独",
+        "超自然"
+      ],
+      "recommended_for": [
+        "夜景",
+        "吸血鬼场景",
+        "梦幻场景"
+      ],
+      "shadow_quality": ",-",
+      "notes": "模拟月光效果，通常是冷色调"
+    },
+    {
+      "lighting_type": "窗光",
+      "alias": [
+        "窗光",
+        "自然窗光"
+      ],
+      "ai_prompt": "窗光,,的和阴影,",
+      "color_temperature": "4500-5500",
+      "mood_association": [
+        "温馨",
+        "思考",
+        "私密",
+        "怀旧"
+      ],
+      "recommended_for": [
+        "室内场景",
+        "阅读场景",
+        "独白场景"
+      ],
+      "shadow_quality": "阴影,画面",
+      "notes": "窗户形成自然的框景和光线模式"
+    },
+    {
+      "lighting_type": "烛光/油灯",
+      "alias": [
+        "",
+        "暖光源"
+      ],
+      "ai_prompt": ",,,,",
+      "color_temperature": "1800-2200",
+      "mood_association": [
+        "温馨",
+        "亲密",
+        "怀旧",
+        "危险"
+      ],
+      "recommended_for": [
+        "晚餐场景",
+        "卧室场景",
+        "停电场景"
+      ],
+      "shadow_quality": ",-,",
+      "notes": "模拟烛火或油灯的温暖光芒"
+    },
+    {
+      "lighting_type": "霓虹灯",
+      "alias": [
+        "霓虹",
+        "都市光"
+      ],
+      "ai_prompt": "霓虹,,对比,,",
+      "color_temperature": "(/)",
+      "mood_association": [
+        "都市",
+        "赛博朋克",
+        "活力",
+        "危险"
+      ],
+      "recommended_for": [
+        "夜店场景",
+        "都市夜景",
+        "赛博朋克风格"
+      ],
+      "shadow_quality": "阴影",
+      "notes": "霓虹灯产生强烈的色彩对比"
+    },
+    {
+      "lighting_type": "街灯",
+      "alias": [
+        "",
+        "路灯"
+      ],
+      "ai_prompt": ",的,,或",
+      "color_temperature": "2700-4000()或5000+()",
+      "mood_association": [
+        "孤独",
+        "都市",
+        "等待",
+        "夜晚"
+      ],
+      "recommended_for": [
+        "街头场景",
+        "夜间对话",
+        "孤独场景"
+      ],
+      "shadow_quality": ",",
+      "notes": "路灯形成独特的光锥效果"
+    },
+    {
+      "lighting_type": "逆光",
+      "alias": [
+        "逆光",
+        "轮廓光"
+      ],
+      "ai_prompt": ",主体,或光线,对比",
+      "color_temperature": "",
+      "mood_association": [
+        "神秘",
+        "浪漫",
+        "戏剧性",
+        "希望"
+      ],
+      "recommended_for": [
+        "日落场景",
+        "剪影",
+        "梦幻效果"
+      ],
+      "shadow_quality": "主体阴影带",
+      "notes": "光源在主体背后，产生轮廓效果"
+    },
+    {
+      "lighting_type": "底光",
+      "alias": [
+        "光线",
+        "恐怖光"
+      ],
+      "ai_prompt": "光线,面部,,阴影",
+      "color_temperature": "或",
+      "mood_association": [
+        "恐怖",
+        "威胁",
+        "不安",
+        "诡异"
+      ],
+      "recommended_for": [
+        "恐怖场景",
+        "反派展示",
+        "惊悚场景"
+      ],
+      "shadow_quality": "阴影",
+      "notes": "从下往上的光线产生恐怖效果"
+    },
+    {
+      "lighting_type": "顶光",
+      "alias": [
+        "",
+        "监狱光"
+      ],
+      "ai_prompt": "-光线,,阴影眼睛和,",
+      "color_temperature": "",
+      "mood_association": [
+        "审讯",
+        "孤独",
+        "压迫",
+        "中性"
+      ],
+      "recommended_for": [
+        "审讯室",
+        "监狱",
+        "医院"
+      ],
+      "shadow_quality": "阴影眼睛和",
+      "notes": "类似于警察局审讯室的光线效果"
+    },
+    {
+      "lighting_type": "混合光",
+      "alias": [
+        "光线",
+        "复杂光"
+      ],
+      "ai_prompt": "光线,和,带",
+      "color_temperature": "(3200-5600+)",
+      "mood_association": [
+        "真实",
+        "复杂",
+        "都市",
+        "生活化"
+      ],
+      "recommended_for": [
+        "室内夜景",
+        "餐厅场景",
+        "现实主义风格"
+      ],
+      "shadow_quality": ",阴影",
+      "notes": "实际生活中最常见的光线情况"
+    },
+    {
+      "lighting_type": "柔光箱",
+      "alias": [
+        "",
+        "影棚光"
+      ],
+      "ai_prompt": "光线,,阴影,",
+      "color_temperature": "5500-6500()或3000-4000()",
+      "mood_association": [
+        "专业",
+        "干净",
+        "商业",
+        "产品"
+      ],
+      "recommended_for": [
+        "产品展示",
+        "人物肖像",
+        "商业摄影"
+      ],
+      "shadow_quality": ",",
+      "notes": "模拟影棚柔光箱的效果"
+    },
+    {
+      "lighting_type": "电影光",
+      "alias": [
+        "电影感光线",
+        "三点布光"
+      ],
+      "ai_prompt": "电影感-光线,,,和,和",
+      "color_temperature": "(3200或5600)",
+      "mood_association": [
+        "电影感",
+        "专业",
+        "戏剧性"
+      ],
+      "recommended_for": [
+        "人物特写",
+        "重要场景",
+        "电影风格"
+      ],
+      "shadow_quality": ",",
+      "notes": "经典的电影布光方式"
+    }
+  ],
+  "color_temperature_guide": {
+    "1800K-2200K": "烛光/日落（极暖）",
+    "2700K-3000K": "白炽灯/日出（暖白）",
+    "3000K-4000K": "暖白色（黎明/黄昏）",
+    "4000K-5000K": "中性白（日出后/日落前）",
+    "5000K-5500K": "日光（正午）",
+    "5500K-6500K": "阴天/闪光灯（冷白）",
+    "6500K-9000K": "阴天/阴影（冷蓝）"
+  },
+  "tips": [
+    "光线质量（）比数量更重要",
+    "考虑光线的方向（）和颜色（）",
+    "阴影可以是柔和的（）也可以是锐利的（）",
+    "混合光源需要平衡色调",
+    "光线应该服务于叙事和情绪"
+  ]
+}

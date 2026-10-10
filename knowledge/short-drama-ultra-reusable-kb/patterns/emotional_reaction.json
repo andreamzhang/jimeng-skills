@@ -1,0 +1,265 @@
+{
+  "pattern_id": "emotional_reaction_sequence",
+  "name": "情绪反应",
+  "version": "1.0",
+  "description": "用于展现角色受到刺激后产生强烈情绪反应的镜头序列",
+  "category": "emotion",
+  "usage_frequency": "",
+  "structure": {
+    "shot_sequence": [
+      {
+        "shot_id": "stimulus",
+        "name": "刺激源",
+        "shot_type": "或",
+        "camera_setup": "或主观视角",
+        "eye_line": "/或_",
+        "duration": "1-2",
+        "visual_prompt_template": "-{_},",
+        "camera_movement": "",
+        "focus": "_"
+      },
+      {
+        "shot_id": "initial_reaction",
+        "name": "初始反应（微反应）",
+        "shot_type": "特写",
+        "camera_setup": "",
+        "eye_line": "_或",
+        "duration": "0.5-1",
+        "visual_prompt_template": "-的-{_},",
+        "camera_movement": "",
+        "notes": "捕捉微表情变化，如瞳孔放大、眨眼、嘴角抽动"
+      },
+      {
+        "shot_id": "building_emotion",
+        "name": "情绪积累",
+        "shot_type": "特写",
+        "camera_setup": "_或",
+        "eye_line": "____",
+        "duration": "1.5-2.5",
+        "visual_prompt_template": "-{_}{_},",
+        "camera_movement": "__",
+        "facial_params": [
+          "_",
+          "",
+          "_"
+        ]
+      },
+      {
+        "shot_id": "emotional_climax",
+        "name": "情绪高潮",
+        "shot_type": "或",
+        "camera_setup": "或手持",
+        "eye_line": "",
+        "duration": "2-4",
+        "visual_prompt_template": "-{__},的{_},或",
+        "camera_movement": "_或_",
+        "pacing": "_",
+        "lighting": "_+_"
+      },
+      {
+        "shot_id": "emotional_aftermath",
+        "name": "情绪余波",
+        "shot_type": "近景",
+        "camera_setup": "或_",
+        "eye_line": "_或",
+        "duration": "2-3",
+        "visual_prompt_template": "的-{主体},{_},",
+        "camera_movement": "或__",
+        "pacing": "_"
+      }
+    ],
+    "pattern_flow": "→→→→",
+    "minimum_shots": 3,
+    "key_shots": [
+      "_",
+      "_"
+    ]
+  },
+  "rules": {
+    "must_use": [
+      "_",
+      "_"
+    ],
+    "recommended": [
+      "__",
+      "_"
+    ],
+    "forbidden": [
+      "___",
+      "_"
+    ],
+    "constraints": {
+      "emotion_progression": ",",
+      "micro_expression": "",
+      "lighting": ","
+    }
+  },
+  "usage_guidelines": {
+    "when_to_use": [
+      "关键台词/信息揭示后需要呈现角色情绪变化",
+      "对话戏中展示听者反应，强化正反打的情绪节奏",
+      "需要观众情感指引或节奏缓冲时",
+      "悬念场景可先给反应再揭示刺激源"
+    ],
+    "when_to_skip": [
+      "需要刻意保持神秘或冷静的角色动机",
+      "反应会削弱节奏或泄露信息时",
+      "同一动作后已连续出现多次重复反应"
+    ],
+    "placement_rules": [
+      "放在关键刺激源镜头之后 0-1 镜内",
+      "冲突或转折点后必须出现至少一条微反应镜头",
+      "反应镜头以特写/大特写/中近景为主，必要时使用过肩"
+    ],
+    "dialogue_rules": [
+      "优先无台词，若必须台词应为短句",
+      "反应镜头需体现微表情或余波动作"
+    ]
+  },
+  "customizable_slots": {
+    "subject": {
+      "type": "",
+      "description": "产生情绪反应的角色",
+      "default": ""
+    },
+    "stimulus_description": {
+      "type": "",
+      "description": "刺激源描述",
+      "default": ""
+    },
+    "emotion_type": {
+      "type": "",
+      "description": "情绪类型",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "emotion_intensity": {
+      "type": "",
+      "description": "情绪强度",
+      "default": "",
+      "options": [
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    "micro_expression": {
+      "type": "",
+      "description": "初始微反应",
+      "default": "_",
+      "options": [
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_"
+      ]
+    },
+    "facial_area": {
+      "type": "",
+      "description": "主要面部区域",
+      "default": "眼睛",
+      "options": [
+        "眼睛",
+        "",
+        "",
+        "_"
+      ]
+    },
+    "emotion_climax_description": {
+      "type": "",
+      "description": "情绪高潮描述",
+      "default": ",的"
+    },
+    "aftermath_expression": {
+      "type": "",
+      "description": "情绪余波表情",
+      "default": ",",
+      "options": [
+        "",
+        "_",
+        "",
+        "",
+        "_",
+        "_"
+      ]
+    }
+  },
+  "emotion_configurations": {
+    "sadness": {
+      "eye_line": "_",
+      "micro_expression": "_",
+      "facial_area": "眼睛",
+      "climax": ",,",
+      "aftermath": ",",
+      "camera_movement": "__",
+      "lighting": "_+_"
+    },
+    "anger": {
+      "eye_line": "_",
+      "micro_expression": "_",
+      "facial_area": "",
+      "climax": ",,面部",
+      "aftermath": "",
+      "camera_movement": "_",
+      "lighting": "_+_"
+    },
+    "joy": {
+      "eye_line": "__",
+      "micro_expression": "_",
+      "facial_area": "_",
+      "climax": ",眼睛,",
+      "aftermath": "_,",
+      "camera_movement": "_",
+      "lighting": "_+_"
+    },
+    "fear": {
+      "eye_line": "_",
+      "micro_expression": "_",
+      "facial_area": "眼睛",
+      "climax": ",,",
+      "aftermath": ",",
+      "camera_movement": "_",
+      "lighting": "_+_"
+    },
+    "shock": {
+      "eye_line": "",
+      "micro_expression": "_",
+      "facial_area": "_",
+      "climax": ",,",
+      "aftermath": "_",
+      "camera_movement": "___",
+      "lighting": "逆光"
+    }
+  },
+  "example_bindings": {
+    "subject": "女主角",
+    "stimulus_description": "发现男友与闺蜜在一起的照片",
+    "emotion_type": "",
+    "emotion_intensity": "",
+    "micro_expression": "_",
+    "facial_area": "_",
+    "emotion_climax_description": ",,缓慢",
+    "aftermath_expression": "_,"
+  },
+  "use_cases": [
+    "噩耗接收",
+    "惊喜揭露",
+    "背叛发现",
+    "误会澄清",
+    "情感突破"
+  ]
+}

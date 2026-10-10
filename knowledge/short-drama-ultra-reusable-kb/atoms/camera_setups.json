@@ -1,0 +1,211 @@
+{
+  "category": "camera_setups",
+  "version": "1.0",
+  "description": "机位设置原子定义，定义各种摄像机位置、角度和双人/多人场景的空间关系",
+  "usage_notes": "与_组合使用，决定画面的空间关系和视角",
+  "atoms": [
+    {
+      "atom_id": "OTS",
+      "director_term": "过肩镜头",
+      "aliases": [
+        "__",
+        "过肩",
+        "肩后"
+      ],
+      "ai_prompt": "过肩镜头,{_}(,和),{_},画面",
+      "parameters": {
+        "foreground_visibility": "|",
+        "shoulder_in_frame": true,
+        "focus_on": "_"
+      },
+      "use_cases": [
+        "",
+        "",
+        "-"
+      ],
+      "notes": "建立两人空间关系，视线指向明确",
+      "emotional_effect": ",,"
+    },
+    {
+      "atom_id": "POV",
+      "director_term": "主观镜头",
+      "aliases": [
+        "主观视角",
+        "主观视角",
+        "第一人称"
+      ],
+      "ai_prompt": "主观视角镜头,镜头平视的{主体},,",
+      "parameters": {
+        "eye_level": true,
+        "gaze_target": "",
+        "blur_background": true
+      },
+      "use_cases": [
+        "角色",
+        "",
+        ""
+      ],
+      "notes": "让观众代入角色视角，产生情感共鸣",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "TWO_SHOT",
+      "director_term": "双人中景",
+      "aliases": [
+        "-画面",
+        "双人同框"
+      ],
+      "ai_prompt": "镜头,{主体}和{主体}画面,构图,",
+      "parameters": {
+        "framing": "近景",
+        "distance_between": "-",
+        "both_in_focus": true
+      },
+      "use_cases": [
+        "",
+        "",
+        "对比"
+      ],
+      "notes": "展现两人关系，但正反打更常用",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "INSERT",
+      "director_term": "插入镜头",
+      "aliases": [
+        "镜头",
+        "",
+        "特写插入"
+      ],
+      "ai_prompt": "镜头,特写的{道具},,",
+      "parameters": {
+        "duration": "(0.5-1)",
+        "focus": "",
+        "context": "或"
+      },
+      "use_cases": [
+        "",
+        "-",
+        ""
+      ],
+      "notes": "用于强调关键道具或细节",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "LOW_ANGLE",
+      "director_term": "仰拍",
+      "aliases": [
+        "仰拍",
+        "仰视",
+        "仰角"
+      ],
+      "ai_prompt": "仰拍镜头,镜头主体,{主体}和",
+      "parameters": {
+        "camera_height": "主体",
+        "angle": "15-30",
+        "perspective": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "让角色显得高大、权威或威胁",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "HIGH_ANGLE",
+      "director_term": "俯拍",
+      "aliases": [
+        "俯拍",
+        "俯视",
+        "俯角"
+      ],
+      "ai_prompt": "俯拍镜头,镜头主体,{主体}或",
+      "parameters": {
+        "camera_height": "主体",
+        "angle": "15-30",
+        "perspective": "主体"
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "表现角色的渺小、无助或被审视",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "DUTCH_ANGLE",
+      "director_term": "倾斜镜头",
+      "aliases": [
+        "画面",
+        "斜角",
+        "德国倾斜"
+      ],
+      "ai_prompt": "倾斜角度镜头,镜头,,的或",
+      "parameters": {
+        "tilt_angle": "15-30",
+        "horizon_visible": true,
+        "straight_lines": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "表达不安、困惑或威胁感，不宜多用",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "atom_id": "OVERHEAD",
+      "director_term": "顶拍",
+      "aliases": [
+        "'",
+        "鸟瞰",
+        "垂直俯视"
+      ],
+      "ai_prompt": "镜头,镜头,的",
+      "parameters": {
+        "camera_position": "",
+        "angle": "90",
+        "frame_contents": ""
+      },
+      "use_cases": [
+        "",
+        "",
+        ""
+      ],
+      "notes": "展现空间关系，具有客观和戏剧性效果",
+      "emotional_effect": [
+        "",
+        "",
+        ""
+      ]
+    }
+  ]
+}
