@@ -18,6 +18,14 @@ codex plugin marketplace add https://github.com/andreamzhang/jimeng-skills.git
 codex plugin add jimeng-skills@jimeng-skills
 ```
 
+安装后验证插件已被识别：
+
+```powershell
+codex plugin list --source jimeng-skills
+```
+
+如果列出的插件名不是 `jimeng-skills@jimeng-skills`，用这个全名重试安装。
+
 ## 一键上手
 
 ```powershell
