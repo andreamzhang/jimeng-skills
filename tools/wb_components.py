@@ -29,8 +29,9 @@ def card(opts, wide: bool = False) -> str:
     bio = f'<p class="bio">{esc(opts["bio"])}</p>' if opts.get("bio") else ""
     m_html = f'<div class="m">{opts["m"]}</div>' if opts.get("m") else ""
     links = opts.get("links", "")
+    action = opts.get("action", "")
     return (f'<div{ id_attr} class="{cls}"{search}>'
-            f'<div class="hd">{ic}<span class="t">{esc(opts.get("t", ""))}</span>{tag}</div>'
+            f'<div class="hd">{ic}<span class="t">{esc(opts.get("t", ""))}</span>{tag}{action}</div>'
             + m_html + bio + (opts.get("body") or "")
             + (f'<div class="links">{links}</div>' if links else "") + "</div>")
 
@@ -108,6 +109,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 system-ui,-app
 .ic{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;background:var(--panel3);color:var(--ink);border:1px solid var(--line)}
 .card.hero .ic{background:var(--acc-soft);color:var(--acc2);border-color:transparent}
 .card .t{font-weight:700;font-size:14.5px;word-break:break-all}
+.copy-btn{margin-left:auto;font:inherit;font-size:10px;color:var(--muted);background:var(--panel3);
+  border:1px solid var(--line);border-radius:8px;padding:2px 7px;cursor:pointer;transition:color .12s,border-color .12s}
+.copy-btn:hover{color:var(--acc2);border-color:var(--acc2)}
 .card .m{color:var(--muted);font-size:12px;margin:2px 0 8px}
 .card .m b{color:var(--ink);font-weight:600}
 .card .bio{color:var(--muted);font-size:12.5px;line-height:1.8;margin:0 0 8px}
@@ -175,6 +179,18 @@ function bindSearch(){
   });
   qEl.addEventListener("input",runSearch);runSearch();
 }
+function bindCopy(){
+  document.querySelectorAll(".copy-btn").forEach(function(btn){
+    btn.addEventListener("click",function(e){
+      e.stopPropagation();e.preventDefault();
+      var text=btn.dataset.copy||"";
+      function flash(){var old=btn.textContent;btn.textContent="已复制";setTimeout(function(){btn.textContent=old;},1200);}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(flash).catch(function(){fallback();});}
+      else{fallback();}
+      function fallback(){var ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);flash();}
+    });
+  });
+}
 function runSearch(){
   var q=(document.getElementById("search").value||"").toLowerCase();
   var n=0,total=0;
@@ -236,6 +252,6 @@ def wb_page(drama: str, title: str, icon: str, pages, stats, cards_html: str,
 <script>
 {charts_js}
 {JS_RUNTIME}
-bindViewer();bindSearch();
+bindViewer();bindSearch();bindCopy();
 </script>
 </body></html>'''

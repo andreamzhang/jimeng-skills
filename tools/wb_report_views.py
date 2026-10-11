@@ -180,12 +180,16 @@ def _charts_card(charts_html: str, title: str, tag: str) -> str:
 
 def _member(rec, bio: str, badge_kind: str, prompt_html: str = "") -> str:
     span = ep_text(rec["eps"])
+    copy_text = f'{rec["display"]}（{span}）'
+    action = (f'<button class="copy-btn" title="复制姓名+集数区间" '
+              f'data-copy="{wb.esc(copy_text)}">复制</button>')
     meta = (f'<b>{wb.esc(rec["display"])}（{wb.esc(span)}）</b>'
             f' · 出场<b>{len(rec["eps"])}</b>集· 提及<b>{rec["mentions"]}</b>次')
     body = (f'<p class="m">{meta}</p><p class="bio">{wb.esc(bio)}</p>'
             + _ep_pills(rec["eps"]) + prompt_html)
     return wb.card({"ic": "👤" if badge_kind != "prop" else "物", "t": rec["display"],
                     "tag": LEVEL_LABEL.get(badge_kind, badge_kind), "m": "", "body": body,
+                    "action": action,
                     "search": rec["display"] + " " + bio})
 
 
