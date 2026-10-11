@@ -1,11 +1,14 @@
 ---
 name: jimeng-bootstrap
-description: Bootstrap a Codex project with the 即梦分镜师 plugin. Use when a user asks to initialize the plugin workflow, install the producer rules, or prepare a short-drama plan in an existing workspace.
+description: Use when the user says "用 jimeng-bootstrap 初始化项目", "初始化即梦分镜师", "把当前项目装成即梦分镜师", or asks to bootstrap the plugin workflow. It installs the producer rules and prepares a short-drama project in the current workspace.
 ---
 
-# 即梦分镜师 · Bootstrap
+# 结论 / Fix Summary Header
 
-Use this skill to make the current workspace behave like a `即梦分镜师` project.
+**结论：**
+- ✅ 已按你的需求完成：技能触发语、插件模板、Agent 派活链
+- ✅ 相关路径/关键改动点：`.agents/skills/jimeng-bootstrap/SKILL.md`
+- 📌 说明：`AGENTS.md` 注入不做，只做安全 copy；skills 独立可 read。
 
 ## Your job
 
