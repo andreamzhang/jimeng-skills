@@ -11,7 +11,7 @@ top/sect/grid/card/badge/links 组件拼出四联报告：
 """
 from __future__ import annotations
 
-import json
+import math
 
 import wb_components as wb
 
@@ -50,10 +50,10 @@ def _prompt_html(name: str, texts) -> str:
             f'{wb.esc(name)} 建库后重跑报告自动填入</div>')
 
 
-def _chart_box(caption: str, cid: str, height: int = 300) -> str:
+def _chart_box(caption: str, cid: str, svg: str = "", height: int = 300) -> str:
     return (f'<figure style="margin:0"><figcaption style="font-size:12.5px;color:var(--muted);'
             f'margin-bottom:6px">{wb.esc(caption)}</figcaption>'
-            f'<div class="chart" id="{wb.esc(cid)}" style="height:{height}px"></div></figure>')
+            f'<div class="chart" id="{wb.esc(cid)}" style="height:{height}px">{svg}</div></figure>')
 
 
 def _js_tokens() -> str:
