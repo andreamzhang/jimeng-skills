@@ -182,6 +182,8 @@ def _role_variant_html(role: str, texts) -> str:
     """把同一主角色下的提示词条目聚合成分条明细表。"""
     texts = texts or {}
     base = role.split()[0]
+    if base and "母亲" in role:
+        base += "母亲"
     keys = [
         k for k in texts
         if any(k.startswith(base + sep) for sep in ("-", "–", "—", "－"))
