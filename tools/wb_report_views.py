@@ -178,7 +178,23 @@ def _charts_card(charts_html: str, title: str, tag: str) -> str:
     return wb.card({"ic": "📊", "t": title, "tag": tag, "m": "", "body": grid, "search": title})
 
 
-def _member(rec, bio: str, badge_kind: str, prompt_html: str = "") -> str:
+def _role_variant_html(role: str, texts) -> str:
+    """把同一主角色下的提示词条目聚合成分条明细表。"""
+    texts = texts or {}
+    base = role.split()[0]
+    keys = [
+        k for k in texts
+        if any(k.startswith(base + sep) for sep in ("-", "–", "—", "－"))
+    ]
+    if len(keys) <= 1:
+        return ""
+    rows = "".join(f"<tr><td>{wb.esc(k)}</td></tr>" for k in sorted(keys))
+    return (f'<details class="slot"><summary>拆分明细（{len(keys)}）</summary>'
+            + f'<div style="overflow:auto"><table class="tbl"><tbody>{rows}</tbody></table></div></details>')
+
+
+def _member(rec, bio: str, badge_kind: str, prompt_html: str = "",
+            variant_html: str = "") -> str:
     span = ep_text(rec["eps"])
     copy_text = f'{rec["display"]}（{span}）'
     action = (f'<button class="copy-btn" title="复制姓名+集数区间" '
@@ -186,7 +202,7 @@ def _member(rec, bio: str, badge_kind: str, prompt_html: str = "") -> str:
     meta = (f'<b>{wb.esc(rec["display"])}（{wb.esc(span)}）</b>'
             f' · 出场<b>{len(rec["eps"])}</b>集· 提及<b>{rec["mentions"]}</b>次')
     body = (f'<p class="m">{meta}</p><p class="bio">{wb.esc(bio)}</p>'
-            + _ep_pills(rec["eps"]) + prompt_html)
+            + _ep_pills(rec["eps"]) + prompt_html + variant_html)
     return wb.card({"ic": "👤" if badge_kind != "prop" else "物", "t": rec["display"],
                     "tag": LEVEL_LABEL.get(badge_kind, badge_kind), "m": "", "body": body,
                     "action": action,
@@ -281,7 +297,8 @@ def build_character(data) -> str:
         for c in levels[lv]:
             bio = d["bios"].get(c["display"]) or "出场频次偏低，作为场景性/功能型配角使用。"
             h += _member(c, bio, lv, _prompt_html(
-                c["display"], d.get("prompt_texts", {}).get("chars", {})))
+                c["display"], d.get("prompt_texts", {}).get("chars", {})),
+                _role_variant_html(c["display"], d.get("prompt_texts", {}).get("chars", {})))
         h += wb.grid_close()
     if groups:
         h += wb.sect(f"✦ 群体角色（{len(groups)}）")

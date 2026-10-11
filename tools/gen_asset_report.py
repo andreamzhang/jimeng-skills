@@ -340,9 +340,9 @@ def load_prompt_sections(assets: Path, filename: str, heading_pat: str):
 def load_prompt_texts(assets: Path):
     """三类提示词库统一读取（人物/场景条目块 + 道具条目块）。"""
     return {
-        "chars": load_prompt_sections(assets, "character-prompts.md", r"^## @"),
-        "scenes": load_prompt_sections(assets, "scene-prompts.md", r"^## @"),
-        "props": load_prompt_sections(assets, "prop-prompts.md", r"^### \d+\.\s*@"),
+        "chars": load_prompt_sections(assets, "character-prompts.md", r"^##(?:\s*@[^\s]+|\s+)"),
+        "scenes": load_prompt_sections(assets, "scene-prompts.md", r"^##(?:\s*@[^\s]+|\s+)"),
+        "props": load_prompt_sections(assets, "prop-prompts.md", r"^###(?:\s*@[^\s]+|\s+)"),
     }
 
 
