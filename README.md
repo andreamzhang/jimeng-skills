@@ -11,6 +11,13 @@
 ./assets/logo.svg
 ```
 
+想从远端安装，可以直接加marketplace：
+
+```powershell
+codex plugin marketplace add https://github.com/andreamzhang/jimeng-skills.git
+codex plugin add jimeng-skills@jimeng-skills
+```
+
 ## 一键上手
 
 ```powershell
