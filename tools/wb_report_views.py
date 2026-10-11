@@ -179,7 +179,9 @@ def _charts_card(charts_html: str, title: str, tag: str) -> str:
 
 
 def _member(rec, bio: str, badge_kind: str, prompt_html: str = "") -> str:
-    meta = f'出场<b>{len(rec["eps"])}</b>集（{ep_text(rec["eps"])}）· 提及<b>{rec["mentions"]}</b>次'
+    span = ep_text(rec["eps"])
+    meta = (f'<b>{wb.esc(rec["display"])}（{wb.esc(span)}）</b>'
+            f' · 出场<b>{len(rec["eps"])}</b>集· 提及<b>{rec["mentions"]}</b>次')
     body = (f'<p class="m">{meta}</p><p class="bio">{wb.esc(bio)}</p>'
             + _ep_pills(rec["eps"]) + prompt_html)
     return wb.card({"ic": "👤" if badge_kind != "prop" else "物", "t": rec["display"],
@@ -290,10 +292,11 @@ def build_character(data) -> str:
     for lv in LEVEL_ORDER:
         for c in levels[lv]:
             idx += 1
-            all_rows.append((str(idx), wb.esc(c["display"]), LEVEL_LABEL[lv],
-                             ep_text(c["eps"]), str(c["mentions"])))
+            all_rows.append((str(idx),
+                             f'<b>{wb.esc(c["display"])}</b>（{ep_text(c["eps"])}）',
+                             LEVEL_LABEL[lv], str(c["mentions"])))
     h += wb.sect("📋 完整清单") + wb.card({"ic": "📋", "t": f"完整清单（{len(all_rows)}）", "m": "全角色一览",
-                                           "body": _tbl(("#", "姓名", "类型", "出场集数", "提及次数"), all_rows),
+                                           "body": _tbl(("#", "姓名+集数", "类型", "提及次数"), all_rows),
                                            "search": "完整清单"})
     return wb.wb_page(drama=d["drama"], title="👤 人物分析报告", icon="👤", pages=_pages("character"),
                       stats=[], cards_html=h, charts_js=_js_tokens() + charts,
