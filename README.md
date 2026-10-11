@@ -3,6 +3,14 @@
 这是一个给 **Codex（AGENTS.md 规则 + 六角色子代理）** 使用的完整分镜流程包。
 它不是 npm 包，也不是散装技能列表；克隆后直接用 Codex 打开仓库根，Codex 会自动加载 `AGENTS.md`、角色定义和技能。
 
+它也已经按 Codex 插件格式补齐：
+
+```text
+.codex-plugin/plugin.json
+./.agents/skills/
+./assets/logo.svg
+```
+
 ## 一键上手
 
 ```powershell
