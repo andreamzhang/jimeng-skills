@@ -36,6 +36,25 @@ def eps_text(nums) -> str:
     return "第" + "、".join(parts) + "集"
 
 
+def ep_text(nums) -> str:
+    """ep01-03，ep34 风格的紧凑区间（用来标角色/场景/道具出场段）。"""
+    nums = sorted(set(nums))
+    parts, out, start, prev = [], [], None, None
+    for n in nums:
+        if start is None:
+            start = prev = n
+        elif n == prev + 1:
+            prev = n
+        else:
+            out.append((start, prev))
+            start = prev = n
+    if start is not None:
+        out.append((start, prev))
+    for a, b in out:
+        parts.append(f"ep{a:02d}" if a == b else f"ep{a:02d}-{b:02d}")
+    return "，".join(parts)
+
+
 def _ep_pills(eps) -> str:
     return '<div class="pills">' + "".join(
         f'<span class="badge onetime">EP{e:02d}</span>' for e in eps) + "</div>"
@@ -160,7 +179,7 @@ def _charts_card(charts_html: str, title: str, tag: str) -> str:
 
 
 def _member(rec, bio: str, badge_kind: str, prompt_html: str = "") -> str:
-    meta = f'出场<b>{len(rec["eps"])}</b>集（第{"、".join(str(e).zfill(2) for e in rec["eps"])[:80]}集）· 提及<b>{rec["mentions"]}</b>次'
+    meta = f'出场<b>{len(rec["eps"])}</b>集（{ep_text(rec["eps"])}）· 提及<b>{rec["mentions"]}</b>次'
     body = (f'<p class="m">{meta}</p><p class="bio">{wb.esc(bio)}</p>'
             + _ep_pills(rec["eps"]) + prompt_html)
     return wb.card({"ic": "👤" if badge_kind != "prop" else "物", "t": rec["display"],
@@ -260,7 +279,7 @@ def build_character(data) -> str:
         h += wb.grid_close()
     if groups:
         h += wb.sect(f"✦ 群体角色（{len(groups)}）")
-        rows = [(wb.esc(c["display"]), "群像/泛指", "第" + "、".join(str(e).zfill(2) for e in c["eps"]) + "集", str(c["mentions"])) for c in groups]
+        rows = [(wb.esc(c["display"]), "群像/泛指", ep_text(c["eps"]), str(c["mentions"])) for c in groups]
         h += wb.card({"ic": "👥", "t": f"群体角色（{len(groups)}）", "m": "无具体姓名的群演，不建独立资产",
                       "body": _tbl(("群体", "类型", "出场集数", "提及"), rows), "search": "群体角色 群像"})
     if d["narrative"]:
@@ -272,7 +291,7 @@ def build_character(data) -> str:
         for c in levels[lv]:
             idx += 1
             all_rows.append((str(idx), wb.esc(c["display"]), LEVEL_LABEL[lv],
-                             "第" + "、".join(str(e).zfill(2) for e in c["eps"]) + "集", str(c["mentions"])))
+                             ep_text(c["eps"]), str(c["mentions"])))
     h += wb.sect("📋 完整清单") + wb.card({"ic": "📋", "t": f"完整清单（{len(all_rows)}）", "m": "全角色一览",
                                            "body": _tbl(("#", "姓名", "类型", "出场集数", "提及次数"), all_rows),
                                            "search": "完整清单"})
