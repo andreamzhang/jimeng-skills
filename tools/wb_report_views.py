@@ -298,9 +298,12 @@ def build_character(data) -> str:
         h += wb.grid_open()
         for c in levels[lv]:
             bio = d["bios"].get(c["display"]) or "出场频次偏低，作为场景性/功能型配角使用。"
-            h += _member(c, bio, lv, _prompt_html(
-                c["display"], d.get("prompt_texts", {}).get("chars", {})),
-                _role_variant_html(c["display"], d.get("prompt_texts", {}).get("chars", {})))
+            prompt_texts = d.get("prompt_texts", {}).get("chars", {})
+            variant_html = (
+                _role_variant_html(c["display"], prompt_texts)
+                if lv in ("core", "important") else ""
+            )
+            h += _member(c, bio, lv, _prompt_html(c["display"], prompt_texts), variant_html)
         h += wb.grid_close()
     if groups:
         h += wb.sect(f"✦ 群体角色（{len(groups)}）")
