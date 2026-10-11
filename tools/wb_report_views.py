@@ -12,6 +12,7 @@ top/sect/grid/card/badge/links 组件拼出四联报告：
 from __future__ import annotations
 
 import math
+import json
 
 import wb_components as wb
 
