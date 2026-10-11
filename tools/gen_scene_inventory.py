@@ -78,7 +78,7 @@ def main() -> int:
             for v in variants:
                 alias_map[v] = canon
 
-    eps = sorted(script_dir.glob("ep*.txt"))
+    eps = sorted(p for p in script_dir.glob("ep*.txt") if re.fullmatch(r"ep\d+", p.stem))
     scenes = collections.defaultdict(lambda: {"eps": set(), "n": 0, "raw": collections.Counter(),
                                              "time": collections.Counter(), "inout": collections.Counter()})
     total = 0

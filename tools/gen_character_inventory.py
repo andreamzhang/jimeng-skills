@@ -54,7 +54,7 @@ def normalize(name: str) -> str:
 def scan(script_dir: Path, alias: dict):
     """返回 {角色: {"eps": [集号], "dialogue_eps": [...], "lines": n, "variants": {原名: 次数}}}"""
     people = OrderedDict()
-    for p in sorted(script_dir.glob("ep*.txt")):
+    for p in sorted(p for p in script_dir.glob("ep*.txt") if re.fullmatch(r"ep\d+", p.stem)):
         ep = p.stem
         for raw in p.read_text(encoding="utf-8", errors="replace").splitlines():
             line = raw.strip()
@@ -116,7 +116,7 @@ def main() -> int:
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     people = scan(script_dir, alias)
-    episodes = sorted(p.stem for p in script_dir.glob("ep*.txt"))
+    episodes = sorted(p.stem for p in script_dir.glob("ep*.txt") if re.fullmatch(r"ep\d+", p.stem))
     cast = sorted(people.items(), key=lambda kv: (-len(kv[1]["eps"]), -kv[1]["lines"], kv[0]))
 
     lines = []
