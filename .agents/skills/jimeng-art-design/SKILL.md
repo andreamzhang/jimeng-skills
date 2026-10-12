@@ -1,7 +1,7 @@
 ---
 name: jimeng-art-design
 description: 服化道技能。用于设计人物设定提示词、道具设定提示词和场景环境提示词。
-version: 1.1.0
+version: 1.1.1
 author: 即梦分镜师工作台
 license: MIT
 platforms: [windows, linux, macos]
@@ -74,6 +74,9 @@ metadata:
           投资人、股东、董事等）共用一条。
         - 只转写剧本明确写到的年龄、身份、服装、伤势与可见状态；五官、肤色、发型/发色、
           精确身高未写明就不推定，写「未限定」或直接省略。
+        - 形态扫描结果统一落盘到 `assets/character-forms.md`：
+          集数/场次/剧本原文关键词/形态类别/可见变化点/是否合并，节末分项计数
+          （服装/造型 X 种、可见状态/身份形态 Y 种），增量保留既有内容，不整体覆盖。
         - 拆分细则与条目关系见 `${SKILL_DIR}/../jimeng-character-assets/SKILL.md`。
 
         人物条目固定六段结构（一段正文，逐行书写，不得用表格/项目符号）：

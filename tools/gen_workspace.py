@@ -493,11 +493,11 @@ function renderPlay(name){
   h+=sect("资产（全剧）");h+=gridOpen();
   var A=p.assets;
   h+=card({ic:"人",t:"人物资产",m:A.characterMd?"源：character-prompts.md":(A.characterReport?"资产报告版":"未建库"),
-    links:link(A.characterMd,"prompts.md","big")+link(A.characterReport,"打开人物报告 →"),search:"人物 character"});
+    links:link(A.characterMd,"prompts.md")+link(A.characterReport,"打开人物报告 →","big"),search:"人物 character"});
   h+=card({ic:"景",t:"场景资产",m:A.sceneMd?"源：scene-prompts.md":(A.sceneReport?"资产报告版":"未建库"),
-    links:link(A.sceneMd,"prompts.md","big")+link(A.sceneReport,"打开场景报告 →"),search:"场景 scene"});
+    links:link(A.sceneMd,"prompts.md")+link(A.sceneReport,"打开场景报告 →","big"),search:"场景 scene"});
   h+=card({ic:"物",t:"道具资产",m:A.propMd?"源：prop-prompts.md":(A.propReport?"资产报告版":"未建库"),
-    links:link(A.propMd,"prompts.md","big")+link(A.propReport,"打开道具报告 →"),search:"道具 prop"});
+    links:link(A.propMd,"prompts.md")+link(A.propReport,"打开道具报告 →","big"),search:"道具 prop"});
   h+=card({ic:"档",t:"清点与分配",m:"脸型分配 / 人物清点 / 场景清点",
     links:link(A.alloc,"分配表","big")+link(A.charInv,"人物清点")+link(A.sceneInv,"场景清点"),search:"分配 清点"});
   h+=card({ic:"报",t:"资产总报告",m:A.masterReport?"master-report.html":"未生成",

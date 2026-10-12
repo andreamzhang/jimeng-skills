@@ -28,7 +28,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 
 SCENE_RE = re.compile(r"^\s*(\d+(?:-\d+)?)\s+(.+)$")
-TIME_RE = re.compile(r"(日|夜|晨|昏|傍晚|清晨|深夜|白天|早上|中午|下午|凌晨)")
+TIME_RE = re.compile(r"(白天|深夜|傍晚|清晨|早上|中午|下午|凌晨|夜晚|日|夜|晨|昏)")
 INOUT_RE = re.compile(r"(内|外)")
 # 场景行里的装饰性分隔符（｜ | · 、）与断字连字符
 SEP_RE = re.compile(r"[｜|]")
@@ -53,6 +53,20 @@ def norm_scene(rest: str):
     body = re.sub(r"\b(内|外)\b", " ", body)
     body = re.sub(r"\s+", " ", body).strip(" -·、")
     place = body.split(" ")[0] if body else raw
+    # 兼容「1 [场景一] English / 中文地点 白天 外」这类编号占位格式：
+    # 机械首位是占位符时，改取最后一个 "/" 后的中文地点段。
+    if re.fullmatch(r"\[场景[^]]*\]", place or ""):
+        parts = re.split(r"\s+/\s+", raw)
+        alt = parts[-1] if len(parts) > 1 else raw
+        alt_body = alt
+        for m in (TIME_RE.search(alt),):
+            if m:
+                alt_body = alt_body.replace(m.group(0), " ")
+        alt_body = re.sub(r"\s+", " ", alt_body).strip(" -·、")
+        alt_body = re.sub(r"\b(内|外)\b", " ", alt_body)
+        alt_body = re.sub(r"\s+", " ", alt_body).strip(" -·、")
+        if alt_body:
+            place = alt_body.split(" ")[0]
     place = SUFFIX_RE.sub("", place).strip(" -·、") or place
     return place, (time.group(0) if time else ""), ("".join(inout[:1]) if inout else ""), raw
 

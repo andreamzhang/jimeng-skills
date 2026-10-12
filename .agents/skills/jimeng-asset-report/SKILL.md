@@ -1,14 +1,14 @@
 ---
 name: jimeng-asset-report
 description: Use when 统计资产/做资产表/分析人物/场景/道具。产出暖金主题HTML资产分析报告。
-version: 1.1.0
+version: 1.2.0
 author: 即梦分镜师工作台
 license: MIT
 platforms: [windows, linux, macos]
 metadata:
   codex:
     tags: [即梦分镜师, 资产报告, echarts]
-    related_skills: [jimeng-art-design]
+    related_skills: [jimeng-art-design, jimeng-character-assets]
 ---
 
 # 资产分析报告生成技能（Codex 版）
@@ -64,3 +64,12 @@ metadata:
 
 [与人物提示词资产的关系]
 分镜引用名的唯一来源是 `assets/character-prompts.md`（@引用名条目，art-design-skill 产出），HTML 报告是分析展示层，两者并存互补不替代。
+
+[人物形态抽取联动（2026-10-12 起）]
+形态抽取与报告层同批交付，不由报告流程单独跳过或延后：
+1. 形态抽取结果统一落盘到 `assets/character-forms.md`（每次运行增量保留，已有内容只合并/修订，不整体覆盖）。
+2. 形态扫描表与自检口径以 `${SKILL_DIR}/../jimeng-character-assets/SKILL.md` 的「人物形态扫描与计数」段为准；
+   报告内容只引用该段的统计口径，不得另行估数。
+3. 合并报告（master）人物相关章节须含形态汇总条目；人物报告（character）须含形态清单与分项计数。
+4. 汇总口径：服装/造型 X 种、可见状态/身份形态 Y 种，两项分列报数，不合并为一个总数。
+5. `character-forms.md` 缺失时，先行派 `art-designer` 补齐该文件，再产出报告；不允许只出报告而缺少形态抽取。

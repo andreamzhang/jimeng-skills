@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import math
 import json
+import re
+from pathlib import Path
 
 import wb_components as wb
 
@@ -195,6 +197,66 @@ def _role_variant_html(role: str, texts) -> str:
             + f'<div style="overflow:auto"><table class="tbl"><tbody>{rows}</tbody></table></div></details>')
 
 
+def _load_forms(drama: str):
+    """读取 assets/character-forms.md 的形态清单（报告层只做展示，不自行估数）。"""
+    path = Path(__file__).resolve().parent.parent / "scripts" / drama / "assets" / "character-forms.md"
+    if not path.is_file():
+        return None
+    roles, totals = [], {"服装/造型": 0, "可见状态/身份形态": 0}
+    current = None
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        s = raw_line.strip()
+        if s.startswith("## ") and not s.startswith("## 汇总"):
+            current = {"role": s[3:].strip(), "forms": [], "subtotal": {}}
+            roles.append(current)
+            continue
+        if s.startswith("## 汇总"):
+            current = None
+        if current and s.startswith("| ") and len(s.split("|")) >= 6:
+            cells = [c.strip() for c in s.strip("|").split("|")]
+            if cells[0] and cells[0] not in ("形态", "---"):
+                current["forms"].append(cells[:5])
+        m = re.match(r"小计：服装/造型\s*(\d+)\s*种；可见状态/身份形态\s*(\d+)\s*种", s)
+        if m and roles:
+            roles[-1]["subtotal"] = {"服装/造型": int(m.group(1)),
+                                     "可见状态/身份形态": int(m.group(2))}
+        m2 = re.match(r"-\s*(服装/造型|可见状态/身份形态)\s*(\d+)\s*种", s)
+        if m2:
+            totals[m2.group(1)] = int(m2.group(2))
+    return {"roles": roles, "totals": totals}
+
+
+def _forms_master_card(forms) -> str:
+    if not forms or not forms["roles"]:
+        return ""
+    rows = []
+    for r in forms["roles"]:
+        sub = r["subtotal"]
+        rows.append((wb.esc(r["role"]), str(sub.get("服装/造型", 0)), str(sub.get("可见状态/身份形态", 0))))
+    body = _tbl(("主角色", "服装/造型", "可见状态/身份"), rows)
+    body += (f'<p class="bio">合计：服装/造型 {forms["totals"]["服装/造型"]} 种 · '
+             f'可见状态/身份形态 {forms["totals"]["可见状态/身份形态"]} 种。'
+             '数据源：assets/character-forms.md（报告层只引用，不现场估数）。</p>')
+    return wb.card({"ic": "🧍", "t": "人物形态抽取汇总", "m": "来自 character-forms.md",
+                    "body": body, "search": "人物 形态 抽取"})
+
+
+def _forms_character_card(forms) -> str:
+    if not forms or not forms["roles"]:
+        return ""
+    rows = []
+    for r in forms["roles"]:
+        for f in r["forms"]:
+            rows.append((wb.esc(r["role"]), wb.esc(f[0]), wb.esc(f[1]),
+                         wb.esc(f[2]), wb.esc(f[3])))
+    body = _tbl(("主角色", "形态", "类别", "证据", "可见变化点"), rows)
+    body += (f'<p class="bio">合计：服装/造型 {forms["totals"]["服装/造型"]} 种 · '
+             f'可见状态/身份形态 {forms["totals"]["可见状态/身份形态"]} 种。'
+             '数据源：assets/character-forms.md。</p>')
+    return wb.card({"ic": "🧍", "t": f"人物形态抽取清单（{len(rows)}）", "m": "逐条剧本证据",
+                    "body": body, "search": "人物 形态 抽取 清单"})
+
+
 def _member(rec, bio: str, badge_kind: str, prompt_html: str = "",
             variant_html: str = "") -> str:
     span = ep_text(rec["eps"])
@@ -252,7 +314,10 @@ def build_master(data) -> str:
          "body": ('<div class="narr"><p>每张角色/场景/道具卡都预留了提示词槽位：'
                   '提示词库（assets/{character,scene,prop}-prompts.md）建好后重跑本报告，'
                   '槽位自动填充为可展开的完整提示词原文。</p></div>'),
-         "search": "提示词 资产 槽位"})
+        "search": "提示词 资产 槽位"})
+    forms_master = _load_forms(d["drama"])
+    if forms_master:
+        h += wb.sect("🧍 人物形态抽取") + _forms_master_card(forms_master)
     if d["phases"]:
         h += wb.sect("🗂 分阶段制作建议") + wb.card({"ic": "🗂", "t": "分阶段制作建议", "m": "从剧本分布推导的排期参考", "body": phases, "search": "分阶段 制作 建议"})
     return wb.wb_page(drama=d["drama"], title="📑 资产总览报告", icon="📊", pages=_pages("master"),
@@ -313,6 +378,9 @@ def build_character(data) -> str:
     if d["narrative"]:
         narr = "".join(f'<div class="narr"><h3>{wb.esc(hh)}</h3><p>{wb.esc(pp)}</p></div>' for hh, pp in d["narrative"])
         h += wb.sect("📖 三阶段叙事结构") + wb.card({"ic": "📖", "t": "三阶段叙事结构", "m": "主线结构摘要", "body": narr, "search": "叙事 结构"})
+    forms_character = _load_forms(d["drama"])
+    if forms_character:
+        h += wb.sect("🧍 人物形态抽取") + _forms_character_card(forms_character)
     idx = 0
     all_rows = []
     for lv in LEVEL_ORDER:
@@ -356,12 +424,17 @@ def build_scene(data) -> str:
         h += wb.grid_open()
         for s in sorted(present, key=lambda x: (-scenes[x]["rows"], x)):
             rec = scenes[s]
+            scene_span = ep_text(rec["eps"])
+            copy_text = f'{s}（{scene_span}）'
+            action = (f'<button class="copy-btn" title="复制场景名+集数区间" '
+                      f'data-copy="{wb.esc(copy_text)}">复制</button>')
             i_o = "/".join(sorted(rec["inout"])) or "—"
             tod = "、".join(sorted(rec["times"])) or "—"
             detail = (f'{i_o} · <b>{rec["rows"]}</b>场 · <b>{len(rec["eps"])}</b>集 · 时间 {tod}')
-            body = f'<p class="m">{detail}</p>' + _ep_pills(rec["eps"]) + _prompt_html(s, scene_prompts)
+            body = (f'<p class="m"><b>{wb.esc(s)}（{scene_span}）</b> · {detail}</p>'
+                    + _ep_pills(rec["eps"]) + _prompt_html(s, scene_prompts))
             h += wb.card({"ic": "🏠", "t": s, "tag": rname, "m": "", "body": body,
-                          "search": s + " " + rname})
+                          "action": action, "search": s + " " + rname})
         h += wb.grid_close()
     return wb.wb_page(drama=d["drama"], title="🏠 场景分析报告", icon="🏠", pages=_pages("scene"),
                       stats=[], cards_html=h, charts_js=_js_tokens() + charts,
