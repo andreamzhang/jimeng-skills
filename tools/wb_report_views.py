@@ -204,18 +204,32 @@ def _load_forms(drama: str):
         return None
     roles, totals = [], {"服装/造型": 0, "可见状态/身份形态": 0}
     current = None
+    header = None
     for raw_line in path.read_text(encoding="utf-8").splitlines():
         s = raw_line.strip()
         if s.startswith("## ") and not s.startswith("## 汇总"):
             current = {"role": s[3:].strip(), "forms": [], "subtotal": {}}
             roles.append(current)
+            header = None
             continue
         if s.startswith("## 汇总"):
             current = None
-        if current and s.startswith("| ") and len(s.split("|")) >= 6:
+            header = None
+        if current and s.startswith("|"):
             cells = [c.strip() for c in s.strip("|").split("|")]
-            if cells[0] and cells[0] not in ("形态", "---"):
-                current["forms"].append(cells[:5])
+            if all(not c or set(c) <= {"-", " ", ":"} for c in cells):
+                continue
+            if cells[0] == "形态":
+                header = cells
+                continue
+            if header and cells[0]:
+                row = dict(zip(header, cells))
+                if row.get("形态"):
+                    current["forms"].append([
+                        row.get("形态", ""), row.get("类别", ""),
+                        row.get("证据", ""), row.get("可见变化点", ""),
+                        row.get("集数", ""),
+                    ])
         m = re.match(r"小计：服装/造型\s*(\d+)\s*种；可见状态/身份形态\s*(\d+)\s*种", s)
         if m and roles:
             roles[-1]["subtotal"] = {"服装/造型": int(m.group(1)),
@@ -245,8 +259,13 @@ def _form_card(role: str, f, prompt_texts) -> str:
     """一条形态一张卡（与人物卡同规格），变体提示词条目建库后自动填充。"""
     name, cat, evidence, change = f[0], f[1], f[2], f[3]
     variant_key = f"{role}-{name}"
+    eps = [int(n) for n in re.findall(r"ep(\d{1,2})", f[4] if len(f) > 4 else "", flags=re.I)]
+    if not eps:
+        eps = [int(n) for n in re.findall(r"ep(\d{1,2})", evidence or "", flags=re.I)]
+    span = ep_text(eps)
+    copy_text = f"{variant_key}（{span}）" if span else variant_key
     action = (f'<button class="copy-btn" title="复制形态引用名" '
-              f'data-copy="@{wb.esc(variant_key)}">复制</button>')
+              f'data-copy="{wb.esc(copy_text)}">复制</button>')
     body = (f'<p class="m"><b>{wb.esc(role)}</b> · 可见变化点：{wb.esc(change)}</p>'
             f'<p class="bio">证据：{wb.esc(evidence)}</p>'
             + _prompt_html(variant_key, prompt_texts))
