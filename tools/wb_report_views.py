@@ -268,6 +268,7 @@ def _form_card(role: str, f, prompt_texts) -> str:
               f'data-copy="{wb.esc(copy_text)}">复制</button>')
     body = (f'<p class="m"><b>{wb.esc(role)}</b> · 可见变化点：{wb.esc(change)}</p>'
             f'<p class="bio">证据：{wb.esc(evidence)}</p>'
+            + _ep_pills(eps)
             + _prompt_html(variant_key, prompt_texts))
     return wb.card({"ic": "🧍", "t": variant_key, "tag": cat, "m": "", "body": body,
                     "action": action,
