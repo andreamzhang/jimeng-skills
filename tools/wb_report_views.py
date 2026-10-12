@@ -250,7 +250,7 @@ def _form_card(role: str, f, prompt_texts) -> str:
     body = (f'<p class="m"><b>{wb.esc(role)}</b> · 可见变化点：{wb.esc(change)}</p>'
             f'<p class="bio">证据：{wb.esc(evidence)}</p>'
             + _prompt_html(variant_key, prompt_texts))
-    return wb.card({"ic": "🧍", "t": name, "tag": cat, "m": "", "body": body,
+    return wb.card({"ic": "🧍", "t": variant_key, "tag": cat, "m": "", "body": body,
                     "action": action,
                     "search": f"{role} {name} {cat} {evidence} {change}"})
 
