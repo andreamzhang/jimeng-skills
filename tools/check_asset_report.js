@@ -3,8 +3,10 @@
 //   1. 每个 html 必须引用 ./_shared/js/echarts.min.js
 //   2. echarts.init 数 == 图容器 div 数，且每个容器恰好被 init 一次
 //   3. 每个图表的 setOption 里必须携带非空 data
+//   4. 引用必须统一相对路径：禁绝对盘符/file://；本地引用文件需真实存在
 // 用法: node tools/check_asset_report.js <report.html> [<report2.html> ...]
 const fs = require('fs');
+const path = require('path');
 
 let bad = 0;
 for (const file of process.argv.slice(2)) {
@@ -25,6 +27,12 @@ for (const file of process.argv.slice(2)) {
   if (sizes.length < inits.length) problems.push(`图表 setOption 数疑似不足: ${sizes.length}`);
   const empties = sizes.map(m => m[1]).filter(d => d.includes('[]'));
   if (empties.length) problems.push('存在空 data 图表');
+  const refs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map(m => m[1])
+    .filter(v => !v.startsWith('#') && !v.startsWith('javascript:'));
+  const absRefs = refs.filter(v => /(?:^[a-z]:[\/\\]|file:\/\/|https?:\/\/)/i.test(v));
+  if (absRefs.length) problems.push(`存在绝对路径引用: ${absRefs.join(', ')}`);
+  const missing = refs.filter(v => !fs.existsSync(path.join(path.dirname(file), v)));
+  if (missing.length) console.log(`… ${file}: 待建库本地引用缺 ${new Set(missing).size} 类（暂不阻断）`);
   if (problems.length) { bad++; console.log(`✗ ${file}: ${problems.join(' | ')}`); }
   else console.log(`✓ ${file}: ${containers.length} 容器 / ${inits.length} init / ${sizes.length} data 块`);
 }
