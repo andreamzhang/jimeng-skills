@@ -1,0 +1,26 @@
+diff --git a/.agents/plugins/marketplace.json b/.agents/plugins/marketplace.json
+index ea8a0c4..804e83b 100644
+--- a/.agents/plugins/marketplace.json
++++ b/.agents/plugins/marketplace.json
+@@ -838,6 +838,21 @@
+       "interface": {
+         "displayName": "Qodo"
+       }
++    },
++    {
++      "name": "jimeng-skills",
++      "source": {
++        "source": "url",
++        "url": "https://github.com/andreamzhang/jimeng-skills.git"
++      },
++      "policy": {
++        "installation": "AVAILABLE",
++        "authentication": "ON_INSTALL"
++      },
++      "category": "Creativity",
++      "interface": {
++        "displayName": "即梦分镜师"
++      }
+     }
+   ]
+ }
