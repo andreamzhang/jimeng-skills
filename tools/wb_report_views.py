@@ -255,7 +255,7 @@ def _forms_master_card(forms) -> str:
                     "body": body, "search": "人物 形态 抽取"})
 
 
-def _form_card(role: str, f, prompt_texts) -> str:
+def _form_card(role: str, f, prompt_texts, level_label: str = "") -> str:
     """一条形态一张卡（与人物卡同规格），变体提示词条目建库后自动填充。"""
     name, cat, evidence, change = f[0], f[1], f[2], f[3]
     variant_key = f"{role}-{name}"
@@ -266,21 +266,23 @@ def _form_card(role: str, f, prompt_texts) -> str:
     copy_text = f"{variant_key}（{span}）" if span else variant_key
     action = (f'<button class="copy-btn" title="复制形态引用名" '
               f'data-copy="{wb.esc(copy_text)}">复制</button>')
-    body = (f'<p class="m"><b>{wb.esc(role)}</b> · 可见变化点：{wb.esc(change)}</p>'
+    body = (f'<p class="m"><b>{wb.esc(role)}</b> · {wb.esc(cat)} · 可见变化点：{wb.esc(change)}</p>'
             f'<p class="bio">证据：{wb.esc(evidence)}</p>'
             + _ep_pills(eps)
             + _prompt_html(variant_key, prompt_texts))
-    return wb.card({"ic": "🧍", "t": variant_key, "tag": cat, "m": "", "body": body,
+    return wb.card({"ic": "🧍", "t": variant_key, "tag": level_label or cat, "m": "", "body": body,
                     "action": action,
                     "search": f"{role} {name} {cat} {evidence} {change}"})
 
 
-def _forms_by_role(forms, prompt_texts) -> dict:
+def _forms_by_role(forms, prompt_texts, level_by_role=None) -> dict:
     """{主角色: [形态卡html]}；报告层只引用 character-forms.md，不现场估数。"""
     if not forms or not forms["roles"]:
         return {}
     prompt_texts = prompt_texts or {}
-    return {r["role"]: [_form_card(r["role"], f, prompt_texts) for f in r["forms"]]
+    level_by_role = level_by_role or {}
+    return {r["role"]: [_form_card(r["role"], f, prompt_texts, level_by_role.get(r["role"], ""))
+                        for f in r["forms"]]
             for r in forms["roles"]}
 
 
@@ -384,7 +386,8 @@ def build_character(data) -> str:
     rail_stats = [(named_total, "命名角色"), (len(levels["core"]), "核心"), (len(levels["important"]), "重要"),
                   (len(levels["minor"]), "次要"), (len(levels["onetime"]), "一次性")]
     char_prompts = d.get("prompt_texts", {}).get("chars", {})
-    forms_by_role = _forms_by_role(_load_forms(d["drama"]), char_prompts)
+    level_by_role = {c["display"]: LEVEL_LABEL[lv] for lv in LEVEL_ORDER for c in levels[lv]}
+    forms_by_role = _forms_by_role(_load_forms(d["drama"]), char_prompts, level_by_role)
     for lv in LEVEL_ORDER:
         if not levels[lv]:
             continue
