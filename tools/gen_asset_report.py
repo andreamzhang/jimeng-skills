@@ -431,12 +431,16 @@ def main() -> int:
         shutil.copyfile(ECHARTS_SRC, dest)
     import wb_report_views
     outs = wb_report_views.render_pages(data)
+    inline_js_marker = "/* inline: local echarts.min.js */"
+    js_src = (ECHARTS_SRC.read_text(encoding="utf-8") if ECHARTS_SRC.is_file() else dest.read_text(encoding="utf-8"))
+    inline_html = f"<script>{inline_js_marker}{js_src}</script>"
     for fname, html in outs.items():
         # 基本校验：每个 echarts.init 都有对应容器
         inits = len(re.findall(r"echarts\.init\(", html))
         divs = len(re.findall(r'id="c-[a-z0-9-]+"', html))
         assert inits == divs, f"{fname}: 图容器 {divs} != init {inits}"
-        (assets / fname).write_text(html, encoding="utf-8")
+        portable = html.replace('<script src="./_shared/js/echarts.min.js"></script>', inline_html, 1)
+        (assets / fname).write_text(portable, encoding="utf-8")
         print(f"  ✓ {assets / fname}  ({len(html) // 1024} KB, {inits} 图)")
     print(f"✓ {drama} 经典资产报告 4 份已生成（黑道千金规范 / 暖金主题 / 本地 echarts）")
     return 0
@@ -444,5 +448,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
 

@@ -11,7 +11,7 @@ const path = require('path');
 let bad = 0;
 for (const file of process.argv.slice(2)) {
   const html = fs.readFileSync(file, 'utf8');
-  const refsLocal = html.includes('src="./_shared/js/echarts.min.js"');
+  const refsLocal = html.includes('src="./_shared/js/echarts.min.js"') || html.includes('/* inline: local echarts.min.js */');
   const containers = [...html.matchAll(/id="(c-[a-z0-9-]+)"/g)].map(m => m[1]);
   const inits = [...html.matchAll(/echarts\.init\(/g)];
   const idRefs = [...html.matchAll(/getElementById\('(c-[a-z0-9-]+)'\)/g)].map(m => m[1]);
@@ -28,7 +28,7 @@ for (const file of process.argv.slice(2)) {
   const empties = sizes.map(m => m[1]).filter(d => d.includes('[]'));
   if (empties.length) problems.push('存在空 data 图表');
   const refs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map(m => m[1])
-    .filter(v => !v.startsWith('#') && !v.startsWith('javascript:'));
+    .filter(v => !v.startsWith('#') && !v.startsWith('javascript:') && !v.includes("'"));
   const absRefs = refs.filter(v => /(?:^[a-z]:[\/\\]|file:\/\/|https?:\/\/)/i.test(v));
   if (absRefs.length) problems.push(`存在绝对路径引用: ${absRefs.join(', ')}`);
   const missing = refs.filter(v => !fs.existsSync(path.join(path.dirname(file), v)));
