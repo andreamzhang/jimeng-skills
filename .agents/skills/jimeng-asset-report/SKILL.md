@@ -26,6 +26,7 @@ metadata:
 全部写到 `scripts/[剧名]/assets/`（不是 analysis/——用户纠正过）：
 - `master-report.html` 总表（数据卡+四图+跳转卡+分阶段建议）
 - `character-report.html` / `scene-report.html` / `prop-report.html`
+- `character-forms.md` 人物形态抽取表（同轮产出/刷新，非独立手工步骤）
 - `_shared/js/echarts.min.js`（从 `${SKILL_DIR}/assets/_shared/js/` 复制，纯本地无CDN）
 - 各报告内引用 `./_shared/js/echarts.min.js` 相对路径
 
@@ -66,10 +67,11 @@ metadata:
 分镜引用名的唯一来源是 `assets/character-prompts.md`（@引用名条目，art-design-skill 产出），HTML 报告是分析展示层，两者并存互补不替代。
 
 [人物形态抽取联动（2026-10-12 起）]
-形态抽取与报告层同批交付，不由报告流程单独跳过或延后：
-1. 形态抽取结果统一落盘到 `assets/character-forms.md`（每次运行增量保留，已有内容只合并/修订，不整体覆盖）。
-2. 形态扫描表与自检口径以 `${SKILL_DIR}/../jimeng-character-assets/SKILL.md` 的「人物形态扫描与计数」段为准；
+形态抽取与报告层一次闭环，不采用“先报告、再补表”的二次流程：
+1. 触发报告层时，形态抽取必须在同一轮产出/刷新 `assets/character-forms.md`。
+2. 已有 `character-forms.md` 只做增量合并或修订；无该文件时，报告层必须先生成草稿表，再渲染 HTML。
+3. 形态扫描表与自检口径以 `${SKILL_DIR}/../jimeng-character-assets/SKILL.md` 的「人物形态扫描与计数」段为准；
    报告内容只引用该段的统计口径，不得另行估数。
-3. 合并报告（master）人物相关章节须含形态汇总条目；人物报告（character）须含形态清单与分项计数。
-4. 汇总口径：服装/造型 X 种、可见状态/身份形态 Y 种，两项分列报数，不合并为一个总数。
-5. `character-forms.md` 缺失时，先行派 `art-designer` 补齐该文件，再产出报告；不允许只出报告而缺少形态抽取。
+4. 合并报告（master）人物相关章节须含形态汇总条目；人物报告（character）须含形态清单与分项计数。
+5. 汇总口径：服装/造型 X 种、可见状态/身份形态 Y 种，两项分列报数，不合并为一个总数。
+6. `character-forms.md` 缺失时，报告层不得继续渲染 HTML；必须先把形态种子表补齐后才允许进入下一阶段。
