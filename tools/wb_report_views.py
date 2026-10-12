@@ -241,29 +241,27 @@ def _forms_master_card(forms) -> str:
                     "body": body, "search": "人物 形态 抽取"})
 
 
-def _forms_cards_html(forms, prompt_texts) -> str:
-    """每条形态一张卡（与人物卡同规格），变体提示词条目建库后自动填充。"""
+def _form_card(role: str, f, prompt_texts) -> str:
+    """一条形态一张卡（与人物卡同规格），变体提示词条目建库后自动填充。"""
+    name, cat, evidence, change = f[0], f[1], f[2], f[3]
+    variant_key = f"{role}-{name}"
+    action = (f'<button class="copy-btn" title="复制形态引用名" '
+              f'data-copy="@{wb.esc(variant_key)}">复制</button>')
+    body = (f'<p class="m"><b>{wb.esc(role)}</b> · 可见变化点：{wb.esc(change)}</p>'
+            f'<p class="bio">证据：{wb.esc(evidence)}</p>'
+            + _prompt_html(variant_key, prompt_texts))
+    return wb.card({"ic": "🧍", "t": name, "tag": cat, "m": "", "body": body,
+                    "action": action,
+                    "search": f"{role} {name} {cat} {evidence} {change}"})
+
+
+def _forms_by_role(forms, prompt_texts) -> dict:
+    """{主角色: [形态卡html]}；报告层只引用 character-forms.md，不现场估数。"""
+    if not forms or not forms["roles"]:
+        return {}
     prompt_texts = prompt_texts or {}
-    roles = forms["roles"]
-    h = wb.grid_open()
-    for r in roles:
-        role = r["role"]
-        for f in r["forms"]:
-            name, cat, evidence, change = f[0], f[1], f[2], f[3]
-            variant_key = f"{role}-{name}"
-            action = (f'<button class="copy-btn" title="复制形态引用名" '
-                      f'data-copy="@{wb.esc(variant_key)}">复制</button>')
-            body = (f'<p class="m"><b>{wb.esc(role)}</b> · 可见变化点：{wb.esc(change)}</p>'
-                    f'<p class="bio">证据：{wb.esc(evidence)}</p>'
-                    + _prompt_html(variant_key, prompt_texts))
-            h += wb.card({"ic": "🧍", "t": name, "tag": cat, "m": "", "body": body,
-                          "action": action,
-                          "search": f"{role} {name} {cat} {evidence} {change}"})
-    h += wb.grid_close()
-    h += (f'<p class="bio">合计：服装/造型 {forms["totals"]["服装/造型"]} 种 · '
-          f'可见状态/身份形态 {forms["totals"]["可见状态/身份形态"]} 种。'
-          '数据源：assets/character-forms.md。</p>')
-    return h
+    return {r["role"]: [_form_card(r["role"], f, prompt_texts) for f in r["forms"]]
+            for r in forms["roles"]}
 
 
 def _member(rec, bio: str, badge_kind: str, prompt_html: str = "",
@@ -365,6 +363,8 @@ def build_character(data) -> str:
     h = wb.sect("📊 角色总览") + _charts_card(ch, "角色总览", "四图")
     rail_stats = [(named_total, "命名角色"), (len(levels["core"]), "核心"), (len(levels["important"]), "重要"),
                   (len(levels["minor"]), "次要"), (len(levels["onetime"]), "一次性")]
+    char_prompts = d.get("prompt_texts", {}).get("chars", {})
+    forms_by_role = _forms_by_role(_load_forms(d["drama"]), char_prompts)
     for lv in LEVEL_ORDER:
         if not levels[lv]:
             continue
@@ -372,12 +372,14 @@ def build_character(data) -> str:
         h += wb.grid_open()
         for c in levels[lv]:
             bio = d["bios"].get(c["display"]) or "出场频次偏低，作为场景性/功能型配角使用。"
-            prompt_texts = d.get("prompt_texts", {}).get("chars", {})
+            prompt_texts = char_prompts
             variant_html = (
                 _role_variant_html(c["display"], prompt_texts)
                 if lv in ("core", "important") else ""
             )
             h += _member(c, bio, lv, _prompt_html(c["display"], prompt_texts), variant_html)
+            for form_card in forms_by_role.pop(c["display"], []):
+                h += form_card
         h += wb.grid_close()
     if groups:
         h += wb.sect(f"✦ 群体角色（{len(groups)}）")
@@ -387,11 +389,12 @@ def build_character(data) -> str:
     if d["narrative"]:
         narr = "".join(f'<div class="narr"><h3>{wb.esc(hh)}</h3><p>{wb.esc(pp)}</p></div>' for hh, pp in d["narrative"])
         h += wb.sect("📖 三阶段叙事结构") + wb.card({"ic": "📖", "t": "三阶段叙事结构", "m": "主线结构摘要", "body": narr, "search": "叙事 结构"})
-    forms_character = _load_forms(d["drama"])
-    if forms_character and forms_character["roles"]:
-        n_forms = sum(len(r["forms"]) for r in forms_character["roles"])
-        h += (wb.sect(f"🧍 人物形态抽取（{n_forms}）")
-              + _forms_cards_html(forms_character, d.get("prompt_texts", {}).get("chars", {})))
+    if forms_by_role:
+        n_forms = sum(len(cards) for cards in forms_by_role.values())
+        h += wb.sect(f"🧍 其他形态（{n_forms}）") + wb.grid_open()
+        for cards in forms_by_role.values():
+            h += "".join(cards)
+        h += wb.grid_close()
     idx = 0
     all_rows = []
     for lv in LEVEL_ORDER:
