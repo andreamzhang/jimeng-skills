@@ -276,7 +276,7 @@ def _form_card(role: str, f, prompt_texts, level_label: str = "") -> str:
             f'<p class="bio">证据：{wb.esc(evidence)}</p>'
             + _ep_pills(eps)
             + _prompt_html(variant_key, prompt_texts))
-    ep_tokens = " ".join(f"ep{n:02d} ep{n}" for n in eps)
+    ep_tokens = " ".join(f"ep{n:02d} ep{n} {n:02d} {n}" for n in eps)
     return wb.card({"ic": "🧍", "t": variant_key, "tag": level_label or cat, "m": "", "body": body,
                     "action": action,
                     "search": f"{role} {name} {cat} {evidence} {change} {span} {ep_tokens}"})
