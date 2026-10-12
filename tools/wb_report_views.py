@@ -259,7 +259,13 @@ def _form_card(role: str, f, prompt_texts, level_label: str = "") -> str:
     """一条形态一张卡（与人物卡同规格），变体提示词条目建库后自动填充。"""
     name, cat, evidence, change = f[0], f[1], f[2], f[3]
     variant_key = f"{role}-{name}"
-    eps = [int(n) for n in re.findall(r"ep(\d{1,2})", f[4] if len(f) > 4 else "", flags=re.I)]
+    raw_eps = f[4] if len(f) > 4 else ""
+    eps = []
+    for m in re.finditer(r"ep\s*(\d{1,2})\s*(?:-\s*(\d{1,2}))?", raw_eps, flags=re.I):
+        a = int(m.group(1))
+        b = int(m.group(2) or a)
+        eps.extend(range(a, b + 1))
+    eps = sorted(set(eps))
     if not eps:
         eps = [int(n) for n in re.findall(r"ep(\d{1,2})", evidence or "", flags=re.I)]
     span = ep_text(eps)
