@@ -293,6 +293,11 @@ def _forms_by_role(forms, prompt_texts, level_by_role=None) -> dict:
             for r in forms["roles"]}
 
 
+def _ep_search_tokens(eps) -> str:
+    """把集数写入 data-search：标准化 EP07 / 去零 ep7 / 纯数字 07、7。"""
+    return " ".join(f"ep{n:02d} ep{n} {n:02d} {n}" for n in eps)
+
+
 def _member(rec, bio: str, badge_kind: str, prompt_html: str = "",
             variant_html: str = "") -> str:
     span = ep_text(rec["eps"])
@@ -480,7 +485,7 @@ def build_scene(data) -> str:
             body = (f'<p class="m"><b>{wb.esc(s)}（{scene_span}）</b> · {detail}</p>'
                     + _ep_pills(rec["eps"]) + _prompt_html(s, scene_prompts))
             h += wb.card({"ic": "🏠", "t": s, "tag": rname, "m": "", "body": body,
-                          "action": action, "search": s + " " + rname})
+                          "action": action, "search": s + " " + rname + " " + scene_span + " " + _ep_search_tokens(rec["eps"])})
         h += wb.grid_close()
     return wb.wb_page(drama=d["drama"], title="🏠 场景分析报告", icon="🏠", pages=_pages("scene"),
                       stats=[], cards_html=h, charts_js=_js_tokens() + charts,
