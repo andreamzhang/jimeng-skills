@@ -390,6 +390,10 @@ def build_character(data) -> str:
         h += wb.sect(f"✦ {LEVEL_LABEL[lv]}（{len(levels[lv])}）")
         h += wb.grid_open()
         for c in levels[lv]:
+            form_cards = forms_by_role.pop(c["display"], [])
+            if form_cards:
+                h += "".join(form_cards)
+                continue
             bio = d["bios"].get(c["display"]) or "出场频次偏低，作为场景性/功能型配角使用。"
             prompt_texts = char_prompts
             variant_html = (
@@ -397,8 +401,6 @@ def build_character(data) -> str:
                 if lv in ("core", "important") else ""
             )
             h += _member(c, bio, lv, _prompt_html(c["display"], prompt_texts), variant_html)
-            for form_card in forms_by_role.pop(c["display"], []):
-                h += form_card
         h += wb.grid_close()
     if groups:
         h += wb.sect(f"✦ 群体角色（{len(groups)}）")
